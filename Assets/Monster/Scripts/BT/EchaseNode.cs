@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class EchaseNode : INode
 {
-    private EnemyController _enemy;
-    private Transform target;
-    public EchaseNode(EnemyController enemy, Transform target)
+    private MonsterBase _enemy;
+
+    public EchaseNode(MonsterBase enemy)
     {
         _enemy = enemy;
-        this.target = target;
+      
     }
     public INode.ENodeState Evaluate()
     {
         Debug.Log("추적 실행중");
-        if (target == null)
+        if (_enemy.Target == null)
             return INode.ENodeState.Failure;
-        Vector2 dir=(target.position-_enemy.transform.position).normalized;
+        Vector2 dir=(_enemy.Target.position-_enemy.transform.position).normalized;
         _enemy.movementDir = dir;
         _enemy.lookDir = dir;
+        _enemy.Move();
         return INode.ENodeState.Running;
     }
 }

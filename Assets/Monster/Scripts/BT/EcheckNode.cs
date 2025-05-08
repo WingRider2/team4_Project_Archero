@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class EcheckNode : INode
 {
-    private EnemyController _enemy;
-    private Transform target;
-    public EcheckNode(EnemyController enemy, Transform target)
+    private MonsterBase _enemy;
+
+    public EcheckNode(MonsterBase enemy)
     {
         _enemy = enemy;
-        this.target = target;
     }
     INode.ENodeState INode.Evaluate()
     {
         Debug.Log("확인 실행중");
-        if(target == null) 
+        if(_enemy.Target == null) 
             return INode.ENodeState.Failure;
-        float distance = Vector2.Distance(_enemy.transform.position, target.position);
+        float distance = Vector2.Distance(_enemy.transform.position, _enemy.Target.position);
         Debug.Log(distance);
         if (distance <=_enemy.AttackRange)
         {

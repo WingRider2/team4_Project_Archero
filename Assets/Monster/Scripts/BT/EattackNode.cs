@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EIdleNode : INode
+public class EattackNode : INode
 {
-    private EnemyController _enemy;
-    public EIdleNode(EnemyController enemy)
+    private MonsterBase _enemy;
+    public EattackNode(MonsterBase enemy)
     {
         _enemy = enemy;
     }
     public INode.ENodeState Evaluate()
     {
-        _enemy.movementDir=Vector2.zero;
-        _enemy.lookDir=Vector2.zero;
+        Debug.Log("АјАн!");
+        _enemy.movementDir = Vector2.zero;
+        _enemy.Move();
         return INode.ENodeState.Success;
     }
 }
