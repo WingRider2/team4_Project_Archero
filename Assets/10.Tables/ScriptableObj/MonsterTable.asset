@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1da03b9527d8a0479d078720fd68de0, type: 3}
   m_Name: MonsterTable
   m_EditorClassIdentifier: 
-  dataList:
-  - ID: 1
-    Name: "\uC544\uBB34\uAC70\uB098"
+  dataList: []
