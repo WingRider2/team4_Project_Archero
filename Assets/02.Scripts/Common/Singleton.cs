@@ -12,7 +12,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 instance = FindAnyObjectByType(typeof(T)) as T;
                 if (instance == null)
                 {
-                    SteupInstance();
+                    SetupInstance();
                 }
                 DontDestroyOnLoad(instance.gameObject);
 
@@ -35,7 +35,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         else
             Destroy(gameObject);
     }
-    static void SteupInstance()
+    static void SetupInstance()
     {
         GameObject gameObj = new GameObject();
         gameObj.name = typeof(T).Name;
