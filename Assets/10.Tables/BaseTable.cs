@@ -7,8 +7,8 @@ public class BaseTable<T> : ScriptableObject, ITable where T : class
 {
     [SerializeField] protected List<T> dataList = new List<T>();
 
-    protected Dictionary<int, T> DataDic { get; private set; } = new Dictionary<int, T>();
-    public    Type               Type    { get; private set; }
+    public Dictionary<int, T> DataDic { get; private set; } = new Dictionary<int, T>();
+    public Type Type { get; private set; }
 
 
     public virtual void CreateTable()
