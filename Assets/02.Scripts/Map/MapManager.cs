@@ -14,6 +14,14 @@ public class MapManager : Singleton<MapManager>
     // Update is called once per frame
     void Update()
     {
+        var monsterTable = TableManager.Instance.GetTable<MonsterTable>();
+        var monsterData  = monsterTable.GetDataByID(1);
+    }
+
+    void UseSkill()
+    {
+        //스킬 로직
         
     }
+    
 }

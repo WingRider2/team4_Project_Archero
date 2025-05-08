@@ -73,3 +73,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+ProjectSettings/EditorBuildSettings.asset
+
+.idea/.idea.team4_Project_Archero/.idea/indexLayout.xml
+Assembly-CSharp.csproj.DotSettings
+
