@@ -18,9 +18,6 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private float speed = 1f; //투사체 속도
     public float Speed { get => speed; set => speed = value; }
 
-    [SerializeField] private float attackRange = 10f; //공격범위
-    public float AttackRange { get => attackRange; set => attackRange = value; }
-
     public LayerMask target;//공격 명중시 사용예정?
 
     [Header("Knock Back Info")]
@@ -32,46 +29,46 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private float knockbackTime = 0.5f;
     public float KnockbackTime { get => knockbackTime; set => knockbackTime = value; }
-        
-    [Header("Ranged Attack Data")]
 
-    [SerializeField] private int bulletIndex;//투사체번호
-    public int BulletIndex { get { return bulletIndex; } }
 
     [SerializeField] private float bulletSize = 1; //투사체 크기
     public float BulletSize { get { return bulletSize; } }
 
     [SerializeField] private float duration;//투사체발사 지연시간
     public float Duration { get { return duration; } }
-
-    [SerializeField] private float spread;//?
-    public float Spread { get { return spread; } }
-
-    [SerializeField] private int numberofProjectilesPerShot;//발사체당 개수?
-    public int NumberofProjectilesPerShot { get { return numberofProjectilesPerShot; } }
-
-    [SerializeField] private float multipleProjectilesAngle;//발사체 2개 사이의 발사 각도
-    public float MultipleProjectilesAngle { get { return multipleProjectilesAngle; } }
-
-    [SerializeField] private Color projectileColor;//투사체 색상
-    public Color ProjectileColor { get { return projectileColor; } }
+    
     // 무기에 대해서
 
     // 오브젝트 풀은 후에 매니저를 통해서관리
     ObjectPool objectPool;
     [SerializeField]Transform firePoint;
-
+    [SerializeField] PlayerController player; // 방향 받아오기
     private void Awake()
     {
         objectPool= FindObjectOfType<ObjectPool>();
+       
     }
+    public void Init(PlayerController playerController)
+    {
+        player = playerController;
 
+    }
     public void Attack()
     {
         //각도 조절
         GameObject arrow = objectPool.Get();
+        ProjectileController controller = arrow.GetComponent<ProjectileController>();
+        controller.Init(objectPool);
+        Vector2 direction = player.lookDirection;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+       
         arrow.transform.position = firePoint.position;
-        arrow.transform.rotation = firePoint.rotation;
-        //bullet.GetComponent<Projectile>().Launch(direction);
+        arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        controller.Launch(direction,speed);
+    }
+    public virtual void Rotate(bool isLeft)
+    {
+        //weaponRenderer.flipY = isLeft;//좌우 회전
     }
 }
