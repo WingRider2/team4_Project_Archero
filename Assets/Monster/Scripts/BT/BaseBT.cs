@@ -14,6 +14,8 @@ public class BaseBT : MonoBehaviour
     protected INode findObs;
     protected INode astar;
     protected INode live;
+    protected INode findTar;
+    protected INode idle;
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -31,6 +33,8 @@ public class BaseBT : MonoBehaviour
        check = new EcheckNode(enemy);
          findObs = new EchObstacleNode(enemy);
        astar = new EaFindNode(enemy);
+        findTar = new FindTargetNode(enemy);
+        idle = new EIdleNode(enemy);
 
     }
     protected virtual void MakeRoot()

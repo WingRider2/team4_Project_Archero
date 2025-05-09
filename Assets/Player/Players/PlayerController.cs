@@ -22,10 +22,8 @@ public class PlayerController : MonoBehaviour
                           // 애니메이션 동작
                           // 충돌 처리 => 
     private float timeSinceLastAttack = float.MaxValue;
-    // 플레이거 공격 하는 것또한 확장성을 있어야함
-    // 플레이어 
+    private float rotateSpeed = 10.0f;
 
-    // 투사체 관리
 
     private void Awake()
     {
@@ -53,9 +51,6 @@ public class PlayerController : MonoBehaviour
             StateChanged(isMove);
         }
     }
-    // 무기 방향 회전 
-    // 몬스터 테이블를 순회?
-    // 가장 가까운 몬스트를 향해
     private void Update()
     {
         TargetingSystem.findTarget();
@@ -88,7 +83,13 @@ public class PlayerController : MonoBehaviour
     }
     private void Attack()
     {
-        weaponHandler.Attack();
+        weaponHandler.Attack(0);
+
+        /* 각도 발사 테스트
+        weaponHandler.Attack(-30);
+        weaponHandler.Attack(0);
+        weaponHandler.Attack(30);
+        */
     }
     private void StateChanged(bool _isMove)
     {
@@ -107,14 +108,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Rotate(Vector2 direction) //플레이어 좌우 회전
+    private void Rotate(Vector2 direction)
     {
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;//Rad2Deg는 1라디안 //Atan2 y과 x 를 통해 라디안 각도를 구한다. 여기에 *Rad2Deg을 하면 도로 바꿔준다.
+        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bool isLeft = Mathf.Abs(rotZ) > 90f;
 
         if (weaponPivot != null)
-        {
-            weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ); // 무기 방향을 돌려준다.
+        {            
+            //weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ); // 무기 방향을 돌려준다.
+            weaponPivot.rotation = Quaternion.Lerp(weaponPivot.rotation, Quaternion.Euler(0, 0, rotZ), Time.deltaTime * rotateSpeed);
         }
 
         weaponHandler?.Rotate(isLeft);

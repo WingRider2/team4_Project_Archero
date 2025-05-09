@@ -10,7 +10,7 @@ public class EaFindNode : INode
     public EaFindNode(MonsterBase enemy)
     {
         _enemy = enemy;
-        astar = new Astar();
+       // astar = new Astar();
     }
     public INode.ENodeState Evaluate()
     {
