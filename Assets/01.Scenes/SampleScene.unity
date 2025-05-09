@@ -268,6 +268,8 @@ MonoBehaviour:
   - {fileID: 6708553046307485658, guid: 5c60b1550f6de7e458aa948da4a006f7, type: 3}
   - {fileID: 9052007931594405545, guid: 87be8a8f546cc99429778d18765f46fe, type: 3}
   - {fileID: 3326488088777852744, guid: dec6b1bc1a268444bb7c76e528b93e9d, type: 3}
+  stageDatas: []
+  testPrefab: {fileID: 6237139047231323186, guid: b41b04994467ed8429b24ed92d66a37f, type: 3}
 --- !u!4 &761699269
 Transform:
   m_ObjectHideFlags: 0
