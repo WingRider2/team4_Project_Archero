@@ -13,7 +13,28 @@ MonoBehaviour:
   m_Name: SkillTable
   m_EditorClassIdentifier: 
   dataList:
-  - Id: 0
+  - Id: 1
     Type: 0
-    Name: 
+    StatSkillType: 0
+    Name: "\uD2B8\uB9AC\uD50C\uC0F7"
     Value: 0
+  - Id: 2
+    Type: 0
+    StatSkillType: 0
+    Name: "\uBC31\uC0F7"
+    Value: 0
+  - Id: 101
+    Type: 1
+    StatSkillType: 1
+    Name: "\uACF5\uACA9\uB825 \uC5C5"
+    Value: 10
+  - Id: 102
+    Type: 1
+    StatSkillType: 2
+    Name: "\uACF5\uACA9 \uC18D\uB3C4 \uC5C5"
+    Value: 10
+  - Id: 103
+    Type: 1
+    StatSkillType: 4
+    Name: "\uC774\uB3D9\uC18D\uB3C4 "
+    Value: 10

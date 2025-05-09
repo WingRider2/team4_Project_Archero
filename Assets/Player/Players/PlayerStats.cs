@@ -7,6 +7,7 @@ public class PlayerStats : MonoBehaviour
     public int maxHP;
     public int currentHP;
     public int attackPower;
+    public int attackSpeed;
     public int defense;
     public float moveSpeed;
 }
