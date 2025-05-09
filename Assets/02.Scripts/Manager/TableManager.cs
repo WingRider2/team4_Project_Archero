@@ -21,7 +21,11 @@ public class TableManager : Singleton<TableManager>
             }
         }
     }
-
+/// <summary>
+/// 등록된 테이블을 가져오는 함수 
+/// </summary>
+/// <typeparam name="T">사용할 Table</typeparam>
+/// <returns></returns>
     public T GetTable<T>() where T : class
     {
         return tableDic[typeof(T)] as T;

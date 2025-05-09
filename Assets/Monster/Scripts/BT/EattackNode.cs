@@ -11,7 +11,10 @@ public class EattackNode : INode
     }
     public INode.ENodeState Evaluate()
     {
+
         _enemy.Attack();
+
+
         _enemy.movementDir = Vector2.zero;
         _enemy.Move();
         return INode.ENodeState.Running;

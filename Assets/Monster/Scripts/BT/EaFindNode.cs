@@ -14,7 +14,7 @@ public class EaFindNode : INode
     }
     public INode.ENodeState Evaluate()
     {
-        Debug.Log("Àå¾Ö¹° Á¸Àç!");
+        Debug.Log("ìž¥ì• ë¬¼ ì¡´ìž¬!");
         _enemy.movementDir = new Vector2(0,0);
          _enemy.lookDir = new Vector2(0, 0);
         _enemy.Move();
