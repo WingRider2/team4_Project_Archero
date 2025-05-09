@@ -67,4 +67,8 @@ public class WeaponHandler : MonoBehaviour
 
         controller.Launch(direction,speed);
     }
+    public virtual void Rotate(bool isLeft)
+    {
+        //weaponRenderer.flipY = isLeft;//ÁÂ¿ì È¸Àü
+    }
 }
