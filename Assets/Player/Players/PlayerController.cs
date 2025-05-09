@@ -113,8 +113,7 @@ public class PlayerController : MonoBehaviour
             bool isSkillAttack = false;
             foreach (ISKill skill in SkillManager.Instance.SelectedSKills)
             {
-                var arrowSkill = skill as IAngleArrowSkill;
-                if (arrowSkill != null)
+                if (skill is IAngleArrowSkill arrowSkill)
                 {
                     foreach (var angle in arrowSkill.GetAttackAngles())
                     {
