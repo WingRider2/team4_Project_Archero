@@ -5,8 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    public Vector2 moveInput { get; private set; }
     public void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 input = context.ReadValue<Vector2>();
+        moveInput = context.ReadValue<Vector2>();
+        moveInput = moveInput.normalized;
     }
+
 }
