@@ -12,9 +12,10 @@ public class EchLiveNode : INode
 
     public INode.ENodeState Evaluate()
     {
-        Debug.Log("생존 확인");
-        if(enemy.IsDead)
+       
+        if(enemy.IsDead||enemy.IsDamaged||enemy.IsAttack)
             return INode.ENodeState.Failure;
+        Debug.Log("이동 가능");
         return INode.ENodeState.Success;
     }
 }

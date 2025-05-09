@@ -20,10 +20,12 @@ public class MonsterBT : MonoBehaviour
         INode chaseSeq = new SelectorNode(new List<INode> { attackSeq, chase });
         INode start = new SelectorNode(new List<INode> { new SequenceNode(new List<INode> { findObs, astar }), chaseSeq});
         root = new SequenceNode(new List<INode> {live,start });
+
     }
     // Update is called once per frame
     void Update()
     {
+       
         root?.Evaluate();
     }
 }
