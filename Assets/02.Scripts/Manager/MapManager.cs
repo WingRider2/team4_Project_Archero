@@ -12,7 +12,7 @@ public class MapManager : Singleton<MapManager>
     [SerializeField] private Tilemap colliderMap;
     [SerializeField] private GameObject[] obstacleObjects;
 
-    [SerializeField] private StageData[] stageDatas;
+    [SerializeField] private TilemapData[] tilemapDatas;
     [SerializeField] private GameObject testPrefab;
     private void Awake()
     {
@@ -29,10 +29,11 @@ public class MapManager : Singleton<MapManager>
 
     public void GenerateMap(ChapterData chapterData)
     {
-        StageData stageData = chapterData.StageDatas[Random.Range(0, chapterData.StageDatas.Count)];
-        GenerateTile(floorMap, stageData.FloorTilemap);
-        GenerateTile(wallMap, stageData.WallTilemap);
-        GenerateTile(colliderMap, stageData.ColliderTilemap);
+        StageData   stageData   = chapterData.StageDatas[Random.Range(0, chapterData.StageDatas.Count)];
+        TilemapData tilemapData = tilemapDatas[Random.Range(0, tilemapDatas.Length)];
+        GenerateTile(floorMap, tilemapData.FloorTilemap);
+        GenerateTile(wallMap, tilemapData.WallTilemap);
+        GenerateTile(colliderMap, tilemapData.ColliderTilemap);
         GenerateObstacle(stageData);
     }
 
@@ -97,7 +98,7 @@ public class MapManager : Singleton<MapManager>
     private void SpawnMonster(StageData stageData,List<Vector3Int> vaildPositions)
     {
         HashSet<int> tileIndex = new HashSet<int>();
-        while (tileIndex.Count < stageData.ObstacleSpawnCount)
+        while (tileIndex.Count < stageData.MonsterSpawnCount)
         {
             tileIndex.Add(Random.Range(0, vaildPositions.Count));
         }

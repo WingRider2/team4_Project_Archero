@@ -268,7 +268,28 @@ MonoBehaviour:
   - {fileID: 6708553046307485658, guid: 5c60b1550f6de7e458aa948da4a006f7, type: 3}
   - {fileID: 9052007931594405545, guid: 87be8a8f546cc99429778d18765f46fe, type: 3}
   - {fileID: 3326488088777852744, guid: dec6b1bc1a268444bb7c76e528b93e9d, type: 3}
-  stageDatas: []
+  tilemapDatas:
+  - FloorTilemap: {fileID: 2735349733516841299, guid: e329eacc3bfb57249b95ec453c0223dc, type: 3}
+    WallTilemap: {fileID: 2358288550623362675, guid: 453e61c882a57054f9ae1a11251513b1, type: 3}
+    ColliderTilemap: {fileID: 3662469009245276540, guid: ec79e30d68206494bbcb8cad22f29863, type: 3}
+  - FloorTilemap: {fileID: 975823459539408021, guid: a32b431796b82ba4db4f509ecfb846bf, type: 3}
+    WallTilemap: {fileID: 7539726854522896815, guid: 110ab7d6f342f60469f454028f2be306, type: 3}
+    ColliderTilemap: {fileID: 975823459539408021, guid: a32b431796b82ba4db4f509ecfb846bf, type: 3}
+  - FloorTilemap: {fileID: 3433359604368161428, guid: 1f0da1541e0d4ee4cbb0d4cc18e1675c, type: 3}
+    WallTilemap: {fileID: 1563018299874726387, guid: 82780d39c919c9b4596d0400ff9628f9, type: 3}
+    ColliderTilemap: {fileID: 7254627933644792679, guid: 367c90b4591c91c4697d88b278937d61, type: 3}
+  - FloorTilemap: {fileID: 952644278011861198, guid: d8913c050bb490541b330f63704fd709, type: 3}
+    WallTilemap: {fileID: 7972740222862890286, guid: 5db6c62cfcf649642bb39d5d0897f01a, type: 3}
+    ColliderTilemap: {fileID: 4409339369570359267, guid: 6dc1cc4e8c8c3464eab27f3f96ee9ae6, type: 3}
+  - FloorTilemap: {fileID: 8699759341294951152, guid: a00cd24708300ba43962c8916c196502, type: 3}
+    WallTilemap: {fileID: 2815581220655267100, guid: 553526eecbc57ce45a6931b7e39e2000, type: 3}
+    ColliderTilemap: {fileID: 4078512368943435987, guid: 3e984defcc7dd604c85fcd602ede2e6e, type: 3}
+  - FloorTilemap: {fileID: 6319932633512330736, guid: d63655b39d037b34aadaf4c85cf571f7, type: 3}
+    WallTilemap: {fileID: 3660157926860606466, guid: 72e6fd5ea13604143b4b9fb5d6c8474c, type: 3}
+    ColliderTilemap: {fileID: 6272535601792685840, guid: 20693f9f01e387043adbf1763b17b737, type: 3}
+  - FloorTilemap: {fileID: 4431842694548817521, guid: 57b0ca57b393f374eb0cb7f35df83683, type: 3}
+    WallTilemap: {fileID: 2954743373135614507, guid: b1b5a1964cb236641b2b1deeadca6362, type: 3}
+    ColliderTilemap: {fileID: 3089813207967747180, guid: 4a005da49a274564886fac5e5e7d83a3, type: 3}
   testPrefab: {fileID: 6237139047231323186, guid: b41b04994467ed8429b24ed92d66a37f, type: 3}
 --- !u!4 &761699269
 Transform:
