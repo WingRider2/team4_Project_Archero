@@ -21,8 +21,6 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
-        mainCamera.transparencySortMode = TransparencySortMode.CustomAxis;
-        mainCamera.transparencySortAxis = new Vector3(0, 1, 0);
     }
 
     void Start()
