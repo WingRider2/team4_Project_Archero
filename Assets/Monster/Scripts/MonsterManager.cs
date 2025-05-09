@@ -5,10 +5,16 @@ using UnityEngine;
 public class MonsterManager : MonoBehaviour
 {
     [SerializeField] MonsterBase monPre;
-    public bool MakeMon(Vector2 pos)
+
+    private void Awake()
     {
-        MonsterBase mon = Instantiate(monPre, pos, Quaternion.identity);
-        mon.Init(0, "테스트", 10, 10, 10, 5, 2);
+  
+    }
+    public bool MakeMon(Vector2 pos,int num)
+    {
+        MonsterData monData= TableManager.Instance.GetTable<MonsterTable>().GetDataByID(num);
+        MonsterBase mon = Instantiate(monData.Monster, pos, Quaternion.identity);
+        mon.Init(num, monData.Name, monData.HP, monData.ATK,monData.DEF ,monData.MoveSpeed, monData.AttackRange,monData.FindRange);
         if(mon==null)
         {
             Debug.Log("몬스터 생성 실패");
@@ -20,7 +26,7 @@ public class MonsterManager : MonoBehaviour
     }
     public void Start()
     {
-        MakeMon(Vector2.zero);
-
+        MakeMon(Vector2.zero,1);
+        MakeMon(new Vector2(10,0), 2);
     }
 }

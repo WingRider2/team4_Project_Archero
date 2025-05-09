@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: MonsterTable
   m_EditorClassIdentifier: 
   dataList:
-  - ID: 0
-    Name: 
-  - ID: 0
-    Name: 
+  - Monster: {fileID: 4907068801579469251, guid: 04ef2c41cc2b63f459dd1a26d0cfc241, type: 3}
+    ID: 1
+    Name: Imp
+    HP: 10
+    ATK: 5
+    DEF: 5
+    MoveSpeed: 5
+    AttackRange: 1
+    AttackTime: 0.1
+    CoolTime: 2
