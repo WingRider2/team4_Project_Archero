@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectPool : Singleton<ObjectPool>
 {
     public GameObject prefab;
-    public int poolSize = 10;
+    public int poolSize = 100;
 
     private Queue<GameObject> pool = new Queue<GameObject>();
 

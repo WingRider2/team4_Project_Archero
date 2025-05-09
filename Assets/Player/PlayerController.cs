@@ -88,7 +88,13 @@ public class PlayerController : MonoBehaviour
     }
     private void Attack()
     {
-        weaponHandler.Attack();
+        weaponHandler.Attack(0);
+
+        /* 각도 발사 테스트
+        weaponHandler.Attack(-30);
+        weaponHandler.Attack(0);
+        weaponHandler.Attack(30);
+        */
     }
     private void StateChanged(bool _isMove)
     {
@@ -109,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate(Vector2 direction) //플레이어 좌우 회전
     {
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;//Rad2Deg는 1라디안 //Atan2 y과 x 를 통해 라디안 각도를 구한다. 여기에 *Rad2Deg을 하면 도로 바꿔준다.
+        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bool isLeft = Mathf.Abs(rotZ) > 90f;
 
         if (weaponPivot != null)
