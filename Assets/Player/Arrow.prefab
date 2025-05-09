@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3761282102423354644}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -116,7 +116,7 @@ Transform:
   - {fileID: 1043871255766813771}
   - {fileID: 255289963123323590}
   m_Father: {fileID: 7695698749489410861}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &5059051531575659145
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,12 +265,12 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03, y: 0.2}
-  m_Size: {x: 0.3, y: 1.4}
-  m_Direction: 0
+  m_Offset: {x: 0.2, y: 0.03}
+  m_Size: {x: 1.4, y: 0.3}
+  m_Direction: 1
 --- !u!114 &4142706010638465973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,9 +283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0293565c3e7fe498403bc3b2fecc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelCollisionLayer:
-    serializedVersion: 2
-    m_Bits: 0
   fxOnDestory: 1
 --- !u!50 &-2145264879021588394
 Rigidbody2D:

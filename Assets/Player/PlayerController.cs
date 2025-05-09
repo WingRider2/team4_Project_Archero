@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform weaponPivot;
     [SerializeField] public WeaponHandler weaponPrefab;
     private WeaponHandler weaponHandler;
-    // 이동
 
+    public Vector2 lookDirection = Vector2.right;//보는 방향
     // 상태 제어 아래를 통해 공격과 이동을 제어
     bool isMove = false;// 이동이 가능한가
     bool isAttack = true; // 공격이 가능한가
@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
             weaponHandler = Instantiate(weaponPrefab, weaponPivot); //무기생성
         else
             weaponHandler = GetComponentInChildren<WeaponHandler>();
+
+        weaponHandler.Init(this);
     }
     private void FixedUpdate()
     {
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("공격준비");
             isMove = false;
             isAttack = true;
+            timeSinceLastAttack = 0; // 멈춘후 잠시후에 공격
         }
     }
 }
