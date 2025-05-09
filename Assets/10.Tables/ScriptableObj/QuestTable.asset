@@ -18,57 +18,57 @@ MonoBehaviour:
     QuestType: 0
     Condition:
       ConditionType: 0
-      CurrentCount: 0
+      NextValue: 0
       RequiredCount: 10
     RewardData:
       RewardItemsList: 
       RewardGold: 0
   - QuestName: "\uC7A1\uBAB9 {0}\uCC98\uB9AC"
-    ID: 1
+    ID: 2
     QuestType: 0
     Condition:
       ConditionType: 1
-      CurrentCount: 0
+      NextValue: 0
       RequiredCount: 100
     RewardData:
       RewardItemsList: 
       RewardGold: 1000
   - QuestName: "\uC720\uC800 Lv.{0} \uB2EC\uC131"
-    ID: 1
+    ID: 3
     QuestType: 2
     Condition:
-      ConditionType: 1
-      CurrentCount: 0
-      RequiredCount: 100
+      ConditionType: 4
+      NextValue: 5
+      RequiredCount: 5
     RewardData:
       RewardItemsList: 
       RewardGold: 1000
   - QuestName: "\uCC55\uD130{0} \uD074\uB9AC\uC5B4"
-    ID: 1
+    ID: 4
     QuestType: 2
     Condition:
-      ConditionType: 1
-      CurrentCount: 0
-      RequiredCount: 100
+      ConditionType: 5
+      NextValue: 1
+      RequiredCount: 1
     RewardData:
       RewardItemsList: 
       RewardGold: 1000
   - QuestName: "\uBA54\uC778 \uC2A4\uD14C\uC774\uC9C0 {0}\uD68C \uB3C4\uC804"
-    ID: 1
+    ID: 5
     QuestType: 2
     Condition:
-      ConditionType: 1
-      CurrentCount: 0
-      RequiredCount: 100
+      ConditionType: 0
+      NextValue: 5
+      RequiredCount: 5
     RewardData:
       RewardItemsList: 
       RewardGold: 1000
   - QuestName: "\uC7A1\uBAB9 {0}\uB9C8\uB9AC \uCC98\uCE58"
-    ID: 1
+    ID: 6
     QuestType: 2
     Condition:
       ConditionType: 1
-      CurrentCount: 0
+      NextValue: 100
       RequiredCount: 100
     RewardData:
       RewardItemsList: 

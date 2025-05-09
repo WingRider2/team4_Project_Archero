@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,28 +18,37 @@ public enum QuestConditionType
     MonsterKill,
     BossMonsterKill,
     EquipmentLevelUp,
+    UserLevelUp,
+    ChapterClear,
 }
 
 public class QuestManager : Singleton<QuestManager>
 {
-    public List<SaveQuestData>                                      CurrentAcceptQuestList { get; private set; } = new List<SaveQuestData>();
-    public List<int>                                                ClearQuestList         { get; set; }         = new List<int>();
-    public Dictionary<QuestConditionType, List<SaveQuestCondition>> QuestConditionsMap     { get; private set; } = new Dictionary<QuestConditionType, List<SaveQuestCondition>>();
+    public List<SaveQuestData>                                      QusetList          { get; private set; } = new List<SaveQuestData>();
+    public List<int>                                                ClearQuestList     { get; set; }         = new List<int>();
+    public Dictionary<QuestConditionType, List<SaveQuestCondition>> QuestConditionsMap { get; private set; } = new Dictionary<QuestConditionType, List<SaveQuestCondition>>();
 
-    void Start()
+    private void Start()
     {
-        foreach (var questData in TableManager.Instance.GetTable<QuestTable>().DataDic.Values)
+        var questTb = TableManager.Instance.GetTable<QuestTable>();
+        foreach (var questData in questTb.DataDic)
         {
-            AcceptQuest(questData);
+            AcceptQuest(questData.Value);
         }
     }
 
-    public void AcceptQuest(QuestData quest)
+    private void Update()
     {
-        if (CurrentAcceptQuestList.Exists(q => q.ID == quest.ID))
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            UpdateCurrentCount(QuestConditionType.Challenge, 1);
+        }
+    }
+
+    private void AcceptQuest(QuestData quest)
+    {
+        if (QusetList.Exists(x => x.ID == quest.ID))
             return;
-
-
         SaveQuestData questData = new SaveQuestData(quest);
 
         SaveQuestCondition condition = questData.Condition;
@@ -48,7 +58,7 @@ public class QuestManager : Singleton<QuestManager>
         }
 
         QuestConditionsMap[quest.Condition.ConditionType].Add(condition);
-        CurrentAcceptQuestList.Add(questData);
+        QusetList.Add(questData);
     }
 
     public void UpdateCurrentCount(QuestConditionType type, int count)
@@ -60,5 +70,9 @@ public class QuestManager : Singleton<QuestManager>
                 condition.UpdateCount(count);
             }
         }
+    }
+
+    public void GetQuestDataByID(int id)
+    {
     }
 }
