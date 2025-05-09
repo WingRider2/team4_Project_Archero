@@ -14,6 +14,7 @@ public class SkillManager : Singleton<SkillManager>
     private void Awake()
     {
         skillTable = TableManager.Instance.GetTable<SkillTable>();
+
     }
 
     // 레벨업이나 스테이지 클리어 시 선택할 스킬 뽑아주기

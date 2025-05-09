@@ -15,9 +15,10 @@ public class ArrowSkill : ISKill
         Id = data.Id;
         Name = data.Name;
         Type = data.Type;
+        Value = data.Value;
     }
 
-    public void ExecuteSkill(GameObject player)
+    public void Attack()
     {
 
     }
