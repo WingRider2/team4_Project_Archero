@@ -20,6 +20,8 @@ public class MonsterBase : MonoBehaviour
     Transform target;
     public Transform Target { get { return target; } }
     public float AttackRange { get { return attackRange; } }
+    float findRange;
+    public float FindRange {  get { return findRange; } }
     public Vector2 movementDir = Vector2.zero;
     public Vector2 lookDir = Vector2.zero;
 
@@ -43,7 +45,7 @@ public class MonsterBase : MonoBehaviour
         characterRender = GetComponent<SpriteRenderer>();
         manationHandler= GetComponent<MAnimationHandler>();
     }
-    public void Init(int _id,string _name,float hp,float _atk,float _def,float speed,float range)
+    public void Init(int _id,string _name,float hp,float _atk,float _def,float speed,float range,float _findRange)
     {
         id = _id;
         name = _name;
@@ -53,9 +55,14 @@ public class MonsterBase : MonoBehaviour
         atk =_atk;
         moveSpeed = speed;
         attackRange = range;
+        findRange = _findRange;
+       
     }
     public virtual float Attack()
     {
+        movementDir = Vector2.zero;
+        lookDir=(target.position-transform.position).normalized;
+        Move();
         isAttack = true;
         Debug.Log("공격" + atk);
         StartCoroutine(Timer(coolTime, () => isAttack = false));
@@ -122,6 +129,7 @@ public class MonsterBase : MonoBehaviour
     }
     public void SetTarget(Transform _target)
     {
+        Debug.Log("플레이어 확인");
         target= _target;
     }
     public void Knockback(Transform other,float power,float duration)

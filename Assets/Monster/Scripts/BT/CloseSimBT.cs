@@ -13,8 +13,11 @@ public class CloseSimBT : BaseBT
         base.MakeRoot();
         INode attackSeq = new SequenceNode(new List<INode> { check, attack });
         INode chaseSeq = new SelectorNode(new List<INode> { attackSeq, chase });
-        INode start = new SelectorNode(new List<INode> { new SequenceNode(new List<INode> { findObs, astar }), chaseSeq });
-        root = new SequenceNode(new List<INode> { live, start });
+        INode find = new SequenceNode(new List<INode> { findTar, idle });
+        INode start = new SelectorNode(new List<INode> { find,new SequenceNode(new List<INode> {
+            findObs, astar }), chaseSeq });
+    
+        root = new SequenceNode(new List<INode> { live ,start });
 
     }
 }
