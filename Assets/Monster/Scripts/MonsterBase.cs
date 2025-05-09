@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MonsterBase : MonoBehaviour
 {
-    Rigidbody2D _rigidbody;
+    protected Rigidbody2D _rigidbody;
     SpriteRenderer characterRender;
-    Animator animator;
+
     float moveSpeed;
    
-    float atk;
+    protected float atk;
     float def;
     protected float currenHP;
     float maxHP;
@@ -22,14 +22,26 @@ public class MonsterBase : MonoBehaviour
     public float AttackRange { get { return attackRange; } }
     public Vector2 movementDir = Vector2.zero;
     public Vector2 lookDir = Vector2.zero;
+
+    protected MAnimationHandler manationHandler;
     bool isDead = false;
-    public bool IsDead {  get { return isDead; } } 
+    public bool IsDead {  get { return isDead; } }
+    bool isDamaged = false;
+    public bool IsDamaged { get { return isDamaged; } }
+    protected bool isAttack = false;
+    public bool IsAttack { get { return isAttack; } }
+    protected float attackTime=0.2f;
+    private float coolTime = 2.0f;
+    private Vector2 knockback=Vector2.zero;
+    private float knockbackDuration = 0.0f;
+    private bool isInvincible = false;
+    public bool IsInvincible { get { return isInvincible; } }
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+       
         characterRender = GetComponent<SpriteRenderer>();
-
+        manationHandler= GetComponent<MAnimationHandler>();
     }
     public void Init(int _id,string _name,float hp,float _atk,float _def,float speed,float range)
     {
@@ -42,15 +54,45 @@ public class MonsterBase : MonoBehaviour
         moveSpeed = speed;
         attackRange = range;
     }
+    public virtual float Attack()
+    {
+        isAttack = true;
+        Debug.Log("공격" + atk);
+        StartCoroutine(Timer(coolTime, () => isAttack = false));
+        return atk;
+    }
+    IEnumerator Timer(float time,System.Action onComplete)
+    {
+        yield  return new WaitForSeconds(time);
+        onComplete();
+
+    }
+    private void Damaged(float damage)
+    {
+        currenHP -= damage;
+        Damaged(currenHP);
+        isInvincible = true;
+        manationHandler.Damaged();
+        StartCoroutine(Timer(1.0f,() => isInvincible = false));
+        if (currenHP <= 0)
+            Dead();
+    }
+    private void Dead()
+    {
+        manationHandler.Dead();
+        isDead = true;
+    }
     public void Move()
     {
         Rotate(lookDir);
         Movement(movementDir);
+
     }
     private void Movement(Vector2 direction)
     {
         direction = direction * moveSpeed;
         _rigidbody.velocity = direction;
+       manationHandler.Move(direction);
     }
     private void Rotate(Vector2 direction)
     {
@@ -82,5 +124,16 @@ public class MonsterBase : MonoBehaviour
     {
         target= _target;
     }
-
+    public void Knockback(Transform other,float power,float duration)
+    {
+        knockbackDuration= duration;
+        knockback=-(other.position - transform.position).normalized*power;   
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isAttack)
+        {
+            //플레이어 데미지 소환.
+        }
+    }
 }

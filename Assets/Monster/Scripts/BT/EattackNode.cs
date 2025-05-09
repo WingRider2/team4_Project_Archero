@@ -11,9 +11,12 @@ public class EattackNode : INode
     }
     public INode.ENodeState Evaluate()
     {
-        Debug.Log("공격!");
+
+        _enemy.Attack();
+
+
         _enemy.movementDir = Vector2.zero;
         _enemy.Move();
-        return INode.ENodeState.Success;
+        return INode.ENodeState.Running;
     }
 }
