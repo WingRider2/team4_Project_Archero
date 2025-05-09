@@ -16,10 +16,13 @@ public class ChapterData
 [Serializable]
 public class StageData
 {
+    public int MonsterSpawnCount;
+    public int ObstacleSpawnCount;
+}
+[Serializable]
+public class TilemapData
+{
     public Tilemap FloorTilemap;
     public Tilemap WallTilemap;
     public Tilemap ColliderTilemap;
-    public int MonsterSpawnCount;
-    public int ObstacleSpawnCount;
-
 }
