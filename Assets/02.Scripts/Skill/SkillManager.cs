@@ -10,22 +10,10 @@ public class SkillManager : Singleton<SkillManager>
     // 스테이지 클리어 임시 변수
     bool isStageClear;
     SkillTable skillTable;
-    int skillCount = 3;
 
     private void Awake()
     {
         skillTable = TableManager.Instance.GetTable<SkillTable>();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     // 레벨업이나 스테이지 클리어 시 선택할 스킬 뽑아주기
@@ -37,7 +25,7 @@ public class SkillManager : Singleton<SkillManager>
         {
             while (selectSkillList.Count < 3)
             {
-                int skillById = Random.Range(0, skillCount);
+                int skillById = Random.Range(0, skillTable.DataDic.Count + 1);
                 var skill = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
                 selectSkillList.Add(skill);
             }

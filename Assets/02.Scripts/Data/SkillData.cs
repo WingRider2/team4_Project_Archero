@@ -3,30 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SkillType
+{
+    Attack,
+    Stat
+}
+
 [Serializable]
 public class SkillData
 {
-    public int id;
-    public string name;
-    public string description;
-    public int level;
-
+    public int Id;
+    public SkillType Type;
+    public string Name;
+    public float Value; // 공격 스킬과 스탯 스킬의 증가량 등을 조절하기 위한 변수
 
     // id가 같아도 서로 다른 객체로 판단해서 중복으로 hashset에 들어가는것을 막기 위한 오버라이드
     public override bool Equals(object obj)
     {
         if (obj is not SkillData other) return false;
-        return this.id == other.id;
+        return this.Id == other.Id;
     }
 
     public override int GetHashCode()
     {
-        return id.GetHashCode();
-    }
-
-    public class AttackSkill
-    {
-
+        return Id.GetHashCode();
     }
 }
 

@@ -12,7 +12,7 @@ public class SkillTable : BaseTable<SkillData>
 
         foreach (var data in dataList)
         {
-            DataDic[data.id] = data;
+            DataDic[data.Id] = data;
         }
     }
 
