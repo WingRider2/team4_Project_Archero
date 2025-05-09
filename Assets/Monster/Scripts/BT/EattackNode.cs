@@ -11,7 +11,7 @@ public class EattackNode : INode
     }
     public INode.ENodeState Evaluate()
     {
-        Debug.Log("°ø°Ý!");
+        Debug.Log("ê³µê²©!");
         _enemy.movementDir = Vector2.zero;
         _enemy.Move();
         return INode.ENodeState.Success;

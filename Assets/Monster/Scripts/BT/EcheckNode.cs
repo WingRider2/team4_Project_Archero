@@ -12,19 +12,19 @@ public class EcheckNode : INode
     }
     INode.ENodeState INode.Evaluate()
     {
-        Debug.Log("»Æ¿Œ Ω««‡¡ﬂ");
+        Debug.Log("ÌôïÏù∏ Ïã§ÌñâÏ§ë");
         if(_enemy.Target == null) 
             return INode.ENodeState.Failure;
         float distance = Vector2.Distance(_enemy.transform.position, _enemy.Target.position);
         Debug.Log(distance);
         if (distance <=_enemy.AttackRange)
         {
-            Debug.Log("≈Ωªˆ º∫∞¯");
+            Debug.Log("ÌÉêÏÉâ ÏÑ±Í≥µ");
             return INode.ENodeState.Success;
         }
         else
         {
-            Debug.Log("≈Ωªˆ Ω«∆–");
+            Debug.Log("ÌÉêÏÉâ Ïã§Ìå®");
             return INode.ENodeState.Failure;
         }
     }

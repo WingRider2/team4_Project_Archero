@@ -13,7 +13,7 @@ public class EchaseNode : INode
     }
     public INode.ENodeState Evaluate()
     {
-        Debug.Log("√ﬂ¿˚ Ω««‡¡ﬂ");
+        Debug.Log("Ï∂îÏ†Å Ïã§ÌñâÏ§ë");
         if (_enemy.Target == null)
             return INode.ENodeState.Failure;
         Vector2 dir=(_enemy.Target.position-_enemy.transform.position).normalized;
