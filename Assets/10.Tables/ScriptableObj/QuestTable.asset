@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14216ef111d81a74ca6e67079fe710ca, type: 3}
+  m_Name: QuestTable
+  m_EditorClassIdentifier: 
+  dataList:
+  - QuestName: "\uBA54\uC778 \uC2A4\uD14C\uC774\uC9C0 \uB3C4\uC804"
+    ID: 1
+    QuestType: 0
+    Condition:
+      ConditionType: 0
+      CurrentCount: 0
+      RequiredCount: 10
+    RewardData:
+      RewardItemsList: 
+      RewardGold: 0
+  - QuestName: "\uC7A1\uBAB9 {0}\uCC98\uB9AC"
+    ID: 1
+    QuestType: 0
+    Condition:
+      ConditionType: 1
+      CurrentCount: 0
+      RequiredCount: 100
+    RewardData:
+      RewardItemsList: 
+      RewardGold: 1000
+  - QuestName: "\uC720\uC800 Lv.{0} \uB2EC\uC131"
+    ID: 1
+    QuestType: 2
+    Condition:
+      ConditionType: 1
+      CurrentCount: 0
+      RequiredCount: 100
+    RewardData:
+      RewardItemsList: 
+      RewardGold: 1000
+  - QuestName: "\uCC55\uD130{0} \uD074\uB9AC\uC5B4"
+    ID: 1
+    QuestType: 2
+    Condition:
+      ConditionType: 1
+      CurrentCount: 0
+      RequiredCount: 100
+    RewardData:
+      RewardItemsList: 
+      RewardGold: 1000
+  - QuestName: "\uBA54\uC778 \uC2A4\uD14C\uC774\uC9C0 {0}\uD68C \uB3C4\uC804"
+    ID: 1
+    QuestType: 2
+    Condition:
+      ConditionType: 1
+      CurrentCount: 0
+      RequiredCount: 100
+    RewardData:
+      RewardItemsList: 
+      RewardGold: 1000
+  - QuestName: "\uC7A1\uBAB9 {0}\uB9C8\uB9AC \uCC98\uCE58"
+    ID: 1
+    QuestType: 2
+    Condition:
+      ConditionType: 1
+      CurrentCount: 0
+      RequiredCount: 100
+    RewardData:
+      RewardItemsList: 
+      RewardGold: 1000
