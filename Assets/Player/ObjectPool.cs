@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObjectPool : Singleton<ObjectPool>
 {
+    //나중에 확성을 위해 흠..
     public GameObject prefab;
     public int poolSize = 100;
 

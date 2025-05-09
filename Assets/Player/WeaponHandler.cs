@@ -34,9 +34,6 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private float bulletSize = 1; //투사체 크기
     public float BulletSize { get { return bulletSize; } }
-
-    [SerializeField] private float duration;//투사체발사 지연시간
-    public float Duration { get { return duration; } }
     
     // 무기에 대해서
 
