@@ -337,6 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tableList:
   - {fileID: 11400000, guid: ea09622222d45094fbae0b1784414850, type: 2}
+  - {fileID: 11400000, guid: ed27a788a7e40854eb9ddd846045531d, type: 2}
   - {fileID: 11400000, guid: 21f3e389611083d42ac5be790c697fb3, type: 2}
 --- !u!4 &1203914985
 Transform:
