@@ -36,12 +36,24 @@ public class ProjectileController : MonoBehaviour
                 //gameObject.SetActive(false);
             }
         }
+        if (collision.CompareTag("Obstacle"))
+        {
+            // 벽면 혹은 장애물
+            // 후에 벽에서 팅기는 거 추가 대비
+            _rigidbody.velocity = Vector3.zero; // 속도 정보 제거
+
+            if (objectPool != null)
+                objectPool.Return(this.gameObject);
+            else
+            {
+                //gameObject.SetActive(false);
+            }
+        }
     }
 
     public void Launch(Vector2 direction , float speed)
     {
         _rigidbody.velocity = direction.normalized * speed;
     }
-
 
 }
