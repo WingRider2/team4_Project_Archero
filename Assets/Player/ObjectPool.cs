@@ -28,8 +28,7 @@ public class ObjectPool : Singleton<ObjectPool>
             obj.SetActive(true);
             return obj;
         }
-
-        // 풀에 없으면 예외로 새로 생성 (선택 사항)
+       
         GameObject extra = Instantiate(prefab);
         return extra;
     }
