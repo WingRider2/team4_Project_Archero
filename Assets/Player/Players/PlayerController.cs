@@ -152,7 +152,6 @@ public class PlayerController : MonoBehaviour
             }
 
             Attack();
-            
         }
     }
 
