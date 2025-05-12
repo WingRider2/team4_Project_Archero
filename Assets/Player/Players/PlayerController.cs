@@ -5,6 +5,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public WeaponHandler weaponPrefab;
     private WeaponHandler weaponHandler;
 
-    public Vector2 lookDirection = Vector2.right; //???? ????
+    public Vector2 LookDirection { get; private set; } = Vector2.right; //???? ????
 
     // ???? ???? ????? ???? ????? ????? ????
     bool isMove = false; // ????? ???????
@@ -101,9 +102,11 @@ public class PlayerController : MonoBehaviour
             SkillManager.Instance.SelectSkill(103);
         }
 
-        TargetingSystem.findTarget();
-        lookDirection = (TargetingSystem.target.transform.position - transform.position).normalized;
-        Rotate(lookDirection);
+        GameObject target = TargetingSystem.FindTarget();
+        if (target == null)
+            return;
+        LookDirection = (target.transform.position - transform.position).normalized;
+        Rotate(LookDirection);
 
         if (isAttack)
         {
@@ -140,6 +143,7 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
+
             Attack();
         }
     }
@@ -174,8 +178,8 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate(Vector2 direction)
     {
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotZ) > 90f;
+        float rotZ   = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bool  isLeft = Mathf.Abs(rotZ) > 90f;
 
         if (weaponPivot != null)
         {
