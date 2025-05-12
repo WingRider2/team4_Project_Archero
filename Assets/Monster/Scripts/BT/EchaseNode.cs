@@ -13,7 +13,7 @@ public class EchaseNode : INode
     }
     public INode.ENodeState Evaluate()
     {
-        Debug.Log("추적 실행중");
+       
         if (_enemy.Target == null)
             return INode.ENodeState.Failure;
         Vector2 dir=(_enemy.Target.position-_enemy.transform.position).normalized;

@@ -16,13 +16,10 @@ public class Astar
       
 
         int mask = LayerMask.GetMask("Obstacle");
-        //��ֹ�/�� Ȯ��
+    
         Collider2D col = Physics2D.OverlapBox(new Vector2(x,y),new Vector2(1,1), mask);
 
-        if (col != null)
-            Debug.Log($"��ֹ� �߰�{x},{y}: {col.name}");
-        else
-            Debug.Log($"({x},{y})�� ��ֹ� ����");
+     
         return col != null;
        
 
@@ -32,24 +29,24 @@ public class Astar
     {
         List<Vector2> path=new List<Vector2>();
         while (lastNode != null) {
-            Debug.Log(lastNode.x + ", " + lastNode.y);
+           
             path.Add(new Vector2(lastNode.x,lastNode.y));
             lastNode = lastNode.parent;
             
         }
       
         path.Reverse();
-        for (int i = 0; i < path.Count - 1; i++)
-        {
-            Debug.DrawLine(path[i], path[i + 1], Color.green, 2f);
-        }
+        //for (int i = 0; i < path.Count - 1; i++)
+        //{
+        //    Debug.DrawLine(path[i], path[i + 1], Color.green, 2f);
+        //}
         return path;
     }
     
     public List<Vector2> FindPath(Vector2 start, Vector2 target)
     {
 
-        Debug.Log("����");
+     
         List<Node> openNodes = new List<Node>();
         HashSet<Vector2> closedNodes = new HashSet<Vector2>();
 

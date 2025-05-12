@@ -128,7 +128,7 @@ public class MonsterBase : MonoBehaviour
        // Debug.DrawRay(transform.position, dir.normalized * distance, Color.red);
 
         if(hit.collider != null ) 
-        Debug.Log("Ȯ��"+hit.collider.tag);
+        
 
         if (hit == null)
         {
@@ -136,7 +136,7 @@ public class MonsterBase : MonoBehaviour
         }
         if (hit.collider.CompareTag("Obstacle"))
         {
-            Debug.Log("�� ����");
+     
             return true;
         }
         return false;
