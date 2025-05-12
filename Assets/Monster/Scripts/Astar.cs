@@ -18,7 +18,7 @@ public class Astar
         int mask = LayerMask.GetMask("Obstacle");
     
         Collider2D col = Physics2D.OverlapBox(new Vector2(x,y),new Vector2(1,1), mask);
-
+        
         return col != null;
        
 
@@ -58,26 +58,30 @@ public class Astar
         int loopNum = 0;
         while (openNodes.Count > 0)
         {
-            currentNode = openNodes[0];
-            Debug.Log("목표"+targetNode.x + "," + targetNode.y);
-            Debug.Log(currentNode.x+","+currentNode.y);
+        
+            
             openNodes.Sort((a, b) => a.f.CompareTo(b.f));
             //foreach (Node node in openNodes) { 
             //    if(node.f<currentNode.f)
             //        currentNode = node;
             //}
-            if (currentNode.x == targetNode.x && currentNode.y == targetNode.y) {
-               
-                return MakePath(currentNode);
-                
-            }
+            currentNode = openNodes[0];
             closedNodes.Add(new Vector2(currentNode.x,currentNode.y));
             openNodes.Remove(currentNode);
             for (int i = 0; i < 4; i++)
             {
                 int nx=dx[i]+currentNode.x;
                 int ny=dy[i]+currentNode.y;
-                if(IsObs(nx,ny))
+                if (nx == targetNode.x && ny == targetNode.y)
+                {
+                    Node endNode = new Node(nx, ny, currentNode.g + 10);
+                 
+                 
+                    endNode.parent = currentNode;
+                    return MakePath(currentNode);
+
+                }
+                if (IsObs(nx,ny))
                     continue;
                 Node nowNode= new Node(nx,ny,currentNode.g+10);
                 nowNode.SetH(targetNode);
