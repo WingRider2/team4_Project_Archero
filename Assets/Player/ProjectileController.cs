@@ -5,13 +5,17 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {   
 
-    private WeaponHandler weaponHandler;//���� ���� 
+    private WeaponHandler weaponHandler;//무기 정보 
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer spriteRenderer;
     private ObjectPool objectPool;
 
     public bool fxOnDestory = true;
+
+
+    //임시
+    public PoolType poolType;
 
     private void Awake()
     {
@@ -22,12 +26,25 @@ public class ProjectileController : MonoBehaviour
     {
         objectPool = pool;
     }
-    private void OnTriggerEnter2D(Collider2D collision) //�浹 ó��
+    private void OnTriggerEnter2D(Collider2D collision) //충돌 처리
     {
         if (collision.CompareTag("Enemy"))
         {
-            // �浹 ó��
-            _rigidbody.velocity = Vector3.zero; // �ӵ� ���� ����
+            // 충돌 처리
+            _rigidbody.velocity = Vector3.zero; // 속도 정보 제거
+
+            if (objectPool != null)
+                objectPool.Return(this.gameObject);
+            else
+            {
+                //gameObject.SetActive(false);
+            }
+        }
+        if (collision.CompareTag("Obstacle"))
+        {
+            // 벽면 혹은 장애물
+            // 후에 벽에서 팅기는 거 추가 대비
+            _rigidbody.velocity = Vector3.zero; // 속도 정보 제거
 
             if (objectPool != null)
                 objectPool.Return(this.gameObject);
@@ -42,6 +59,5 @@ public class ProjectileController : MonoBehaviour
     {
         _rigidbody.velocity = direction.normalized * speed;
     }
-
 
 }

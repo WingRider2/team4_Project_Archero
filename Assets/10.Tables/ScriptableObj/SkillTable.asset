@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9064d4c285b48b945850a44cbe47801b, type: 3}
+  m_Name: SkillTable
+  m_EditorClassIdentifier: 
+  dataList:
+  - Id: 1
+    Type: 0
+    StatSkillType: 0
+    Name: "\uD2B8\uB9AC\uD50C\uC0F7"
+    Value: 0
+  - Id: 2
+    Type: 0
+    StatSkillType: 0
+    Name: "\uBC31\uC0F7"
+    Value: 0
+  - Id: 3
+    Type: 0
+    StatSkillType: 0
+    Name: "\uC0AC\uC774\uB4DC \uC0F7"
+    Value: 0
+  - Id: 101
+    Type: 1
+    StatSkillType: 1
+    Name: "\uACF5\uACA9\uB825 \uC5C5"
+    Value: 10
+  - Id: 102
+    Type: 1
+    StatSkillType: 2
+    Name: "\uACF5\uACA9 \uC18D\uB3C4 \uC5C5"
+    Value: 0.2
+  - Id: 103
+    Type: 1
+    StatSkillType: 4
+    Name: "\uC774\uB3D9\uC18D\uB3C4 "
+    Value: 1

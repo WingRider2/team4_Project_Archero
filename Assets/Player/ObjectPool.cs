@@ -1,41 +1,70 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Windows;
+using static UnityEditor.Progress;
 
+public enum PoolType
+{
+    None,
+    Arrow,
+    PoisonArrow,
+    BloodArrow,
+}
 public class ObjectPool : Singleton<ObjectPool>
 {
-    public GameObject prefab;
-    public int poolSize = 10;
+    //나중에 확장을 위해 흠..
+    public GameObject[] prefabs;
+    public int poolSize = 30;
 
-    private Queue<GameObject> pool = new Queue<GameObject>();
+    private Dictionary<PoolType, Queue<GameObject>> pools = new();
 
     void Awake()
     {
-        for (int i = 0; i < poolSize; i++)
+        foreach (var item in prefabs)
         {
-            GameObject obj = Instantiate(prefab);
-            obj.transform.parent = transform;
-            obj.SetActive(false);
-            pool.Enqueue(obj);
+            for (int i = 0; i < poolSize; i++)
+            {
+                GameObject obj = Instantiate(item);
+                ProjectileController pc = obj.GetComponent<ProjectileController>();
+                obj.transform.parent = transform;
+                obj.SetActive(false);
+                PoolType poolType = PoolType.None;
+                if (Enum.TryParse(item.name, out poolType))
+                {
+                    if (!pools.ContainsKey(poolType)) pools.Add(poolType, new());
+                    pc.poolType = poolType;
+                    pools[poolType].Enqueue(obj);
+                }
+                else
+                {
+                    Debug.Log("생성 실패");
+                }
+            }
         }
     }
 
-    public GameObject Get()
+    public GameObject Get(PoolType poolType)
     {
-        if (pool.Count > 0)
+        if (pools[poolType].Count > 0)
         {
-            GameObject obj = pool.Dequeue();
+            GameObject obj = pools[poolType].Dequeue();
             obj.SetActive(true);
             return obj;
         }
-       
-        GameObject extra = Instantiate(prefab);
+
+        GameObject extra = Instantiate(prefabs.FirstOrDefault(item => item.name == poolType.ToString()));
+        extra.transform.parent = transform;
+
         return extra;
     }
 
     public void Return(GameObject obj)
     {
         obj.SetActive(false);
-        pool.Enqueue(obj);
+        ProjectileController pc = obj.GetComponent<ProjectileController>();
+        pools[pc.poolType].Enqueue(obj);
     }
 }

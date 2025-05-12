@@ -25,12 +25,12 @@ public class MonsterManager : MonoBehaviour
     }
     public void Clear()
     {
-        //¹¹ Á¾·á½Ã... ÀÛµ¿
+        //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½... ï¿½Ûµï¿½
     }
     private void HandleMonsterDeath(MonsterBase mon)
     {
         mon.OnDeath -= HandleMonsterDeath;
-        Debug.Log($"{mon.name} »èÁ¦");
+        Debug.Log($"{mon.name} ï¿½ï¿½ï¿½ï¿½");
         monsters.Remove(mon);
         if (monsters.Count == 0) { 
             Clear();
@@ -43,8 +43,10 @@ public class MonsterManager : MonoBehaviour
         mon.Init(num, monData.Name, monData.HP, monData.ATK,monData.DEF ,monData.MoveSpeed, monData.AttackRange,monData.FindRange);
         if(mon==null)
         {
-            Debug.Log("¸ó½ºÅÍ »ý¼º ½ÇÆÐ");
+
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
             return null;
+
         }
         mon.SetTarget(GameObject.FindWithTag("Player").transform);
         return mon;

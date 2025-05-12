@@ -12,18 +12,20 @@ public class Astar
     static int[] ddy = { 1, -1, 1, -1 };
     private bool IsObs(int x,int  y)
     {
+
       
 
         int mask = LayerMask.GetMask("Obstacle");
-        //Àå¾Ö¹°/º® È®ÀÎ
+        //ï¿½ï¿½Ö¹ï¿½/ï¿½ï¿½ È®ï¿½ï¿½
         Collider2D col = Physics2D.OverlapBox(new Vector2(x,y),new Vector2(1,1), mask);
 
         if (col != null)
-            Debug.Log($"Àå¾Ö¹° ¹ß°ß{x},{y}: {col.name}");
+            Debug.Log($"ï¿½ï¿½Ö¹ï¿½ ï¿½ß°ï¿½{x},{y}: {col.name}");
         else
-            Debug.Log($"({x},{y})¿¡ Àå¾Ö¹° ¾øÀ½");
+            Debug.Log($"({x},{y})ï¿½ï¿½ ï¿½ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½");
         return col != null;
        
+
     }
    
     public List<Vector2> MakePath(Node lastNode)
@@ -47,7 +49,7 @@ public class Astar
     public List<Vector2> FindPath(Vector2 start, Vector2 target)
     {
 
-        Debug.Log("½ÃÀÛ");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½");
         List<Node> openNodes = new List<Node>();
         HashSet<Vector2> closedNodes = new HashSet<Vector2>();
 
