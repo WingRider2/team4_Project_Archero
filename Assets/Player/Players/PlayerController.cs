@@ -8,8 +8,8 @@ using UnityEngine.Pool;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D Rigidbody2D;
-    private PlayerInputHandler PlayerInputHandler;
+    private Rigidbody2D rigidbody2D;
+    private PlayerInputHandler playerInputHandler;
     public PlayerStats PlayerStats { get; private set; }
     private TargetingSystem TargetingSystem;
     private CapsuleCollider2D capsuleCollider2D;
@@ -129,12 +129,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-        /* 각도 발사 테스트
-        weaponHandler.Attack(-30);
-        weaponHandler.Attack(0);
-        weaponHandler.Attack(30);
-        */
-    }
+    /* 각도 발사 테스트
+    weaponHandler.Attack(-30);
+    weaponHandler.Attack(0);
+    weaponHandler.Attack(30);
+    */
+
 
     private void StateChanged(bool _isMove)
     {
@@ -154,11 +154,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Rotate(Vector2 direction)
     {
-        float rotZ   = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool  isLeft = Mathf.Abs(rotZ) > 90f;
+        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bool isLeft = Mathf.Abs(rotZ) > 90f;
 
         if (weaponPivot != null)
-        {            
+        {
             //weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ); // 무기 방향을 돌려준다.
             weaponPivot.rotation = Quaternion.Lerp(weaponPivot.rotation, Quaternion.Euler(0, 0, rotZ), Time.deltaTime * rotateSpeed);
         }
@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
         weaponHandler?.Rotate(isLeft);
     }
 
-    void Hit(float multiplier , Collision2D collision2D)
+    void Hit(float multiplier, Collision2D collision2D)
     {
         float damage = multiplier;//이부분에서 collision2D에서 데미지를 읽어야함
 
@@ -176,3 +176,4 @@ public class PlayerController : MonoBehaviour
         PlayerStats.currentHP -= (int)(Damage + 0.5f); //뒷계산은 반올림
     }
 }
+
