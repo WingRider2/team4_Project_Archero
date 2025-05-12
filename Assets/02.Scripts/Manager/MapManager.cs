@@ -10,13 +10,17 @@ public class MapManager : Singleton<MapManager>
     [SerializeField] private Tilemap floorMap;
     [SerializeField] private Tilemap wallMap;
     [SerializeField] private Tilemap colliderMap;
+    [SerializeField] private Tilemap doorTilemap;
     [SerializeField] private GameObject[] obstacleObjects;
+    [SerializeField] private GameObject doorPrefabs;
 
     [SerializeField] private TilemapData[] tilemapDatas;
     [SerializeField] private GameObject testPrefab;
+
     private void Awake()
     {
     }
+
     void Start()
     {
         GenerateMap(TableManager.Instance.GetTable<StageTable>().GetDataByID(1));
@@ -34,10 +38,13 @@ public class MapManager : Singleton<MapManager>
         GenerateTile(floorMap, tilemapData.FloorTilemap);
         GenerateTile(wallMap, tilemapData.WallTilemap);
         GenerateTile(colliderMap, tilemapData.ColliderTilemap);
+        GenerateTile(doorTilemap, tilemapData.DoorTilemap);
+
+        SpawnDoors();
         GenerateObstacle(stageData);
     }
 
-    private void GenerateTile(Tilemap tilemap,Tilemap dataTilemap)
+    private void GenerateTile(Tilemap tilemap, Tilemap dataTilemap)
     {
         tilemap.ClearAllTiles();
         var floor  = dataTilemap;
@@ -45,14 +52,15 @@ public class MapManager : Singleton<MapManager>
         foreach (var pos in bounds.allPositionsWithin)
         {
             var tile = floor.GetTile(pos);
-            if(tile != null)
-                tilemap.SetTile(pos,tile);
+            if (tile != null)
+                tilemap.SetTile(pos, tile);
         }
     }
-/// <summary>
-/// 장애물을 랜덤으로 생성하는 메서드
-/// </summary>
-/// <param name="stageData"></param>
+
+    /// <summary>
+    /// 장애물을 랜덤으로 생성하는 메서드
+    /// </summary>
+    /// <param name="stageData"></param>
     private void GenerateObstacle(StageData stageData)
     {
         List<Vector3Int> vaildPositions = GenerateSpawnArea();
@@ -68,13 +76,13 @@ public class MapManager : Singleton<MapManager>
         foreach (var index in tileIndex)
         {
             GameObject go = Instantiate(obstacleObjects[Random.Range(0, obstacleObjects.Length)]);
-            go.transform.position = floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f,0.5f);
+            go.transform.position = floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f, 0.5f);
             vaildPositions.RemoveAt(index);
         }
 
         SpawnMonster(stageData, vaildPositions);
-
     }
+
     List<Vector3Int> GenerateSpawnArea()
     {
         List<Vector3Int> result = new();
@@ -95,20 +103,34 @@ public class MapManager : Singleton<MapManager>
         return result;
     }
 
-    private void SpawnMonster(StageData stageData,List<Vector3Int> vaildPositions)
+    private void SpawnMonster(StageData stageData, List<Vector3Int> vaildPositions)
     {
         HashSet<int> tileIndex = new HashSet<int>();
         while (tileIndex.Count < stageData.MonsterSpawnCount)
         {
             tileIndex.Add(Random.Range(0, vaildPositions.Count));
         }
-        
+
         foreach (var index in tileIndex)
         {
             GameObject go = Instantiate(testPrefab);
-            go.transform.position = floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f,0.5f);
+            go.transform.position = floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f, 0.5f);
         }
     }
+
+    private void SpawnDoors()
+    {
+        foreach (var pos in doorTilemap.cellBounds.allPositionsWithin)
+        {
+            if (!doorTilemap.HasTile(pos))
+                continue;
+
+            Vector3    worldPos = doorTilemap.CellToWorld(pos);
+            GameObject go       = Instantiate(doorPrefabs, worldPos, Quaternion.identity);
+            // go.transform.position = worldPos;
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (floorMap == null || wallMap == null) return;
@@ -129,7 +151,6 @@ public class MapManager : Singleton<MapManager>
                 Gizmos.color = new Color(0f, 1f, 0f, 0.3f); // 연한 녹색
                 Gizmos.DrawCube(worldPos, new Vector3(1f, 1f, 0.1f));
             }
-        }    
+        }
     }
-    
 }
