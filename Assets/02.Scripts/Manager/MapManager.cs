@@ -27,6 +27,8 @@ public class MapManager : Singleton<MapManager>
     private GameObject currentDoorObject;
     public Tilemap FloorMap => floorMap;
 
+    public List<Vector3> MonsterSpawnPositions { get; private set; }
+
     private void Awake()
     {
     }
@@ -114,6 +116,7 @@ public class MapManager : Singleton<MapManager>
     private void SpawnMonster(StageData stageData, List<Vector3Int> vaildPositions)
     {
         HashSet<int> tileIndex = new HashSet<int>();
+        MonsterSpawnPositions.Clear();
         while (tileIndex.Count < stageData.MonsterSpawnCount)
         {
             tileIndex.Add(Random.Range(0, vaildPositions.Count));
@@ -121,8 +124,7 @@ public class MapManager : Singleton<MapManager>
 
         foreach (var index in tileIndex)
         {
-            GameObject go = Instantiate(testPrefab);
-            go.transform.position = floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f, 0.5f);
+            MonsterSpawnPositions.Add(floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f, 0.5f));
         }
     }
 
