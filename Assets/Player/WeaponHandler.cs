@@ -47,8 +47,6 @@ public class WeaponHandler : MonoBehaviour
     {
         objectPool= FindObjectOfType<ObjectPool>();
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
-
-
     }
     public void Init(PlayerController playerController)
     {
