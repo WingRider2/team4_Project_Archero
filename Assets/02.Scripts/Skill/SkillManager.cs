@@ -6,13 +6,13 @@ using Random = UnityEngine.Random;
 
 public class SkillManager : Singleton<SkillManager>
 {
-    // ÇÃ·¹ÀÌ¾î ·¹º§¾÷ ÆÇ´Ü ÀÓ½Ã º¯¼ö
+    // í”Œë ˆì´ì–´ ë ˆë²¨ì—… íŒë‹¨ ì„ì‹œ ë³€ìˆ˜
     [SerializeField]
     private PlayerController player;
 
     bool isPlayerLevelUp;
 
-    // ½ºÅ×ÀÌÁö Å¬¸®¾î ÀÓ½Ã º¯¼ö
+    // ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ ì„ì‹œ ë³€ìˆ˜
     bool isStageClear;
     SkillTable skillTable;
 
@@ -35,7 +35,7 @@ public class SkillManager : Singleton<SkillManager>
         }
     }
 
-    // ·¹º§¾÷ÀÌ³ª ½ºÅ×ÀÌÁö Å¬¸®¾î ½Ã ¼±ÅÃÇÒ ½ºÅ³ »Ì¾ÆÁÖ±â
+    // ë ˆë²¨ì—…ì´ë‚˜ ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ ì‹œ ì„ íƒí•  ìŠ¤í‚¬ ë½‘ì•„ì£¼ê¸°
     HashSet<SkillData> GetSkillToSelect()
     {
         HashSet<SkillData> selectSkillList = new HashSet<SkillData>();
