@@ -66,8 +66,7 @@ public class WeaponHandler : MonoBehaviour
         arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
 
         //여기 쯤에서 추가연산?
-        controller.Launch(direction, speed);
-        weaponAnimationHandler.Shot();
+        controller.Launch(direction, speed);        
     }
 
     public void Attack(float _angle)
@@ -83,6 +82,7 @@ public class WeaponHandler : MonoBehaviour
         arrow.transform.position = firePoint.position;
         arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
 
+        weaponAnimationHandler.Shot();
         //여기 쯤에서 추가연산?
         controller.Launch(direction, speed);
     }
