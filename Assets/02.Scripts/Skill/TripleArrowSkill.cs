@@ -20,10 +20,31 @@ public class TripleArrowSkill : IAngleArrowSkill, ISkill
         Type = data.Type;
         Value = data.Value;
         SkillIcon = data.SkillIcon;
+        //GameObject arrow = ObjectPool.Instance.Get(AttackType.Arrow);
+        //ProjectileController controller = arrow.GetComponent<ProjectileController>();
+        float[] angleOffsets = { -15f, 0f, 15f };
+
+        foreach (float offset in angleOffsets)
+        {
+            //float angle = _angle + offset;
+
+            //Vector2 direction = Quaternion.Euler(0, 0, _angle) * player.lookDirection;
+
+            //arrow.transform.position = Quaternion.Euler(0, 0, angle);
+
+            //Rigidbody2D rb = arrow.GetComponent<Rigidbody2D>();
+
+            //if (rb != null)
+            //{
+            //    rb.velocity = shootDir.normalized * 10f;
+            //}
+
+        }
     }
 
     public float[] GetAttackAngles()
     {
+        float[] angleOffsets = { -15f, 15f };
         return angleOffsets;
     }
 }

@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInputHandler PlayerInputHandler;
     public PlayerStats PlayerStats { get; private set; }
     private TargetingSystem TargetingSystem;
+    protected AnimationHandler animationHandler;
 
     [SerializeField] private Transform weaponPivot;
     [SerializeField] private WeaponHandler weaponPrefab;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
         PlayerInputHandler = GetComponent<PlayerInputHandler>();
         PlayerStats = GetComponent<PlayerStats>();
         TargetingSystem = GetComponent<TargetingSystem>();
+        animationHandler = GetComponent<AnimationHandler>();
 
         if (weaponPrefab != null)
             weaponHandler = Instantiate(weaponPrefab, weaponPivot); //???????
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 moveDir = PlayerInputHandler.moveInput;
         Rigidbody2D.velocity = moveDir * PlayerStats.MoveSpeed;
-
+        animationHandler.Move(moveDir * PlayerStats.MoveSpeed);
         bool wasMoving = isMove;
         isMove = moveDir.magnitude > 0.01f;
 
@@ -150,6 +152,7 @@ public class PlayerController : MonoBehaviour
             }
 
             Attack();
+            
         }
     }
 
