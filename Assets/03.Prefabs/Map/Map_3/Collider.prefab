@@ -1125,26 +1125,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -1, y: 14, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 0, y: 14, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: 1, y: 14, z: 0}
     second:
       serializedVersion: 2
@@ -1247,13 +1227,13 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 120
+  - m_RefCount: 118
     m_Data: {fileID: 11400000, guid: 6157c347d5df94743974e4434f34ca6c, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 120
+  - m_RefCount: 118
     m_Data: {fileID: -1285552051, guid: 626489da5ec28d04d8f7f22fea20b66f, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 120
+  - m_RefCount: 118
     m_Data:
       e00: 1
       e01: 0
@@ -1272,7 +1252,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 120
+  - m_RefCount: 118
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -1451,13 +1431,27 @@ CompositeCollider2D:
     m_ColliderPaths:
     - - X: 110000000
         Y: 150000000
-      - X: -110000000
+      - X: 10000000
         Y: 150000000
-      - X: -110000000
-        Y: -160000000
-      - X: 110000000
-        Y: -160000000
-    - - X: -100000000
+      - X: 10000000
+        Y: 140000000
+      - X: 40000000
+        Y: 140000000
+      - X: 40000000
+        Y: 70000000
+      - X: 70000000
+        Y: 70000000
+      - X: 70000000
+        Y: 80000000
+      - X: 50000000
+        Y: 80000000
+      - X: 50000000
+        Y: 140000000
+      - X: 100000000
+        Y: 140000000
+      - X: 100000000
+        Y: -150000000
+      - X: -100000000
         Y: -150000000
       - X: -100000000
         Y: 140000000
@@ -1473,36 +1467,21 @@ CompositeCollider2D:
         Y: 70000000
       - X: -40000000
         Y: 140000000
-      - X: 40000000
+      - X: -10000000
         Y: 140000000
-      - X: 40000000
-        Y: 70000000
-      - X: 70000000
-        Y: 70000000
-      - X: 70000000
-        Y: 80000000
-      - X: 50000000
-        Y: 80000000
-      - X: 50000000
-        Y: 140000000
-      - X: 100000000
-        Y: 140000000
-      - X: 100000000
-        Y: -150000000
+      - X: -10000000
+        Y: 150000000
+      - X: -110000000
+        Y: 150000000
+      - X: -110000000
+        Y: -160000000
+      - X: 110000000
+        Y: -160000000
   m_CompositePaths:
     m_Paths:
     - - {x: 11, y: 15}
-      - {x: -11, y: 15}
-      - {x: -11, y: -16}
-      - {x: 11, y: -16}
-    - - {x: -10, y: -15}
-      - {x: -10, y: 14}
-      - {x: -5, y: 14}
-      - {x: -5, y: 8}
-      - {x: -7, y: 8}
-      - {x: -7, y: 7}
-      - {x: -4, y: 7}
-      - {x: -4, y: 14}
+      - {x: 1, y: 15}
+      - {x: 1, y: 14}
       - {x: 4, y: 14}
       - {x: 4, y: 7}
       - {x: 7, y: 7}
@@ -1511,6 +1490,19 @@ CompositeCollider2D:
       - {x: 5, y: 14}
       - {x: 10, y: 14}
       - {x: 10, y: -15}
+      - {x: -10, y: -15}
+      - {x: -10, y: 14}
+      - {x: -5, y: 14}
+      - {x: -5, y: 8}
+      - {x: -7, y: 8}
+      - {x: -7, y: 7}
+      - {x: -4, y: 7}
+      - {x: -4, y: 14}
+      - {x: -1, y: 14}
+      - {x: -1, y: 15}
+      - {x: -11, y: 15}
+      - {x: -11, y: -16}
+      - {x: 11, y: -16}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0
   m_UseDelaunayMesh: 0
