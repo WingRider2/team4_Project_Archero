@@ -19,7 +19,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
 
     List<ISkill> skills = new List<ISkill>();
 
-    public List<ISkill> SelectedSKills { get; private set; } = new List<ISkill>();
+    public List<ISkill> SelectedSKills { get; set; } = new List<ISkill>();
 
     protected override void Awake()
     {
@@ -37,7 +37,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
     }
 
     // 레벨업이나 스테이지 클리어 시 선택할 스킬 뽑아주기
-    HashSet<SkillData> GetSkillToSelect()
+    public HashSet<SkillData> GetSkillToSelect()
     {
         HashSet<SkillData> selectSkillList = new HashSet<SkillData>();
 
@@ -46,7 +46,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
             while (selectSkillList.Count < 3)
             {
                 int skillById = Random.Range(0, skillTable.DataDic.Count + 1);
-                var skill     = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
+                var skill = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
                 selectSkillList.Add(skill);
             }
         }
