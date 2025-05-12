@@ -17,15 +17,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public WeaponHandler weaponPrefab;
     private WeaponHandler weaponHandler;
 
-    public Vector2 lookDirection = Vector2.right; //���� ����
+    public Vector2 lookDirection = Vector2.right; //???? ????
 
-    // ���� ���� �Ʒ��� ���� ���ݰ� �̵��� ����
-    bool isMove = false; // �̵��� �����Ѱ�
+    // ???? ???? ????? ???? ????? ????? ????
+    bool isMove = false; // ????? ???????
 
-    bool isAttack = true; // ������ �����Ѱ�
+    bool isAttack = true; // ?????? ???????
 
-    // �ִϸ��̼� ����
-    // �浹 ó�� => 
+    // ??????? ????
+    // ?浹 ??? => 
     private float timeSinceLastAttack = float.MaxValue;
     private float rotateSpeed = 10.0f;
 
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         TargetingSystem = GetComponent<TargetingSystem>();
 
         if (weaponPrefab != null)
-            weaponHandler = Instantiate(weaponPrefab, weaponPivot); //�������
+            weaponHandler = Instantiate(weaponPrefab, weaponPivot); //???????
         else
             weaponHandler = GetComponentInChildren<WeaponHandler>();
 
@@ -92,11 +92,11 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("�Ƚ����!");
+            Debug.Log("??????!");
         }
     }
 
-    private void HandleAttackDelay() //���� ��߻� �� �ʿ��� �ð� ���
+    private void HandleAttackDelay() //???? ???? ?? ????? ?ð? ???
     {
         if (weaponHandler == null)
             return;
@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
     {
         weaponHandler.Attack(angle);
 
-        /* ���� �߻� �׽�Ʈ
+        /* ???? ??? ????
         weaponHandler.Attack(-30);
         weaponHandler.Attack(0);
         weaponHandler.Attack(30);
@@ -143,16 +143,16 @@ public class PlayerController : MonoBehaviour
     {
         if (_isMove)
         {
-            Debug.Log("�̵���");
+            Debug.Log("?????");
             isMove = true;
             isAttack = false;
         }
         else
         {
-            Debug.Log("�����غ�");
+            Debug.Log("???????");
             isMove = false;
             isAttack = true;
-            timeSinceLastAttack = 0; // ������ ����Ŀ� ����
+            timeSinceLastAttack = 0; // ?????? ????Ŀ? ????
         }
     }
 
@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
 
         if (weaponPivot != null)
         {
-            //weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ); // ���� ������ �����ش�.
+            //weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ); // ???? ?????? ???????.
             weaponPivot.rotation = Quaternion.Lerp(weaponPivot.rotation, Quaternion.Euler(0, 0, rotZ), Time.deltaTime * rotateSpeed);
         }
 

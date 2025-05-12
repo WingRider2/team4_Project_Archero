@@ -12,19 +12,19 @@ public class FindTargetNode : INode
     }
     INode.ENodeState INode.Evaluate()
     {
-        Debug.Log("È®ÀÎ ½ÇÇàÁß");
+        Debug.Log("í™•ì¸ ì‹¤í–‰ì¤‘");
         if (_enemy.Target == null)
             return INode.ENodeState.Failure;
         float distance = Vector2.Distance(_enemy.transform.position, _enemy.Target.position);
         Debug.Log(distance);
         if (distance <= _enemy.FindRange)
         {
-            Debug.Log("Àû Á¸Àç");
+            Debug.Log("ì  ì¡´ì¬");
             return INode.ENodeState.Failure;
         }
         else
         {
-            Debug.Log("Àû ¾øÀ½");
+            Debug.Log("ì  ì—†ìŒ");
             return INode.ENodeState.Success;
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {   
 
-    private WeaponHandler weaponHandler;//¹«±â Á¤º¸ 
+    private WeaponHandler weaponHandler;//ë¬´ê¸° ì •ë³´ 
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer spriteRenderer;
@@ -22,12 +22,12 @@ public class ProjectileController : MonoBehaviour
     {
         objectPool = pool;
     }
-    private void OnTriggerEnter2D(Collider2D collision) //Ãæµ¹ Ã³¸®
+    private void OnTriggerEnter2D(Collider2D collision) //ì¶©ëŒ ì²˜ë¦¬
     {
         if (collision.CompareTag("Enemy"))
         {
-            // Ãæµ¹ Ã³¸®
-            _rigidbody.velocity = Vector3.zero; // ¼Óµµ Á¤º¸ Á¦°Å
+            // ì¶©ëŒ ì²˜ë¦¬
+            _rigidbody.velocity = Vector3.zero; // ì†ë„ ì •ë³´ ì œê±°
 
             if (objectPool != null)
                 objectPool.Return(this.gameObject);
@@ -38,9 +38,9 @@ public class ProjectileController : MonoBehaviour
         }
         if (collision.CompareTag("Obstacle"))
         {
-            // º®¸é È¤Àº Àå¾Ö¹°
-            // ÈÄ¿¡ º®¿¡¼­ ÆÃ±â´Â °Å Ãß°¡ ´ëºñ
-            _rigidbody.velocity = Vector3.zero; // ¼Óµµ Á¤º¸ Á¦°Å
+            // ë²½ë©´ í˜¹ì€ ì¥ì• ë¬¼
+            // í›„ì— ë²½ì—ì„œ íŒ…ê¸°ëŠ” ê±° ì¶”ê°€ ëŒ€ë¹„
+            _rigidbody.velocity = Vector3.zero; // ì†ë„ ì •ë³´ ì œê±°
 
             if (objectPool != null)
                 objectPool.Return(this.gameObject);

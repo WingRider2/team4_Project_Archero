@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
-    <file url="file://$PROJECT_DIR$/Assets/02.Scripts/Data/SkillData.cs" charset="EUC-KR" />
-    <file url="file://$PROJECT_DIR$/Assets/02.Scripts/Skill/SkillManager.cs" charset="EUC-KR" />
-    <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/BT/EaFindNode.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/02.Scripts/Data/SkillData.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/02.Scripts/Skill/SkillManager.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/Astar.cs" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/BT/EattackNode.cs" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/BT/EchLiveNode.cs" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/BT/EchObstacleNode.cs" charset="EUC-KR" />
-    <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/BT/EchaseNode.cs" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/BT/EcheckNode.cs" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/BT/EdeadNode.cs" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/MonsterBase.cs" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/BT/EchaseNode.cs" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/BT/EdeadNode.cs" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/BT/FindTargetNode.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/MonsterBase.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/Monster/Scripts/MonsterManager.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/Player/Attack.cs" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Assets/Player/ObjectPool.cs" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/Assets/Player/Players/PlayerController.cs" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Assets/Player/WeaponHandler.cs" charset="EUC-KR" />
+    <file url="file://$PROJECT_DIR$/Assets/Player/Players/PlayerManager.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/Player/ProjectileController.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/Player/TargetingSystem.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/Player/WeaponHandler.cs" charset="UTF-8" />
   </component>
 </project>

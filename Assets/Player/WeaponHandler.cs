@@ -7,19 +7,19 @@ using UnityEngine.Pool;
 public class WeaponHandler : MonoBehaviour
 {
     [Header("Attack Info")]
-    [SerializeField] private float delay = 1f; //°ø°İ¼Óµµ => Àç¹ß»ç ½Ã°£
+    [SerializeField] private float delay = 1f; //ê³µê²©ì†ë„ => ì¬ë°œì‚¬ ì‹œê°„
     public float Delay { get => delay; set => delay = value; }
 
-    [SerializeField] private float weaponSize = 1f; //¹«±âÅ©±â
+    [SerializeField] private float weaponSize = 1f; //ë¬´ê¸°í¬ê¸°
     public float WeaponSize { get => weaponSize; set => weaponSize = value; }
 
-    [SerializeField] private float power = 1f; //¹«±â ÇÇÇØ
+    [SerializeField] private float power = 1f; //ë¬´ê¸° í”¼í•´
     public float Power { get => power; set => power = value; }
 
-    [SerializeField] private float speed = 1f; //Åõ»çÃ¼ ¼Óµµ
+    [SerializeField] private float speed = 1f; //íˆ¬ì‚¬ì²´ ì†ë„
     public float Speed { get => speed; set => speed = value; }
 
-    public LayerMask target;//°ø°İ ¸íÁß½Ã »ç¿ë¿¹Á¤?
+    public LayerMask target;//ê³µê²© ëª…ì¤‘ì‹œ ì‚¬ìš©ì˜ˆì •?
 
     [Header("Knock Back Info")]
     [SerializeField] private bool isOnKnockback = false;
@@ -32,15 +32,15 @@ public class WeaponHandler : MonoBehaviour
     public float KnockbackTime { get => knockbackTime; set => knockbackTime = value; }
 
 
-    [SerializeField] private float bulletSize = 1; //Åõ»çÃ¼ Å©±â
+    [SerializeField] private float bulletSize = 1; //íˆ¬ì‚¬ì²´ í¬ê¸°
     public float BulletSize { get { return bulletSize; } }
     
-    // ¹«±â¿¡ ´ëÇØ¼­
+    // ë¬´ê¸°ì— ëŒ€í•´ì„œ
 
-    // ¿ÀºêÁ§Æ® Ç®Àº ÈÄ¿¡ ¸Å´ÏÀú¸¦ ÅëÇØ¼­°ü¸®
+    // ì˜¤ë¸Œì íŠ¸ í’€ì€ í›„ì— ë§¤ë‹ˆì €ë¥¼ í†µí•´ì„œê´€ë¦¬
     ObjectPool objectPool;
     [SerializeField] Transform firePoint;
-    [SerializeField] PlayerController player; // ¹æÇâ ¹Ş¾Æ¿À±â
+    [SerializeField] PlayerController player; // ë°©í–¥ ë°›ì•„ì˜¤ê¸°
     [SerializeField] SpriteRenderer weaponRenderer;
 
     private void Awake()
@@ -57,34 +57,34 @@ public class WeaponHandler : MonoBehaviour
     }
     public void Attack()
     {
-        //È­»ìÀÇ Á¤º¸ ºÒ·¯¿À±â
+        //í™”ì‚´ì˜ ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°
         GameObject arrow = objectPool.Get();
         ProjectileController controller = arrow.GetComponent<ProjectileController>();
         controller.Init(objectPool);
 
-        //È­»ì ¹ß»ç °¢µµ Á¶Àı
+        //í™”ì‚´ ë°œì‚¬ ê°ë„ ì¡°ì ˆ
         Vector2 direction = player.lookDirection;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;       
         arrow.transform.position = firePoint.position;
         arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        //¿©±â Âë¿¡¼­ Ãß°¡¿¬»ê?
+        //ì—¬ê¸° ì¯¤ì—ì„œ ì¶”ê°€ì—°ì‚°?
         controller.Launch(direction,speed);
     }
     public void Attack(float _angle)
     {
-        //È­»ìÀÇ Á¤º¸ ºÒ·¯¿À±â
+        //í™”ì‚´ì˜ ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°
         GameObject arrow = objectPool.Get();
         ProjectileController controller = arrow.GetComponent<ProjectileController>();
         controller.Init(objectPool);
 
-        //È­»ì ¹ß»ç °¢µµ Á¶Àı
+        //í™”ì‚´ ë°œì‚¬ ê°ë„ ì¡°ì ˆ
         Vector2 direction = Quaternion.Euler(0, 0, _angle) * player.lookDirection ;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg ;
         arrow.transform.position = firePoint.position;
         arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        //¿©±â Âë¿¡¼­ Ãß°¡¿¬»ê?
+        //ì—¬ê¸° ì¯¤ì—ì„œ ì¶”ê°€ì—°ì‚°?
         controller.Launch(direction, speed);
     }
     public virtual void Rotate(bool isLeft)

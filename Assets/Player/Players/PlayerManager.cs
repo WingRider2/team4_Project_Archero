@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
-    //ÇÃ·¹ÀÌ¾î ÄÄÆ÷³ÍÆ® ÀúÀå
+    //í”Œë ˆì´ì–´ ì»´í¬ë„ŒíŠ¸ ì €ì¥
     public PlayerStats stats;
     public PlayerController controller;
     public Animation animation;
 
-    //ÇÃ·¹ÀÌ¾î »óÅÂ¿¡ ´ëÇÑ Á¶Àı
+    //í”Œë ˆì´ì–´ ìƒíƒœì— ëŒ€í•œ ì¡°ì ˆ
 
     void Awake()
     {

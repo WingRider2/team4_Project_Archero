@@ -64,7 +64,7 @@ public class MonsterBase : MonoBehaviour
         lookDir=(target.position-transform.position).normalized;
         Move();
         isAttack = true;
-        Debug.Log("°ø°Ý" + atk);
+        Debug.Log("ê³µê²©" + atk);
         StartCoroutine(Timer(coolTime, () => isAttack = false));
         return atk;
     }
@@ -116,7 +116,7 @@ public class MonsterBase : MonoBehaviour
         int mask = (1 << iL) | (1 << pL);
         RaycastHit2D hit = Physics2D.Raycast(transform.position,dir.normalized,distance,mask);
         Debug.DrawRay(transform.position, dir.normalized * distance, Color.red);
-        Debug.Log("È®ÀÎ"+hit.collider.tag);
+        Debug.Log("í™•ì¸"+hit.collider.tag);
         if (hit == null)
         {
             return false;
@@ -129,7 +129,7 @@ public class MonsterBase : MonoBehaviour
     }
     public void SetTarget(Transform _target)
     {
-        Debug.Log("ÇÃ·¹ÀÌ¾î È®ÀÎ");
+        Debug.Log("í”Œë ˆì´ì–´ í™•ì¸");
         target= _target;
     }
     public void Knockback(Transform other,float power,float duration)
@@ -141,7 +141,7 @@ public class MonsterBase : MonoBehaviour
     {
         if (isAttack)
         {
-            //ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö ¼ÒÈ¯.
+            //í”Œë ˆì´ì–´ ë°ë¯¸ì§€ ì†Œí™˜.
         }
     }
 }

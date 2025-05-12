@@ -71,8 +71,4 @@ public class QuestManager : Singleton<QuestManager>
             }
         }
     }
-
-    public void GetQuestDataByID(int id)
-    {
-    }
 }
