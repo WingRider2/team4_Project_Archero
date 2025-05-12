@@ -81,7 +81,7 @@ public class MonsterBase : MonoBehaviour
         onComplete();
 
     }
-    private void Damaged(float damage)
+    public void Damaged(float damage)
     {
         currenHP -= damage;
         Damaged(currenHP);
@@ -151,11 +151,16 @@ public class MonsterBase : MonoBehaviour
         knockbackDuration= duration;
         knockback=-(other.position - transform.position).normalized*power;   
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isAttack &&collision.tag=="Player")
+        {
+            collision.gameObject.GetComponent<HitPart>().Damaged(atk);
+   
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isAttack)
-        {
-            //플레이어 데미지 소환.
-        }
+        
     }
 }

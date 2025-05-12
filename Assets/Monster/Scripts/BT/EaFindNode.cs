@@ -21,6 +21,7 @@ public class EaFindNode : INode
     private const float FindCooldown = 2f;
     public INode.ENodeState Evaluate()
     {
+      
         if (isFind)
         {
             findTimer += Time.deltaTime;
@@ -34,7 +35,7 @@ public class EaFindNode : INode
         if (_enemy.Target == null)
             return INode.ENodeState.Failure;
         if (!isFind) {
-       
+            Debug.Log("경로 탐색");
             isFind = true;
             path = null;
             if (path == null || Vector2.Distance(lastPos, _enemy.transform.position) > Threshold)

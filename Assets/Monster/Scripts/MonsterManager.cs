@@ -49,10 +49,10 @@ public class MonsterManager : MonoBehaviour
         return mon;
         
     }
-    //public void Start()
-    //{
-    //    MakeMon(new Vector2(0, 0), 1);
-    //    var ga = MakeMon(new Vector2(10, 0), 2);
-       
-    //}
+    public void Start()
+    {
+        MakeMon(new Vector2(0, 0), 1);
+        var ga = MakeMon(new Vector2(10, 0), 2);
+
+    }
 }
