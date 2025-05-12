@@ -7,9 +7,6 @@ using UnityEngine.Pool;
 public class WeaponHandler : MonoBehaviour
 {
     [Header("Attack Info")]
-    [SerializeField] private float delay = 1f; //공격속도 => 재발사 시간
-    public float Delay { get => delay; set => delay = value; }
-
     [SerializeField] private float weaponSize = 1f; //무기크기
     public float WeaponSize { get => weaponSize; set => weaponSize = value; }
 
@@ -34,7 +31,7 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private float bulletSize = 1; //투사체 크기
     public float BulletSize { get { return bulletSize; } }
-    
+
     // 무기에 대해서
 
     // 오브젝트 풀은 후에 매니저를 통해서관리
@@ -45,7 +42,7 @@ public class WeaponHandler : MonoBehaviour
 
     private void Awake()
     {
-        objectPool= FindObjectOfType<ObjectPool>();
+        objectPool = FindObjectOfType<ObjectPool>();
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
     }
     public void Init(PlayerController playerController)
@@ -62,8 +59,8 @@ public class WeaponHandler : MonoBehaviour
         controller.Init(objectPool);
 
         //화살 발사 각도 조절
-        Vector2 direction = Quaternion.Euler(0, 0, _angle) * player.lookDirection ;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg ;
+        Vector2 direction = Quaternion.Euler(0, 0, _angle) * player.lookDirection;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         arrow.transform.position = firePoint.position;
         arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
 

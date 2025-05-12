@@ -17,9 +17,9 @@ public class SkillManager : Singleton<SkillManager>
     SkillTable skillTable;
 
 
-    List<ISKill> skills = new List<ISKill>();
+    List<ISkill> skills = new List<ISkill>();
 
-    public List<ISKill> SelectedSKills { get; private set; } = new List<ISKill>();
+    public List<ISkill> SelectedSKills { get; private set; } = new List<ISkill>();
 
     private void Awake()
     {
@@ -45,7 +45,7 @@ public class SkillManager : Singleton<SkillManager>
             while (selectSkillList.Count < 3)
             {
                 int skillById = Random.Range(0, skillTable.DataDic.Count + 1);
-                var skill     = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
+                var skill = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
                 selectSkillList.Add(skill);
             }
         }
@@ -53,7 +53,7 @@ public class SkillManager : Singleton<SkillManager>
         return selectSkillList;
     }
 
-    public ISKill CreateSkill(SkillData skill)
+    public ISkill CreateSkill(SkillData skill)
     {
         return skill.Type switch
         {
@@ -66,7 +66,7 @@ public class SkillManager : Singleton<SkillManager>
         };
     }
 
-    public ISKill GetSkill(int id)
+    public ISkill GetSkill(int id)
     {
         return skills.Find(x => x.Id == id);
     }
