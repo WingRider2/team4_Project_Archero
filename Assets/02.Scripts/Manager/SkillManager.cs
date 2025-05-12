@@ -23,7 +23,6 @@ public class SkillManager : SceneOnlyManager<SkillManager>
 
     protected override void Awake()
     {
-        base.Awake();
     }
 
     private void Start()
@@ -93,6 +92,5 @@ public class SkillManager : SceneOnlyManager<SkillManager>
 
     protected override void OnDestroy()
     {
-        base.OnDestroy();
     }
 }

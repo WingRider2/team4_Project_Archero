@@ -9,7 +9,6 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
 
     protected override void Awake()
     {
-        base.Awake();
     }
 
     public List<MonsterBase> Monsters { get { return monsters; } }
@@ -19,7 +18,7 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
         monsters = new List<MonsterBase>();
         foreach (var monPos in monpoint)
         {
-            MakeMon(monPos, Random.Range(1, 3));
+            monsters.Add(MakeMon(monPos, Random.Range(1, 3)));
         }
     }
 
@@ -63,6 +62,5 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
     //}
     protected override void OnDestroy()
     {
-        base.OnDestroy();
     }
 }

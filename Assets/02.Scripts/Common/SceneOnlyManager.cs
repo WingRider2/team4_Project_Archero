@@ -5,22 +5,43 @@ using UnityEngine;
 
 public class SceneOnlyManager<T> : MonoBehaviour where T : MonoBehaviour
 {
-    public static T Instance { get; private set; }
+    private static T instance;
+
+    public static T Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindAnyObjectByType(typeof(T)) as T;
+                if (instance == null)
+                {
+                    SetupInstance();
+                }
+            }
+
+            return instance;
+        }
+    }
 
     protected virtual void Awake()
     {
         if (Instance == null && Instance != this)
         {
             Destroy(gameObject);
-            return;
         }
-
-        Instance = this as T;
     }
 
     protected virtual void OnDestroy()
     {
-        if (Instance == this)
-            Instance = null;
+        if (instance == this)
+            instance = null;
+    }
+
+    private static void SetupInstance()
+    {
+        GameObject gameObj = new GameObject();
+        gameObj.name = typeof(T).Name;
+        instance = gameObj.AddComponent<T>();
     }
 }

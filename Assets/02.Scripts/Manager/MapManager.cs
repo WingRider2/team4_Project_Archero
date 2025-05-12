@@ -22,19 +22,15 @@ public class MapManager : SceneOnlyManager<MapManager>
 
     [SerializeField] private GameObject playerObject;
 
-    private MonsterManager monsterManager;
 
     public Door CurrentDoor { get; private set; }
     private GameObject currentDoorObject;
     public Tilemap FloorMap => floorMap;
 
-    public List<Vector3> MonsterSpawnPositions { get; private set; }
+    public List<Vector3> MonsterSpawnPositions { get; private set; } = new List<Vector3>();
 
     protected override void Awake()
     {
-        base.Awake();
-        monsterManager = GetComponent<MonsterManager>();
-        MonsterSpawnPositions = new List<Vector3>();
     }
 
     void Start()
@@ -133,7 +129,7 @@ public class MapManager : SceneOnlyManager<MapManager>
         }
 
         //레벨
-        monsterManager.makeMonList(MonsterSpawnPositions, 1);
+        MonsterManager.Instance.makeMonList(MonsterSpawnPositions, 1);
     }
 
     private void SpawnDoors()
