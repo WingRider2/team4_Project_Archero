@@ -9,6 +9,8 @@ public class StatSkill : ISkill
     public SkillType Type { get; }
     public float Value { get; }
 
+    public Sprite SkillIcon { get; }
+
     public StatSkillType StatType { get; }
     private PlayerController player;
 
@@ -19,6 +21,7 @@ public class StatSkill : ISkill
         Type = data.Type;
         Value = data.Value;
         StatType = data.StatSkillType;
+        SkillIcon = data.SkillIcon;
         this.player = player;
     }
 

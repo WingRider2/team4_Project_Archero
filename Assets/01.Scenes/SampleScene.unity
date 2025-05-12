@@ -2572,26 +2572,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431686772607705400}
   m_CullTransparentMesh: 1
---- !u!114 &185508134197218722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7527043125579675028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!224 &196304346431440052
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2613,7 +2593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540.2341, y: -383.83362}
+  m_AnchoredPosition: {x: 539.4734, y: -384.37482}
   m_SizeDelta: {x: 300, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &280541459623802592
@@ -2655,6 +2635,7 @@ GameObject:
   - component: {fileID: 4083637913155750711}
   - component: {fileID: 878068878644397953}
   - component: {fileID: 6925667032836176207}
+  - component: {fileID: 6925667032836176208}
   m_Layer: 5
   m_Name: Panel_LevelUp
   m_TagString: Untagged
@@ -3496,7 +3477,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 9999999
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5977d3737597ac543825f4e597bff0a4, type: 2}
   m_sharedMaterial: {fileID: 4459229669425961054, guid: 5977d3737597ac543825f4e597bff0a4, type: 2}
@@ -3523,7 +3504,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.35
+  m_fontSize: 47.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4047,7 +4028,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 57.55
+  m_fontSize: 57.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4540,7 +4521,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.5
+  m_fontSize: 34.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4737,7 +4718,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 190.23407, y: -383.83362}
+  m_AnchoredPosition: {x: 189.47339, y: -384.37482}
   m_SizeDelta: {x: 300, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3191277717363680723
@@ -5586,8 +5567,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Panel_Pause: {fileID: 636164746494177270}
+  gold_text: {fileID: 1333640808522797584}
+  level_text: {fileID: 7500697351957778531}
   continue_button_text: {fileID: 8513982554659969316}
   exit_button_text: {fileID: 6184743389585648145}
+  hpBar: {fileID: 8404489079838299553}
+  skill_icons: []
 --- !u!1 &4620826581459321303
 GameObject:
   m_ObjectHideFlags: 0
@@ -5861,7 +5846,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 57.6
+  m_fontSize: 57.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9462,7 +9447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 890.2341, y: -383.83362}
+  m_AnchoredPosition: {x: 889.4734, y: -384.37482}
   m_SizeDelta: {x: 300, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5712994486974418738
@@ -9510,8 +9495,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4519312959440328755}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: Click_Button_Exit
+        m_TargetAssemblyTypeName: UIManager_Battle, Assembly-CSharp
+        m_MethodName: Button_Exit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9586,8 +9571,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4519312959440328755}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: Change_PausePanel_Activity
+        m_TargetAssemblyTypeName: UIManager_Battle, Assembly-CSharp
+        m_MethodName: Eable_PausePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9771,6 +9756,7 @@ GameObject:
   - component: {fileID: 636164746494177270}
   - component: {fileID: 7683424474343209018}
   - component: {fileID: 6025726388961455251}
+  - component: {fileID: 7683424474343209019}
   m_Layer: 5
   m_Name: Panel_Pause
   m_TagString: Untagged
@@ -10397,6 +10383,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6925667032836176208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363874618891508368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad841025756dda446b8c222b80f60e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillOptions:
+  - name: {fileID: 2543315134997706835}
+    level: {fileID: 2649871015993755742}
+    icon: {fileID: 8206124540894199134}
+    info: {fileID: 7434787162814875985}
+  - name: {fileID: 3763040998065559681}
+    level: {fileID: 4170037001473998062}
+    icon: {fileID: 4504409238985222443}
+    info: {fileID: 733605282410619067}
+  - name: {fileID: 475151008904173495}
+    level: {fileID: 3191277717363680723}
+    icon: {fileID: 4847273958145589063}
+    info: {fileID: 1633075786383495024}
 --- !u!224 &6938739010504497591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10772,7 +10783,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.05
+  m_fontSize: 46.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10865,7 +10876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2803181529472967478}
   - component: {fileID: 5049952677705823688}
-  - component: {fileID: 185508134197218722}
+  - component: {fileID: 7527043125579675029}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -10873,6 +10884,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7527043125579675029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7527043125579675028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!224 &7635505092093374447
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10920,6 +10961,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6097441499475458645}
   m_CullTransparentMesh: 1
+--- !u!114 &7683424474343209019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6097441499475458645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1e5090592e810449d11d0f4783f5fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Panel_Skills: {fileID: 4998910011178667123}
 --- !u!222 &7834388601730020324
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11409,7 +11463,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52.2
+  m_fontSize: 52.15
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11646,9 +11700,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4519312959440328755}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: Change_PausePanel_Activity
+      - m_Target: {fileID: 7683424474343209019}
+        m_TargetAssemblyTypeName: UI_Pause, Assembly-CSharp
+        m_MethodName: Disable_PausePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
