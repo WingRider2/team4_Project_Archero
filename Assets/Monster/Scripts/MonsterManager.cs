@@ -4,29 +4,55 @@ using UnityEngine;
 
 public class MonsterManager : MonoBehaviour
 {
-    [SerializeField] MonsterBase monPre;
+
+    List<MonsterBase> monsters;
 
     private void Awake()
     {
   
     }
-    public bool MakeMon(Vector2 pos,int num)
+    public List<MonsterBase> Monsters {  get { return monsters; } }
+    public void makeMonList(List<Vector3> monpoint, int level)
+    {
+        monsters = new List<MonsterBase>();
+        foreach (var monPos in monpoint) {
+            MakeMon(monPos,Random.Range(1, 3));
+        }
+    }
+    public void Clear()
+    {
+        //�� �����... �۵�
+    }
+    private void HandleMonsterDeath(MonsterBase mon)
+    {
+        mon.OnDeath -= HandleMonsterDeath;
+        Debug.Log($"{mon.name} ����");
+        monsters.Remove(mon);
+        if (monsters.Count == 0) { 
+            Clear();
+        }
+    }
+    
+    public MonsterBase MakeMon(Vector3 pos,int num)
     {
         MonsterData monData= TableManager.Instance.GetTable<MonsterTable>().GetDataByID(num);
-        MonsterBase mon = Instantiate(monData.Monster, pos, Quaternion.identity);
+        MonsterBase mon = Instantiate(monData.Monster,pos,Quaternion.identity);
         mon.Init(num, monData.Name, monData.HP, monData.ATK,monData.DEF ,monData.MoveSpeed, monData.AttackRange,monData.FindRange);
         if(mon==null)
         {
-            Debug.Log("몬스터 생성 실패");
-            return false;
+
+            Debug.Log("���� ���� ����");
+            return null;
+
         }
         mon.SetTarget(GameObject.FindWithTag("Player").transform);
-        return true;
+        return mon;
         
     }
-    public void Start()
-    {
-        MakeMon(Vector2.zero,1);
-        MakeMon(new Vector2(10,0), 2);
-    }
+    //public void Start()
+    //{
+    //    MakeMon(new Vector2(0, 0), 1);
+    //    var ga = MakeMon(new Vector2(10, 0), 2);
+       
+    //}
 }

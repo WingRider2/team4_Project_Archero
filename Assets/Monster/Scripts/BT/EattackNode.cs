@@ -17,6 +17,6 @@ public class EattackNode : INode
 
         _enemy.movementDir = Vector2.zero;
         _enemy.Move();
-        return INode.ENodeState.Running;
+        return INode.ENodeState.Success;
     }
 }

@@ -13,6 +13,10 @@ public class ChapterData
 
     [Header("Stage Data")]
     public List<StageData> StageDatas;
+
+    [FormerlySerializedAs("RewardDatas")]
+    [Header("Reward Data")]
+    public RewardData RewardData;
 }
 
 [Serializable]
@@ -29,4 +33,5 @@ public class TilemapData
     public Tilemap WallTilemap;
     public Tilemap ColliderTilemap;
     public Tilemap DoorTilemap;
+    public Tilemap PlayerSpawnTilemap;
 }

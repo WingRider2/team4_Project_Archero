@@ -23,6 +23,11 @@ MonoBehaviour:
     StatSkillType: 0
     Name: "\uBC31\uC0F7"
     Value: 0
+  - Id: 3
+    Type: 0
+    StatSkillType: 0
+    Name: "\uC0AC\uC774\uB4DC \uC0F7"
+    Value: 0
   - Id: 101
     Type: 1
     StatSkillType: 1
@@ -32,9 +37,9 @@ MonoBehaviour:
     Type: 1
     StatSkillType: 2
     Name: "\uACF5\uACA9 \uC18D\uB3C4 \uC5C5"
-    Value: 10
+    Value: 0.2
   - Id: 103
     Type: 1
     StatSkillType: 4
     Name: "\uC774\uB3D9\uC18D\uB3C4 "
-    Value: 10
+    Value: 1

@@ -14,6 +14,6 @@ public class EIdleNode : INode
         _enemy.movementDir=Vector2.zero;
         _enemy.lookDir=Vector2.zero;
         _enemy.Move();
-        return INode.ENodeState.Success;
+        return INode.ENodeState.Running;
     }
 }

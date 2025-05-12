@@ -11,23 +11,34 @@ public class MapManager : Singleton<MapManager>
     [SerializeField] private Tilemap wallMap;
     [SerializeField] private Tilemap colliderMap;
     [SerializeField] private Tilemap doorTilemap;
+    [SerializeField] private Tilemap playerSpawnTilemap;
+
     [SerializeField] private GameObject[] obstacleObjects;
     [SerializeField] private GameObject doorPrefabs;
 
     [SerializeField] private TilemapData[] tilemapDatas;
     [SerializeField] private GameObject testPrefab;
 
+
+    [SerializeField] private GameObject playerObject;
+    
+    private MonsterManager monsterManager;
+
+    public Door CurrentDoor { get; private set; }
+    private GameObject currentDoorObject;
+    public Tilemap FloorMap => floorMap;
+
+    public List<Vector3> MonsterSpawnPositions { get; private set; }
+
     private void Awake()
     {
+        monsterManager=GetComponent<MonsterManager>();
+        MonsterSpawnPositions = new List<Vector3>();
     }
 
     void Start()
     {
         GenerateMap(TableManager.Instance.GetTable<StageTable>().GetDataByID(1));
-    }
-
-    private void Update()
-    {
     }
 
 
@@ -39,7 +50,8 @@ public class MapManager : Singleton<MapManager>
         GenerateTile(wallMap, tilemapData.WallTilemap);
         GenerateTile(colliderMap, tilemapData.ColliderTilemap);
         GenerateTile(doorTilemap, tilemapData.DoorTilemap);
-
+        GenerateTile(playerSpawnTilemap, tilemapData.PlayerSpawnTilemap);
+        SpawnPlayer();
         SpawnDoors();
         GenerateObstacle(stageData);
     }
@@ -93,8 +105,9 @@ public class MapManager : Singleton<MapManager>
             for (int y = bounds.yMin + 1; y < bounds.yMax - 2; y++)
             {
                 Vector3Int pos = new Vector3Int(x, y, 0);
-                if (!floorMap.HasTile(pos)) continue;
                 if (wallMap.HasTile(pos)) continue;
+                if (playerSpawnTilemap.HasTile(pos)) continue;
+                if (!floorMap.HasTile(pos)) continue;
 
                 result.Add(pos);
             }
@@ -106,6 +119,8 @@ public class MapManager : Singleton<MapManager>
     private void SpawnMonster(StageData stageData, List<Vector3Int> vaildPositions)
     {
         HashSet<int> tileIndex = new HashSet<int>();
+     
+        MonsterSpawnPositions.Clear();
         while (tileIndex.Count < stageData.MonsterSpawnCount)
         {
             tileIndex.Add(Random.Range(0, vaildPositions.Count));
@@ -113,9 +128,10 @@ public class MapManager : Singleton<MapManager>
 
         foreach (var index in tileIndex)
         {
-            GameObject go = Instantiate(testPrefab);
-            go.transform.position = floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f, 0.5f);
+            MonsterSpawnPositions.Add(floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f, 0.5f));
         }
+        //레벨
+        monsterManager.makeMonList(MonsterSpawnPositions,1);
     }
 
     private void SpawnDoors()
@@ -125,9 +141,36 @@ public class MapManager : Singleton<MapManager>
             if (!doorTilemap.HasTile(pos))
                 continue;
 
-            Vector3    worldPos = doorTilemap.CellToWorld(pos);
-            GameObject go       = Instantiate(doorPrefabs, worldPos, Quaternion.identity);
-            // go.transform.position = worldPos;
+            Vector3 worldPos = doorTilemap.CellToWorld(pos);
+            if (currentDoorObject == null)
+            {
+                GameObject go = Instantiate(doorPrefabs, worldPos, Quaternion.identity);
+                CurrentDoor = go.GetComponent<Door>();
+                currentDoorObject = go;
+            }
+            else
+            {
+                currentDoorObject.transform.position = worldPos;
+            }
+
+            break;
+        }
+
+        if (CurrentDoor != null)
+        {
+            CurrentDoor.DoorControl(false);
+        }
+    }
+
+    private void SpawnPlayer()
+    {
+        foreach (var pos in playerSpawnTilemap.cellBounds.allPositionsWithin)
+        {
+            if (!playerSpawnTilemap.HasTile(pos))
+                continue;
+
+            Vector3 worldPos = playerSpawnTilemap.CellToWorld(pos);
+            playerObject.transform.position = worldPos;
         }
     }
 

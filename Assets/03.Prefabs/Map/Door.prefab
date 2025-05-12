@@ -217,7 +217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorSpriteRenderer: {fileID: 1607304504740255316}
   openSprite: {fileID: 21300000, guid: 5ee26cb8dc0ee6b4082dd754826e827f, type: 3}
-  collider: {fileID: 3115883097092846519}
+  closeSprite: {fileID: 21300000, guid: 1a8cb506ff6ba1642b685d451d0474da, type: 3}
+  doorCollider: {fileID: 3115883097092846519}
 --- !u!61 &3115883097092846519
 BoxCollider2D:
   m_ObjectHideFlags: 0

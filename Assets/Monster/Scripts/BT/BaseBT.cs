@@ -45,5 +45,6 @@ public class BaseBT : MonoBehaviour
     void Update()
     {
         root?.Evaluate();
+       
     }
 }

@@ -14,6 +14,14 @@ public class MAnimationHandler : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
+    public void Attack()
+    {
+        animator.SetBool(isAttack, true);
+    }
+    public void AttackEnd()
+    {
+        animator.SetBool(isAttack, false);
+    }
     public void Move(Vector2 dir)
     {
         animator.SetBool(isMoving, dir.magnitude > 0.5f);

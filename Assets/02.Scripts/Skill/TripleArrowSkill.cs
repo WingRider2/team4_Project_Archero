@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TripleArrowSkill : IAngleArrowSkill, ISKill
+public class TripleArrowSkill : IAngleArrowSkill, ISkill
 {
-    public int       Id    { get; set; }
-    public string    Name  { get; set; }
-    public SkillType Type  { get; set; }
-    public float     Value { get; set; }
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public SkillType Type { get; set; }
+    public float Value { get; set; }
 
     public TripleArrowSkill(SkillData data)
     {
@@ -39,7 +39,7 @@ public class TripleArrowSkill : IAngleArrowSkill, ISKill
 
     public float[] GetAttackAngles()
     {
-        float[] angleOffsets = { -15f, 0f, 15f };
+        float[] angleOffsets = { -15f, 15f };
         return angleOffsets;
     }
 }
