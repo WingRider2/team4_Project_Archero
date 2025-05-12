@@ -57,7 +57,7 @@ public class WeaponHandler : MonoBehaviour
     public void Attack(float _angle)
     {
         //화살의 정보 불러오기
-        GameObject arrow = objectPool.Get(PoolType.Arrow);
+        GameObject arrow = objectPool.Get(AttackType.Arrow);
         ProjectileController controller = arrow.GetComponent<ProjectileController>();
         controller.Init(objectPool);
 
