@@ -125,12 +125,11 @@ public class MonsterBase : MonoBehaviour
         Vector2 boxWidth = new Vector2(0.7f,0.7f);
         int mask = (1 << iL) | (1 << pL);
         RaycastHit2D hit = Physics2D.BoxCast(transform.position,boxWidth,0f,dir.normalized,distance,mask);
-       // Debug.DrawRay(transform.position, dir.normalized * distance, Color.red);
+        // Debug.DrawRay(transform.position, dir.normalized * distance, Color.red);
 
-        if(hit.collider != null ) 
-        
 
-        if (hit == null)
+
+        if (hit.collider == null)
         {
             return false;
         }
