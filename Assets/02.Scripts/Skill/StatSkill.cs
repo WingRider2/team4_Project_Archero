@@ -35,6 +35,12 @@ public class StatSkill : ISkill
             case StatSkillType.MoveSpd:
                 player.PlayerStats.moveSpeed += Value;
                 break;
+            case StatSkillType.MaxHp:
+                player.PlayerStats.maxHP += (int)Value;
+                break;
+            case StatSkillType.CurrentHp:
+                player.PlayerStats.currentHP += (int)Value;
+                break;
         }
     }
 }

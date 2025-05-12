@@ -43,3 +43,13 @@ MonoBehaviour:
     StatSkillType: 4
     Name: "\uC774\uB3D9\uC18D\uB3C4 "
     Value: 1
+  - Id: 104
+    Type: 1
+    StatSkillType: 8
+    Name: "\uCD5C\uB300 \uCCB4\uB825 \uC5C5"
+    Value: 100
+  - Id: 105
+    Type: 1
+    StatSkillType: 16
+    Name: "\uD604\uC7AC \uCCB4\uB825 \uD68C\uBCF5"
+    Value: 200
