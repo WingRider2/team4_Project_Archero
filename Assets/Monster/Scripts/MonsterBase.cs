@@ -16,7 +16,9 @@ public class MonsterBase : MonoBehaviour
     float maxHP;
     string name;
     int id;
-    public float ID { get { return id; } }
+    float exp=10f;
+    public float EXP { get { return exp; }}
+       public float ID { get { return id; } }
     float attackRange;
     Transform target;
     public Transform Target { get { return target; } }
@@ -123,7 +125,7 @@ public class MonsterBase : MonoBehaviour
         Vector2 boxWidth = new Vector2(0.7f,0.7f);
         int mask = (1 << iL) | (1 << pL);
         RaycastHit2D hit = Physics2D.BoxCast(transform.position,boxWidth,0f,dir.normalized,distance,mask);
-        Debug.DrawRay(transform.position, dir.normalized * distance, Color.red);
+       // Debug.DrawRay(transform.position, dir.normalized * distance, Color.red);
 
         if(hit.collider != null ) 
         Debug.Log("Ȯ��"+hit.collider.tag);

@@ -8,19 +8,38 @@ public class EchObstacleNode : INode
 
     public EchObstacleNode(MonsterBase enemy)
     {
+        
         _enemy = enemy;
     }
+    bool isFind = false;
+    bool isOb = false;
+    float findTimer = 0;
+    private const float FindCooldown = 2f;
     INode.ENodeState INode.Evaluate()
     {
-        bool isOb = _enemy.ShootObstacle();
+        if (isFind)
+        {
+            findTimer += Time.deltaTime;
+            if (findTimer >= FindCooldown)
+            {
+                isFind = false;
+                findTimer = 0f;
+            }
+        }
+     
+        if (!isFind)
+        {
+            isOb = _enemy.ShootObstacle();
+        }
         if (isOb)
         {
-            Debug.Log("Àå¾Ö¹°");
+            Debug.Log("ì¥ì• ë¬¼");
+            isFind = true;
             return INode.ENodeState.Success;
         }
         else
         {
-            Debug.Log("¾øÀ½");
+            Debug.Log("ì—†ìŒ");
             return INode.ENodeState.Failure;
         }
     }
