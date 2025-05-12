@@ -7,5 +7,11 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RangeOver
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: bed5d1c16ac39c744be884ec7116917d, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 66e22a67df2bd9c4d951b535dd6206a7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 348f89f28211dbb4eb2b7a88daff8b99, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 67f1e2c69ae0d964e9259505b6e852ba, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 348f89f28211dbb4eb2b7a88daff8b99, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 28907c9a6ed5c1d4db8bc9e21c9216c1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 348f89f28211dbb4eb2b7a88daff8b99, type: 2}

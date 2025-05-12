@@ -12,14 +12,14 @@ public class EcheckNode : INode
     }
     INode.ENodeState INode.Evaluate()
     {
-        Debug.Log("확인 실행중");
+        Debug.Log("공격 가능 확인 실행중");
         if(_enemy.Target == null) 
             return INode.ENodeState.Failure;
         float distance = Vector2.Distance(_enemy.transform.position, _enemy.Target.position);
         Debug.Log(distance);
         if (distance <=_enemy.AttackRange)
         {
-            Debug.Log("탐색 성공");
+            Debug.Log("공격 가능 성공");
             return INode.ENodeState.Success;
         }
         else

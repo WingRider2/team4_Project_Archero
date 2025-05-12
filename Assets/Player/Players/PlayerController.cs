@@ -5,6 +5,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,8 +21,9 @@ public class PlayerController : MonoBehaviour
     public Vector2 LookDirection { get; private set; } = Vector2.right; //???? ????
 
     // ???? ???? ????? ???? ????? ????? ????
-    private bool isMove = false;  // ????? ???????
-    private bool isAttack = true; // ?????? ???????
+    bool isMove = false; // ????? ???????
+
+    bool isAttack = true; // ?????? ???????
 
     // ??????? ????
     // ?浹 ??? => 
@@ -63,28 +65,46 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // 테스트용 코드
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("F1");
-            SkillManager.Instance.SelecteSkill(1);
+            Debug.Log("F1 : 트리플 샷");
+            SkillManager.Instance.SelectSkill(1);
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            Debug.Log("F2");
-            SkillManager.Instance.SelecteSkill(2);
+            Debug.Log("F2 : 백 샷");
+            SkillManager.Instance.SelectSkill(2);
         }
 
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            Debug.Log("F3");
-            SkillManager.Instance.SelecteSkill(3);
+            Debug.Log("F3 : 사이드 샷");
+            SkillManager.Instance.SelectSkill(3);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            Debug.Log("F3 : 공격력 업");
+            SkillManager.Instance.SelectSkill(101);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            Debug.Log("F4 : 공격속도 업");
+            SkillManager.Instance.SelectSkill(102);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            Debug.Log("F5 : 이동속도 업");
+            SkillManager.Instance.SelectSkill(103);
         }
 
         GameObject target = TargetingSystem.FindTarget();
         if (target == null)
             return;
-
         LookDirection = (target.transform.position - transform.position).normalized;
         Rotate(LookDirection);
 
@@ -94,7 +114,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("??????!");
+            Debug.Log("이동중");
         }
     }
 
@@ -112,6 +132,7 @@ public class PlayerController : MonoBehaviour
         {
             timeSinceLastAttack = 0;
             //여기서 이제 앵글값을 준다.
+            bool isSkillAttack = false;
             foreach (ISkill skill in SkillManager.Instance.SelectedSKills)
             {
                 if (skill is IAngleArrowSkill arrowSkill)
@@ -151,7 +172,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("이동 종료");
             isMove = false;
             isAttack = true;
-            timeSinceLastAttack = 0; // ?????? ????Ŀ? ????
+            timeSinceLastAttack = 0; // 공격 지연 시간 초기화
         }
     }
 
@@ -162,7 +183,7 @@ public class PlayerController : MonoBehaviour
 
         if (weaponPivot != null)
         {
-            //weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ); // 공격 지연 시간 초기화
+            //weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ); // ???? ?????? ???????.
             weaponPivot.rotation = Quaternion.Lerp(weaponPivot.rotation, Quaternion.Euler(0, 0, rotZ), Time.deltaTime * rotateSpeed);
         }
 
