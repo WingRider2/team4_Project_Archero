@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,9 @@ public class MonsterBase : MonoBehaviour
 {
     protected Rigidbody2D _rigidbody;
     SpriteRenderer characterRender;
-
+    public event Action<MonsterBase> OnDeath;
     float moveSpeed;
-   
+    List<Vector2> path;
     protected float atk;
     float def;
     protected float currenHP;
@@ -44,6 +45,10 @@ public class MonsterBase : MonoBehaviour
        
         characterRender = GetComponent<SpriteRenderer>();
         manationHandler= GetComponent<MAnimationHandler>();
+    }
+    public void setPath(List<Vector2> _path)
+    {
+        path = _path;
     }
     public void Init(int _id,string _name,float hp,float _atk,float _def,float speed,float range,float _findRange)
     {
@@ -88,6 +93,8 @@ public class MonsterBase : MonoBehaviour
     {
         manationHandler.Dead();
         isDead = true;
+        OnDeath?.Invoke(this);
+        Destroy(gameObject);
     }
     public void Move()
     {
@@ -113,9 +120,11 @@ public class MonsterBase : MonoBehaviour
         float distance = dir.magnitude;
         int iL = 6;
         int pL = 7;
+        Vector2 boxWidth = new Vector2(0.7f,0.7f);
         int mask = (1 << iL) | (1 << pL);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position,dir.normalized,distance,mask);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position,boxWidth,0f,dir.normalized,distance,mask);
         Debug.DrawRay(transform.position, dir.normalized * distance, Color.red);
+        if(hit.collider != null ) 
         Debug.Log("확인"+hit.collider.tag);
         if (hit == null)
         {
@@ -123,6 +132,7 @@ public class MonsterBase : MonoBehaviour
         }
         if (hit.collider.CompareTag("Obstacle"))
         {
+            Debug.Log("벽 존재");
             return true;
         }
         return false;

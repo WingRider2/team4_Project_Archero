@@ -14,6 +14,7 @@ public class MonsterCloseSim : MonsterBase
   
     IEnumerator AttackMotion()
     {
+        manationHandler.Attack();
         int cnt = 2;
         _rigidbody.velocity = new(0, 0);
         Vector2 targetPos = Target.position;
@@ -40,6 +41,6 @@ public class MonsterCloseSim : MonsterBase
             _rigidbody.MovePosition(mov);
             yield return null;
         }
-       
+        manationHandler.AttackEnd();
     }
 }

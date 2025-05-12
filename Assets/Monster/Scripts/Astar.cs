@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class Astar : MonoBehaviour
+public class Astar 
 {
     static int[] dx = { 1, 0, -1, 0 };
     static int[] dy = { 0, 1, 0, -1 };
@@ -12,10 +12,20 @@ public class Astar : MonoBehaviour
     static int[] ddy = { 1, -1, 1, -1 };
     private bool IsObs(int x,int  y)
     {
+      
+
+        int mask = LayerMask.GetMask("Obstacle");
         //장애물/벽 확인
-        if(x < 0 || y < 0||x>10||y>10) return true;
-        return false;
+        Collider2D col = Physics2D.OverlapBox(new Vector2(x,y),new Vector2(1,1), mask);
+
+        if (col != null)
+            Debug.Log($"장애물 발견{x},{y}: {col.name}");
+        else
+            Debug.Log($"({x},{y})에 장애물 없음");
+        return col != null;
+       
     }
+   
     public List<Vector2> MakePath(Node lastNode)
     {
         List<Vector2> path=new List<Vector2>();
@@ -27,13 +37,17 @@ public class Astar : MonoBehaviour
         }
       
         path.Reverse();
+        for (int i = 0; i < path.Count - 1; i++)
+        {
+            Debug.DrawLine(path[i], path[i + 1], Color.green, 2f);
+        }
         return path;
     }
     
     public List<Vector2> FindPath(Vector2 start, Vector2 target)
     {
-       
-       
+
+        Debug.Log("시작");
         List<Node> openNodes = new List<Node>();
         HashSet<Vector2> closedNodes = new HashSet<Vector2>();
 
