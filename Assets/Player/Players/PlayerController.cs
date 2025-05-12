@@ -7,28 +7,34 @@ using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
 
+
 public class PlayerController : MonoBehaviour
 {
+    private readonly int requestExp = 100;
     private Rigidbody2D Rigidbody2D;
     private PlayerInputHandler PlayerInputHandler;
     public PlayerStats PlayerStats { get; private set; }
     private TargetingSystem TargetingSystem;
 
     [SerializeField] private Transform weaponPivot;
-    [SerializeField] public WeaponHandler weaponPrefab;
+    [SerializeField] private WeaponHandler weaponPrefab;
     private WeaponHandler weaponHandler;
 
     public Vector2 LookDirection { get; private set; } = Vector2.right; //???? ????
 
     // ???? ???? ????? ???? ????? ????? ????
-    bool isMove = false; // ????? ???????
+    private bool isMove = false; // ????? ???????
 
-    bool isAttack = true; // ?????? ???????
+    private bool isAttack = true; // ?????? ???????
 
     // ??????? ????
     // ?浹 ??? => 
     private float timeSinceLastAttack = float.MaxValue;
     private float rotateSpeed = 10.0f;
+
+
+    public int PlayerLevel { get; private set; }
+    public int Exp         { get; private set; }
 
     private void Awake()
     {
@@ -102,10 +108,10 @@ public class PlayerController : MonoBehaviour
             SkillManager.Instance.SelectSkill(103);
         }
 
-        GameObject target = TargetingSystem.FindTarget();
-        if (target == null)
+        GameObject findTarget = TargetingSystem.FindTarget();
+        if (findTarget == null)
             return;
-        LookDirection = (target.transform.position - transform.position).normalized;
+        LookDirection = (findTarget.transform.position - transform.position).normalized;
         Rotate(LookDirection);
 
         if (isAttack)
@@ -188,5 +194,21 @@ public class PlayerController : MonoBehaviour
         }
 
         weaponHandler?.Rotate(isLeft);
+    }
+
+
+    public void AddExp(int exp)
+    {
+        Exp += exp;
+        while (Exp > requestExp)
+        {
+            Exp -= requestExp;
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {
+        PlayerLevel++;
     }
 }
