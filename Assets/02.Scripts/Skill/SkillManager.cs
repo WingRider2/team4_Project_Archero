@@ -59,6 +59,7 @@ public class SkillManager : Singleton<SkillManager>
         {
             SkillType.Attack when skill.Id == 1 => new TripleArrowSkill(skill),
             SkillType.Attack when skill.Id == 2 => new BackArrowSkill(skill),
+            SkillType.Attack when skill.Id == 3 => new SideArrowSkill(skill),
 
             SkillType.Stat => new StatSkill(skill, player),
 
@@ -71,7 +72,7 @@ public class SkillManager : Singleton<SkillManager>
         return skills.Find(x => x.Id == id);
     }
 
-    public void SelecteSkill(int id)
+    public void SelectSkill(int id)
     {
         var skill = GetSkill(id);
         if (skill == null)

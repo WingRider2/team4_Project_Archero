@@ -64,34 +64,41 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // 테스트용 코드
         if (Input.GetKeyDown(KeyCode.F1))
         {
             Debug.Log("F1 : 트리플 샷");
-            SkillManager.Instance.SelecteSkill(1);
+            SkillManager.Instance.SelectSkill(1);
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
             Debug.Log("F2 : 백 샷");
-            SkillManager.Instance.SelecteSkill(2);
+            SkillManager.Instance.SelectSkill(2);
         }
 
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            Debug.Log("F3 : 공격력 업");
-            SkillManager.Instance.SelecteSkill(101);
+            Debug.Log("F3 : 사이드 샷");
+            SkillManager.Instance.SelectSkill(3);
         }
 
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            Debug.Log("F4 : 공격속도 업");
-            SkillManager.Instance.SelecteSkill(102);
+            Debug.Log("F3 : 공격력 업");
+            SkillManager.Instance.SelectSkill(101);
         }
 
         if (Input.GetKeyDown(KeyCode.F5))
         {
+            Debug.Log("F4 : 공격속도 업");
+            SkillManager.Instance.SelectSkill(102);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
             Debug.Log("F5 : 이동속도 업");
-            SkillManager.Instance.SelecteSkill(103);
+            SkillManager.Instance.SelectSkill(103);
         }
 
         TargetingSystem.findTarget();
