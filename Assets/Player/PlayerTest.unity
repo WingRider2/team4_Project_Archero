@@ -1381,7 +1381,7 @@ MonoBehaviour:
   maxHP: 5
   currentHP: 5
   attackPower: 5
-  attackSpeed: 0
+  attackSpeed: 1
   defense: 5
   moveSpeed: 5
 --- !u!114 &1771653024
