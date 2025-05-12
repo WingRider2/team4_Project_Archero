@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c14a88f1a29c1144b8ec6697a231666c, type: 3}
+  m_Name: StageTable
+  m_EditorClassIdentifier: 
+  dataList:
+  - Name: "\uCC55\uD130 1"
+    ID: 1
+    StageDatas:
+    - MonsterSpawnCount: 5
+      ObstacleSpawnCount: 3
+    - MonsterSpawnCount: 5
+      ObstacleSpawnCount: 4
+    - MonsterSpawnCount: 5
+      ObstacleSpawnCount: 5
+    - MonsterSpawnCount: 5
+      ObstacleSpawnCount: 6
+    - MonsterSpawnCount: 5
+      ObstacleSpawnCount: 6
+    - MonsterSpawnCount: 5
+      ObstacleSpawnCount: 6
+    - MonsterSpawnCount: 5
+      ObstacleSpawnCount: 6
+    - MonsterSpawnCount: 5
+      ObstacleSpawnCount: 6
+    RewardDatas:
+    - RewardItemsList: 
+      RewardGold: 1000
