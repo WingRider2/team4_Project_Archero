@@ -42,8 +42,21 @@ public class BaseBT : MonoBehaviour
 
     }
     // Update is called once per frame
+    bool isStart = false;
+    float timer = 0;
+    private const float FindCooldown = 1f;
     void Update()
     {
+        if (!isStart)
+        {
+            timer += Time.deltaTime;
+            if (timer >= FindCooldown)
+            {
+                isStart = true;
+            }
+            return;
+        }
+        
         root?.Evaluate();
        
     }
