@@ -8,7 +8,7 @@ using UnityEngine.Pool;
 using UnityEngine.Serialization;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : SceneOnlyManager<PlayerController>
 {
     private readonly int requestExp = 100;
     private Rigidbody2D Rigidbody2D;
@@ -35,9 +35,9 @@ public class PlayerController : MonoBehaviour
 
 
     public int PlayerLevel { get; private set; }
-    public int Exp { get; private set; }
+    public int Exp         { get; private set; }
 
-    private void Awake()
+    protected override void Awake()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         PlayerInputHandler = GetComponent<PlayerInputHandler>();
@@ -185,8 +185,8 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate(Vector2 direction)
     {
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotZ) > 90f;
+        float rotZ   = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bool  isLeft = Mathf.Abs(rotZ) > 90f;
 
         if (weaponPivot != null)
         {
@@ -211,5 +211,9 @@ public class PlayerController : MonoBehaviour
     private void LevelUp()
     {
         PlayerLevel++;
+    }
+
+    protected override void OnDestroy()
+    {
     }
 }

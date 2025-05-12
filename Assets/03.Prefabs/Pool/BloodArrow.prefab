@@ -283,8 +283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0293565c3e7fe498403bc3b2fecc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 2
+  poolSize: 30
   fxOnDestory: 1
-  attackType: 0
+  attackType: 3
 --- !u!50 &4956696292598993985
 Rigidbody2D:
   serializedVersion: 4

@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 public class SkillManager : SceneOnlyManager<SkillManager>
 {
     // 플레이어 레벨업 판단 임시 변수
-    [SerializeField]
     private PlayerController player;
 
     bool isPlayerLevelUp;
@@ -23,6 +22,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
 
     protected override void Awake()
     {
+        player = PlayerController.Instance;
     }
 
     private void Start()
