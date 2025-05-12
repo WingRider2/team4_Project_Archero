@@ -15,8 +15,8 @@ public class TripleArrowSkill : IAngleArrowSkill, ISkill
         Name = data.Name;
         Type = data.Type;
         Value = data.Value;
-        GameObject arrow = ObjectPool.Instance.Get(PoolType.Arrow);
-        ProjectileController controller = arrow.GetComponent<ProjectileController>();
+        //GameObject arrow = ObjectPool.Instance.Get(AttackType.Arrow);
+        //ProjectileController controller = arrow.GetComponent<ProjectileController>();
         float[] angleOffsets = { -15f, 0f, 15f };
 
         foreach (float offset in angleOffsets)

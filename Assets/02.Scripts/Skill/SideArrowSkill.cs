@@ -9,6 +9,7 @@ public class SideArrowSkill : IAngleArrowSkill, ISkill
     public SkillType Type { get; set; }
     public float Value { get; set; }
 
+    float[] angleOffsets = { -90f, 90f };
     public SideArrowSkill(SkillData data)
     {
         Id = data.Id;
@@ -19,7 +20,6 @@ public class SideArrowSkill : IAngleArrowSkill, ISkill
 
     public float[] GetAttackAngles()
     {
-        float[] angleOffsets = { -90f, 90f };
         return angleOffsets;
     }
 }

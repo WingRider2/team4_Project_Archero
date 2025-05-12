@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Windows;
 //using static UnityEditor.Progress;
 
-public enum PoolType
+public enum AttackType
 {
     None,
     Arrow,
@@ -19,7 +19,7 @@ public class ObjectPool : Singleton<ObjectPool>
     public GameObject[] prefabs;
     public int poolSize = 30;
 
-    private Dictionary<PoolType, Queue<GameObject>> pools = new();
+    private Dictionary<AttackType, Queue<GameObject>> pools = new();
 
     void Awake()
     {
@@ -31,12 +31,12 @@ public class ObjectPool : Singleton<ObjectPool>
                 ProjectileController pc = obj.GetComponent<ProjectileController>();
                 obj.transform.parent = transform;
                 obj.SetActive(false);
-                PoolType poolType = PoolType.None;
-                if (Enum.TryParse(item.name, out poolType))
+                AttackType attackType = AttackType.None;
+                if (Enum.TryParse(item.name, out attackType))
                 {
-                    if (!pools.ContainsKey(poolType)) pools.Add(poolType, new());
-                    pc.poolType = poolType;
-                    pools[poolType].Enqueue(obj);
+                    if (!pools.ContainsKey(attackType)) pools.Add(attackType, new());
+                    pc.attackType = attackType;
+                    pools[attackType].Enqueue(obj);
                 }
                 else
                 {
@@ -46,16 +46,16 @@ public class ObjectPool : Singleton<ObjectPool>
         }
     }
 
-    public GameObject Get(PoolType poolType)
+    public GameObject Get(AttackType attackType)
     {
-        if (pools[poolType].Count > 0)
+        if (pools[attackType].Count > 0)
         {
-            GameObject obj = pools[poolType].Dequeue();
+            GameObject obj = pools[attackType].Dequeue();
             obj.SetActive(true);
             return obj;
         }
 
-        GameObject extra = Instantiate(prefabs.FirstOrDefault(item => item.name == poolType.ToString()));
+        GameObject extra = Instantiate(prefabs.FirstOrDefault(item => item.name == attackType.ToString()));
         extra.transform.parent = transform;
 
         return extra;
@@ -64,7 +64,7 @@ public class ObjectPool : Singleton<ObjectPool>
     public void Return(GameObject obj)
     {
         obj.SetActive(false);
-        ProjectileController pc = obj.GetComponent<ProjectileController>();
-        pools[pc.poolType].Enqueue(obj);
+        ProjectileController pc = obj.GetComponent<ProjectileController>();//추후 화살에 새로운 클래스가 추가 되면 그 클래스로 확인
+        pools[pc.attackType].Enqueue(obj);
     }
 }

@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {   
-
     private WeaponHandler weaponHandler;//무기 정보 
-
     private Rigidbody2D _rigidbody;
     private SpriteRenderer spriteRenderer;
     private ObjectPool objectPool;
@@ -15,7 +13,7 @@ public class ProjectileController : MonoBehaviour
 
 
     //임시
-    public PoolType poolType;
+    public AttackType attackType;
 
     private void Awake()
     {
@@ -56,7 +54,7 @@ public class ProjectileController : MonoBehaviour
     }
 
     public void Launch(Vector2 direction , float speed)
-    {
+    {        
         _rigidbody.velocity = direction.normalized * speed;
     }
 
