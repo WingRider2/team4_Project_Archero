@@ -13,6 +13,10 @@ public class ProjectileController : MonoBehaviour
 
     public bool fxOnDestory = true;
 
+
+    //임시
+    public PoolType poolType;
+
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
