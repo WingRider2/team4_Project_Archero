@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("??????!");
+            Debug.Log("이동중");
         }
     }
 
@@ -143,16 +143,16 @@ public class PlayerController : MonoBehaviour
     {
         if (_isMove)
         {
-            Debug.Log("?????");
+            Debug.Log("이동시작");
             isMove = true;
             isAttack = false;
         }
         else
         {
-            Debug.Log("???????");
+            Debug.Log("이동 종료");
             isMove = false;
             isAttack = true;
-            timeSinceLastAttack = 0; // ?????? ????Ŀ? ????
+            timeSinceLastAttack = 0; // 공격 지연 시간 초기화
         }
     }
 
