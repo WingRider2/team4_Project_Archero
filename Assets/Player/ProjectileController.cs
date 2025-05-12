@@ -54,8 +54,7 @@ public class ProjectileController : MonoBehaviour
     }
 
     public void Launch(Vector2 direction , float speed)
-    {
-        Debug.Log("발사");
+    {        
         _rigidbody.velocity = direction.normalized * speed;
     }
 

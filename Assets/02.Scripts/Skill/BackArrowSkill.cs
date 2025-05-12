@@ -9,12 +9,15 @@ public class BackArrowSkill : IAngleArrowSkill, ISkill
     public SkillType Type { get; private set; }
     public float Value { get; private set; }
 
+    public Sprite SkillIcon { get; private set; }
+
     public BackArrowSkill(SkillData data)
     {
         Id = data.Id;
         Name = data.Name;
         Type = data.Type;
         Value = data.Value;
+        SkillIcon = data.SkillIcon;
     }
 
     public float[] GetAttackAngles()

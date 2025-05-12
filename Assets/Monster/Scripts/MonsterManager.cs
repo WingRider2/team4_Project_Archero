@@ -54,6 +54,8 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
         mon.SetTarget(GameObject.FindWithTag("Player").transform);
         return mon;
     }
+
+
     //public void Start()
     //{
     //    MakeMon(new Vector2(0, 0), 1);
@@ -64,3 +66,4 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
     {
     }
 }
+
