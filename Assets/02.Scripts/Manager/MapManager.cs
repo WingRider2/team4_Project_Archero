@@ -21,7 +21,8 @@ public class MapManager : Singleton<MapManager>
 
 
     [SerializeField] private GameObject playerObject;
-
+    
+    private MonsterManager monsterManager;
 
     public Door CurrentDoor { get; private set; }
     private GameObject currentDoorObject;
@@ -31,6 +32,8 @@ public class MapManager : Singleton<MapManager>
 
     private void Awake()
     {
+        monsterManager=GetComponent<MonsterManager>();
+        MonsterSpawnPositions = new List<Vector3>();
     }
 
     void Start()
@@ -116,6 +119,7 @@ public class MapManager : Singleton<MapManager>
     private void SpawnMonster(StageData stageData, List<Vector3Int> vaildPositions)
     {
         HashSet<int> tileIndex = new HashSet<int>();
+     
         MonsterSpawnPositions.Clear();
         while (tileIndex.Count < stageData.MonsterSpawnCount)
         {
@@ -126,6 +130,8 @@ public class MapManager : Singleton<MapManager>
         {
             MonsterSpawnPositions.Add(floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f, 0.5f));
         }
+        //레벨
+        monsterManager.makeMonList(MonsterSpawnPositions,1);
     }
 
     private void SpawnDoors()

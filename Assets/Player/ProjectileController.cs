@@ -15,7 +15,7 @@ public class ProjectileController : MonoBehaviour
 
 
     //임시
-    public PoolType poolType;
+    public AttackType attackType;
 
     private void Awake()
     {

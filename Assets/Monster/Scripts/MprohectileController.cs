@@ -7,8 +7,7 @@ public class MprohectileController : MonoBehaviour
     private MWeaponHandler mWeaponHandler;
     private float currentDuration;
     private Vector2 direction;
-    private bool isReady;
-  
+    private bool isReady;  
 
     private Rigidbody2D rb;
     private void Awake()
