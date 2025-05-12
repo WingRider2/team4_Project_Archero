@@ -12,32 +12,29 @@ public class PlayerController : MonoBehaviour
     private PlayerInputHandler PlayerInputHandler;
     public PlayerStats PlayerStats { get; private set; }
     private TargetingSystem TargetingSystem;
-
+    private CapsuleCollider2D capsuleCollider2D;
     [SerializeField] private Transform weaponPivot;
     [SerializeField] public WeaponHandler weaponPrefab;
     private WeaponHandler weaponHandler;
 
-    public Vector2 lookDirection = Vector2.right; //���� ����
-
-    // ���� ���� �Ʒ��� ���� ���ݰ� �̵��� ����
-    bool isMove = false; // �̵��� �����Ѱ�
-
-    bool isAttack = true; // ������ �����Ѱ�
-
-    // �ִϸ��̼� ����
-    // �浹 ó�� => 
+    public Vector2 lookDirection = Vector2.right;//보는 방향
+    // 상태 제어 아래를 통해 공격과 이동을 제어
+    bool isMove = false;// 이동이 가능한가
+    bool isAttack = true; // 공격이 가능한가
+                          // 애니메이션 동작
+                          // 충돌 처리 => ?
     private float timeSinceLastAttack = float.MaxValue;
     private float rotateSpeed = 10.0f;
 
     private void Awake()
     {
-        Rigidbody2D = GetComponent<Rigidbody2D>();
-        PlayerInputHandler = GetComponent<PlayerInputHandler>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        playerInputHandler = GetComponent<PlayerInputHandler>();
         PlayerStats = GetComponent<PlayerStats>();
         TargetingSystem = GetComponent<TargetingSystem>();
 
         if (weaponPrefab != null)
-            weaponHandler = Instantiate(weaponPrefab, weaponPivot); //�������
+            weaponHandler = Instantiate(weaponPrefab, weaponPivot); //무기생성
         else
             weaponHandler = GetComponentInChildren<WeaponHandler>();
 
@@ -50,8 +47,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 moveDir = PlayerInputHandler.moveInput;
-        Rigidbody2D.velocity = moveDir * PlayerStats.moveSpeed;
+        Vector2 moveDir = playerInputHandler.moveInput;
+        rigidbody2D.velocity = moveDir * PlayerStats.moveSpeed;
 
         bool wasMoving = isMove;
         isMove = moveDir.magnitude > 0.01f;
@@ -83,8 +80,12 @@ public class PlayerController : MonoBehaviour
         }
 
         TargetingSystem.findTarget();
-        lookDirection = (TargetingSystem.target.transform.position - transform.position).normalized;
-        Rotate(lookDirection);
+
+        if (TargetingSystem.target != null)
+        {
+            lookDirection = (TargetingSystem.target.transform.position - transform.position).normalized;
+            Rotate(lookDirection);
+        }
 
         if (isAttack)
         {
@@ -92,11 +93,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("�Ƚ����!");
+            Debug.Log("안쏘는중!");
         }
     }
-
-    private void HandleAttackDelay() //���� ��߻� �� �ʿ��� �ð� ���
+    private void HandleAttackDelay()//무기 재발사 에 필요한 시간 계산
     {
         if (weaponHandler == null)
             return;
@@ -129,11 +129,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Attack(float angle = 0)
-    {
-        weaponHandler.Attack(angle);
-
-        /* ���� �߻� �׽�Ʈ
+        /* 각도 발사 테스트
         weaponHandler.Attack(-30);
         weaponHandler.Attack(0);
         weaponHandler.Attack(30);
@@ -144,30 +140,39 @@ public class PlayerController : MonoBehaviour
     {
         if (_isMove)
         {
-            Debug.Log("�̵���");
+            Debug.Log("이동중");
             isMove = true;
             isAttack = false;
         }
         else
         {
-            Debug.Log("�����غ�");
+            Debug.Log("공격준비");
             isMove = false;
             isAttack = true;
-            timeSinceLastAttack = 0; // ������ ����Ŀ� ����
+            timeSinceLastAttack = 0; // 멈춘후 잠시후에 공격
         }
     }
-
     private void Rotate(Vector2 direction)
     {
         float rotZ   = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bool  isLeft = Mathf.Abs(rotZ) > 90f;
 
         if (weaponPivot != null)
-        {
-            //weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ); // ���� ������ �����ش�.
+        {            
+            //weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ); // 무기 방향을 돌려준다.
             weaponPivot.rotation = Quaternion.Lerp(weaponPivot.rotation, Quaternion.Euler(0, 0, rotZ), Time.deltaTime * rotateSpeed);
         }
 
         weaponHandler?.Rotate(isLeft);
+    }
+
+    void Hit(float multiplier , Collision2D collision2D)
+    {
+        float damage = multiplier;//이부분에서 collision2D에서 데미지를 읽어야함
+
+    }
+    void ApplyDamage(float Damage)
+    {
+        PlayerStats.currentHP -= (int)(Damage + 0.5f); //뒷계산은 반올림
     }
 }

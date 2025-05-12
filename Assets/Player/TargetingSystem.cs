@@ -8,7 +8,7 @@ public class TargetingSystem : MonoBehaviour
 
     public void findTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");// ÈÄ¿¡ ¸ó½ºÅÍ »ı¼º È¤Àº »ç¸ÁÇÒ¶§ °ü¸®;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");// í›„ì— ëª¬ìŠ¤í„° ìƒì„± í˜¹ì€ ì‚¬ë§í• ë•Œ ê´€ë¦¬;
 
         GameObject nearest = null;
         float minDist = Mathf.Infinity;

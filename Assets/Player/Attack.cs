@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class Attack :MonoBehaviour
 {
-    //°¢Á¾ °ø°İ¹æ½Ä¿¡ ´ëÇØ¼­
-    //°ø°İÀÇ °³¼ö,
-    //°ø°İÀÇ °¢µµ,
-    //Åõ»çÃ¼ ¼Óµµ?
+    //ê°ì¢… ê³µê²©ë°©ì‹ì— ëŒ€í•´ì„œ
+    //ê³µê²©ì˜ ê°œìˆ˜,
+    //ê³µê²©ì˜ ê°ë„,
+    //íˆ¬ì‚¬ì²´ ì†ë„?
 
     public abstract void ExecuteAttack();
 }

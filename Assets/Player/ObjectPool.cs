@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectPool : Singleton<ObjectPool>
 {
-    //³ªÁß¿¡ È®¼ºÀ» À§ÇØ Èì..
+    //ë‚˜ì¤‘ì— í™•ì„±ì„ ìœ„í•´ í ..
     public GameObject prefab;
     public int poolSize = 100;
 
