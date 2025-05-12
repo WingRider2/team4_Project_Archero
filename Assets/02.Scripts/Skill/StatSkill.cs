@@ -30,10 +30,10 @@ public class StatSkill : ISkill
                 player.PlayerStats.attackPower += (int)Value;
                 break;
             case StatSkillType.AttackSpd:
-                player.PlayerStats.attackSpeed -= Value;
+                player.PlayerStats.AttackSpeed -= Value;
                 break;
             case StatSkillType.MoveSpd:
-                player.PlayerStats.moveSpeed += Value;
+                player.PlayerStats.MoveSpeed += Value;
                 break;
             case StatSkillType.MaxHp:
                 player.PlayerStats.maxHP += (int)Value;

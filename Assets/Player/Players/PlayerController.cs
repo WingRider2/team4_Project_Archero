@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
 
     public int PlayerLevel { get; private set; }
-    public int Exp         { get; private set; }
+    public int Exp { get; private set; }
 
     private void Awake()
     {
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 moveDir = PlayerInputHandler.moveInput;
-        Rigidbody2D.velocity = moveDir * PlayerStats.moveSpeed;
+        Rigidbody2D.velocity = moveDir * PlayerStats.MoveSpeed;
 
         bool wasMoving = isMove;
         isMove = moveDir.magnitude > 0.01f;
@@ -92,19 +92,19 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            Debug.Log("F3 : 공격력 업");
+            Debug.Log("F4 : 공격력 업");
             SkillManager.Instance.SelectSkill(101);
         }
 
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            Debug.Log("F4 : 공격속도 업");
+            Debug.Log("F5 : 공격속도 업");
             SkillManager.Instance.SelectSkill(102);
         }
 
         if (Input.GetKeyDown(KeyCode.F6))
         {
-            Debug.Log("F5 : 이동속도 업");
+            Debug.Log("F6 : 이동속도 업");
             SkillManager.Instance.SelectSkill(103);
         }
 
@@ -129,16 +129,15 @@ public class PlayerController : MonoBehaviour
         if (weaponHandler == null)
             return;
 
-        if (timeSinceLastAttack <= PlayerStats.attackSpeed)
+        if (timeSinceLastAttack <= PlayerStats.AttackSpeed)
         {
             timeSinceLastAttack += Time.deltaTime;
         }
 
-        if (isAttack && timeSinceLastAttack > PlayerStats.attackSpeed)
+        if (isAttack && timeSinceLastAttack > PlayerStats.AttackSpeed)
         {
             timeSinceLastAttack = 0;
             //여기서 이제 앵글값을 준다.
-            bool isSkillAttack = false;
             foreach (ISkill skill in SkillManager.Instance.SelectedSKills)
             {
                 if (skill is IAngleArrowSkill arrowSkill)
@@ -184,8 +183,8 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate(Vector2 direction)
     {
-        float rotZ   = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool  isLeft = Mathf.Abs(rotZ) > 90f;
+        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bool isLeft = Mathf.Abs(rotZ) > 90f;
 
         if (weaponPivot != null)
         {
