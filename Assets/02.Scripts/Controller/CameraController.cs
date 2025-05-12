@@ -18,13 +18,14 @@ public class CameraController : MonoBehaviour
 
     private Camera mainCamera;
 
-    private void Awake()
+
+    private void Start()
     {
         mainCamera = Camera.main;
-    }
+        //
+        // mainCamera.transparencySortMode = TransparencySortMode.CustomAxis;
+        // mainCamera.transparencySortAxis = Vector3.up;
 
-    void Start()
-    {
         camHalfHeight = mainCamera.orthographicSize;
         camHalfWidth = camHalfHeight * mainCamera.aspect;
         mapBounds = tilemap.localBounds;
