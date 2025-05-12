@@ -14,7 +14,8 @@ public class CloseSimBT : BaseBT
         INode attackSeq = new SequenceNode(new List<INode> { check, attack });
         INode chaseSel = new SelectorNode(new List<INode> { attackSeq, chase });
         INode findTSeq = new SequenceNode(new List<INode> { findTar, idle });
-        INode findObS = new SequenceNode(new List<INode> {  findObs, astar });
+        INode astarSel=new SelectorNode(new List<INode> {  astar,idle });
+        INode findObS = new SequenceNode(new List<INode> {  findObs, astarSel });
         INode selR = new SelectorNode(new List<INode> { findTSeq,findObS, chaseSel });
     
         root = new SequenceNode(new List<INode> { live ,selR });
