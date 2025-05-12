@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class TargetingSystem : MonoBehaviour
 {
-    public GameObject target;
-
-    public void findTarget()
+    public GameObject FindTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");// 후에 몬스터 생성 혹은 사망할때 관리;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); // 후에 몬스터 생성 혹은 사망할때 관리;
 
         GameObject nearest = null;
-        float minDist = Mathf.Infinity;
+        float      minDist = Mathf.Infinity;
 
         foreach (GameObject enemy in enemies)
         {
@@ -23,6 +21,6 @@ public class TargetingSystem : MonoBehaviour
             }
         }
 
-        target = nearest;
+        return nearest;
     }
 }
