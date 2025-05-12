@@ -10,11 +10,14 @@ public class ArrowSkill : ISkill
 
     public float Value { get; set; }
 
+    public Sprite SkillIcon { get; set; }
+
     public ArrowSkill(SkillData data)
     {
         Id = data.Id;
         Name = data.Name;
         Type = data.Type;
         Value = data.Value;
+        SkillIcon = data.SkillIcon;
     }
 }
