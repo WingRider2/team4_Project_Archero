@@ -15,7 +15,7 @@ public class EchLiveNode : INode
        
         if(enemy.IsDead||enemy.IsDamaged||enemy.IsAttack)
             return INode.ENodeState.Failure;
- 
+        Debug.Log("이동 가능");
         return INode.ENodeState.Success;
     }
 }

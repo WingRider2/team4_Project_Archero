@@ -33,13 +33,13 @@ public class EchObstacleNode : INode
         }
         if (isOb)
         {
-      
+            Debug.Log("장애물");
             isFind = true;
             return INode.ENodeState.Success;
         }
         else
         {
-     
+            Debug.Log("없음");
             return INode.ENodeState.Failure;
         }
     }

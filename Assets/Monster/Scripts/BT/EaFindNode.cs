@@ -52,7 +52,7 @@ public class EaFindNode : INode
         _enemy.movementDir = dir;
         _enemy.lookDir = dir;
         _enemy.Move();
-      
+        Debug.Log("탐색 이동 중");
         if(Vector2.Distance(_enemy.transform.position,targetPos) < Threshold)
         {
             path.RemoveAt(0);
