@@ -39,11 +39,12 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] PlayerController player; // 방향 받아오기
     [SerializeField] SpriteRenderer weaponRenderer;
-
+    WaponAnimationHandler weaponAnimationHandler;
     private void Awake()
     {
         objectPool = FindObjectOfType<ObjectPool>();
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
+        weaponAnimationHandler = GetComponent<WaponAnimationHandler>();
     }
 
     public void Init(PlayerController playerController)
@@ -66,6 +67,7 @@ public class WeaponHandler : MonoBehaviour
 
         //여기 쯤에서 추가연산?
         controller.Launch(direction, speed);
+        weaponAnimationHandler.Shot();
     }
 
     public void Attack(float _angle)
