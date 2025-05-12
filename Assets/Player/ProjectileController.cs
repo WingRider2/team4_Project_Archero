@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {   
+
     private WeaponHandler weaponHandler;//무기 정보 
+
     private Rigidbody2D _rigidbody;
     private SpriteRenderer spriteRenderer;
     private ObjectPool objectPool;

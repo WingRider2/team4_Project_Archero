@@ -17,7 +17,7 @@ public class MonsterManager : MonoBehaviour
         mon.Init(num, monData.Name, monData.HP, monData.ATK,monData.DEF ,monData.MoveSpeed, monData.AttackRange,monData.FindRange);
         if(mon==null)
         {
-            Debug.Log("¸ó½ºÅÍ »ı¼º ½ÇÆĞ");
+            Debug.Log("ëª¬ìŠ¤í„° ìƒì„± ì‹¤íŒ¨");
             return false;
         }
         mon.SetTarget(GameObject.FindWithTag("Player").transform);

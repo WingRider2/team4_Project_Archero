@@ -12,7 +12,7 @@ public class Astar : MonoBehaviour
     static int[] ddy = { 1, -1, 1, -1 };
     private bool IsObs(int x,int  y)
     {
-        //Àå¾Ö¹°/º® È®ÀÎ
+        //ì¥ì• ë¬¼/ë²½ í™•ì¸
         if(x < 0 || y < 0||x>10||y>10) return true;
         return false;
     }
