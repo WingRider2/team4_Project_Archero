@@ -1,22 +1,29 @@
 using UnityEngine;
-
+using TMPro;
 public class UI_GameOver : MonoBehaviour
 {
-    // °ÔÀÓ Å¬¸®¾î ¿©ºÎ
+    // ê²Œì„ í´ë¦¬ì–´ ì—¬ë¶€
     bool isClear;
+    [SerializeField] TextMeshProUGUI ButtonText_Exit, ButtonText_Next;
+
+    private void Awake()
+    {
+        // ê²Œì„ í´ë¦¬ì–´ UI ë²„íŠ¼ë“¤: ë©”ì¸ ë©”ë‰´ë¡œ ë‚˜ê°€ê¸°, ë‹¤ìŒ ìŠ¤í…Œì´ì§€ 2ê°œì˜ í…ìŠ¤íŠ¸ ì‚¬ì´ì¦ˆ í†µì¼
+       UIManager_Battle.Instance.Pause_Buttons_TextSize_Unify(ButtonText_Exit, ButtonText_Next);
+    }
 
     private void OnEnable()
     {
-        // ¸ó½ºÅÍ ´Ù ÀâÀ¸¸é isClear·Î Å¬¸®¾î »óÅÂ Ç¥½Ã¸¦ ³Ö´Â´Ù°í ÇÏ´Ï ±× °ªÀ» ¹Ş¾Æ¿Àµµ·Ï ÇÏ±â
+        // ëª¬ìŠ¤í„° ë‹¤ ì¡ìœ¼ë©´ isClearë¡œ í´ë¦¬ì–´ ìƒíƒœ í‘œì‹œë¥¼ ë„£ëŠ”ë‹¤ê³  í•˜ë‹ˆ ê·¸ ê°’ì„ ë°›ì•„ì˜¤ë„ë¡ í•˜ê¸°
         // isClear
 
-        // °ÔÀÓ Å¬¸®¾î ¿©ºÎ¿¡ µû¶ó ´Ù¸¥ UI ÃâÇö
+        // ê²Œì„ í´ë¦¬ì–´ ì—¬ë¶€ì— ë”°ë¼ ë‹¤ë¥¸ UI ì¶œí˜„
         transform.GetChild(0).gameObject.SetActive(!isClear);
         transform.GetChild(1).gameObject.SetActive(isClear);
     }
 
     public void Button_NextStage()
     {
-        Debug.Log("´ÙÀ½ ½ºÅ×ÀÌÁö");
+        Debug.Log("ë‹¤ìŒ ìŠ¤í…Œì´ì§€");
     }
 }
