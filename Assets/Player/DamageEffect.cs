@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Attack :MonoBehaviour
+public abstract class DamageEffect :MonoBehaviour
 {
     //각종 공격방식에 대해서
     //공격의 개수,
