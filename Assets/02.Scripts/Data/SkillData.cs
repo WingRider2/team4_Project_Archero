@@ -33,9 +33,9 @@ public class SkillData
     public SkillType Type;
     public StatSkillType StatSkillType;
     public string Name;
-    public float Value; // °ø°İ ½ºÅ³°ú ½ºÅÈ ½ºÅ³ÀÇ Áõ°¡·® µîÀ» Á¶ÀıÇÏ±â À§ÇÑ º¯¼ö
+    public float Value; // ê³µê²© ìŠ¤í‚¬ê³¼ ìŠ¤íƒ¯ ìŠ¤í‚¬ì˜ ì¦ê°€ëŸ‰ ë“±ì„ ì¡°ì ˆí•˜ê¸° ìœ„í•œ ë³€ìˆ˜
 
-    // id°¡ °°¾Æµµ ¼­·Î ´Ù¸¥ °´Ã¼·Î ÆÇ´ÜÇØ¼­ Áßº¹À¸·Î hashset¿¡ µé¾î°¡´Â°ÍÀ» ¸·±â À§ÇÑ ¿À¹ö¶óÀÌµå
+    // idê°€ ê°™ì•„ë„ ì„œë¡œ ë‹¤ë¥¸ ê°ì²´ë¡œ íŒë‹¨í•´ì„œ ì¤‘ë³µìœ¼ë¡œ hashsetì— ë“¤ì–´ê°€ëŠ”ê²ƒì„ ë§‰ê¸° ìœ„í•œ ì˜¤ë²„ë¼ì´ë“œ
     // public override bool Equals(object obj)
     // {
     //     if (obj is not SkillData other) return false;
