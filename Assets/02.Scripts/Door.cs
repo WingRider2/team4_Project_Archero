@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer doorSpriteRenderer;
-    [SerializeField] Sprite openSprite;
-    [SerializeField] private BoxCollider2D collider;
+    [SerializeField] private SpriteRenderer doorSpriteRenderer;
+
+    [SerializeField] private Sprite openSprite;
+    [SerializeField] private Sprite closeSprite;
+
+    [SerializeField] private BoxCollider2D doorCollider;
+
 
     /// <summary>
     /// 스테이지 클리어시 해당 함수 호출
     /// </summary>
-    public void OpenDoor()
+    public void DoorControl(bool isOpen)
     {
-        doorSpriteRenderer.sprite = openSprite;
-        collider.enabled = false;
+        doorSpriteRenderer.sprite = isOpen ? openSprite : closeSprite;
+        doorCollider.enabled = !isOpen;
     }
 }
