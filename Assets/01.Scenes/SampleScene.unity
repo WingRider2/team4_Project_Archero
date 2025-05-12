@@ -265,7 +265,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1929549293202023224, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
   m_PrefabInstance: {fileID: 331388763}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1486095767}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8720da4e1856b2041aecac4a3257b484, type: 3}
@@ -506,7 +506,7 @@ MonoBehaviour:
     DoorTilemap: {fileID: 406545715672184822, guid: 67af1b06342201b43b8eb15b717c6380, type: 3}
     PlayerSpawnTilemap: {fileID: 6457384072592340580, guid: bf6f94ca0d4401e4bbddaa0ca7bf57a7, type: 3}
   testPrefab: {fileID: 6237139047231323186, guid: b41b04994467ed8429b24ed92d66a37f, type: 3}
-  playerObject: {fileID: 0}
+  playerObject: {fileID: 1486095767}
 --- !u!4 &761699269
 Transform:
   m_ObjectHideFlags: 0
@@ -782,6 +782,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1486095767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7450258485076249342, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
+  m_PrefabInstance: {fileID: 331388763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1803660615
 GameObject:
   m_ObjectHideFlags: 0
