@@ -1,55 +1,63 @@
 using UnityEngine;
 using TMPro;
 using System;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class UI_LevelUP : MonoBehaviour
 {
+    // ìœ ì €ë“¤ì—ê²Œ ì •ë³´ë¥¼ ë³´ì—¬ì£¼ê¸° ìœ„í•œ UI ì˜¤ë¸Œì íŠ¸ë“¤
     [SerializeField] SkillOption[] skillOptions;
-    UIManager_Battle uIManager_Battle;
 
-    // ½ºÅ³ ¼±ÅÃÁö¿¡ ³ª¿Ã ½ºÅ³µé. ¼±ÅÃÁö 3°³ °íÁ¤ÀÌ¶ó±â¿¡ Å©±â °íÁ¤
+    // ìŠ¤í‚¬ ì„ íƒì§€ì— ë‚˜ì˜¨ ìŠ¤í‚¬ë“¤ì˜ ì¸ë±ìŠ¤. ì„ íƒì§€ 3ê°œ ê³ ì •ì´ë¼ê¸°ì— í¬ê¸° ê³ ì •
     int[] skillOptionIndexs = new int[3];
-
-    private void Awake()
-    {
-        uIManager_Battle = GetComponentInParent<UIManager_Battle>();
-    }
 
     private void OnEnable()
     {
+        // ë ˆë²¨ì—… ê³ ë¥´ëŠ” ë™ì•ˆì€ ì¼ì‹œì •ì§€
+        Time.timeScale = 0;
         SkillOptionInit();
     }
 
+    // ë ˆë²¨ì—… íŒ¨ë„ì´ ë“±ì¥í•  ë•Œ, ë ˆë²¨ì—… ì„ íƒì§€ ì´ˆê¸°í™”
     void SkillOptionInit()
     {
-        // ·¹º§¾÷ ÇÒ ¶§ ¾î¶² ½ºÅ³µéÀÌ ³ª¿À´ÂÁö? >> ¿ÀÈÄ¿¡ ÄÚµå º¸°í ¾î¶»°Ô ¸¸µéÁö °áÁ¤ÇÏ±â
-        // È¹µæ ½ºÅ³, ·¹º§Àº ¾îµğ¿¡¼­ °¡Á®¿Ã ¼ö ÀÖ´ÂÁö ¾Ë¾Æº¸±â >> ½ºÅ³ ·£´ı ÃâÇö ºÎºĞÀÌ ¾øÀ¸¸é ¸¸µé±â
-        // ½ºÅ³ ÀÎµ¦½º·ÎºÎÅÍ ÀÌ¸§, ·¹º§, ¾ÆÀÌÄÜ, ¼³¸íÀ» ¹Ş¾Æ¿Í¼­ °¢°¢ ½áÁÖ±â
-        for (int i = 0; i < 3; i++)
+        // ëœë¤í•˜ê²Œ ë½‘ì€ 3ê°œì˜ ìŠ¤í‚¬ì„ ê°€ì ¸ì˜¤ê²Œë”
+        HashSet<SkillData> skillDatas = new HashSet<SkillData>(SkillManager.Instance.GetSkillToSelect());
+
+        // HashSetì€ ì¸ë±ìŠ¤ê°€ ì—†ìœ¼ë¯€ë¡œ ì—¬ê¸°ì„œ ië¥¼ ì„ ì–¸í•˜ì—¬ ì‚¬ìš©
+        int i = 0;
+        foreach (SkillData skillData in skillDatas)
         {
-            //skillOptionIndexs[i] = ;
-            //skillOptions[i].name.text = "";
-            //skillOptions[i].level.text = $"Lv. {}";
-            //skillOptions[i].icon.sprite = ;
-            //skillOptions[i].info.text = "";
+            // ê° ë²„íŠ¼ì— ì–´ë–¤ ìŠ¤í‚¬ì´ ë“¤ì–´ê°€ ìˆëŠ”ì§€ ì¸ë±ìŠ¤ ì €ì¥
+            skillOptionIndexs[i] = skillData.Id;
+
+            // UI í‘œì‹œ ì •ë³´ ë³€ê²½
+            skillOptions[i].name.text = skillData.Name;
+            skillOptions[i].icon.sprite = skillData.SkillIcon;
+            // ìŠ¤í‚¬ ì„¤ëª… ì—†ë‹¤??? >> ë°¤ì— ìŠ¤í‚¬ ë°ì´í„° ì‘ì—…í•´ë„ ë˜ëŠ”ì§€ ë¬¼ì–´ë³´ê¸°
+            //skillOptions[i].info.text = skillData.;
+
+            // ë‹¤ìŒ ì¸ë±ìŠ¤ë¡œ
+            i++;
         }
     }
 
     public void Button_OptionSelect(int buttonIndex)
     {
-        // ½ºÅ³ ·¹º§¾÷À» ¾î¶»°Ô ÇÏ´ÂÁö È®ÀÎ ÇÊ¿ä
-        
-        // ¹öÆ°À» ´­·¯ ¼±ÅÃÇÑ ½ºÅ³ ÀÎµ¦½º´Â ¾Æ·¡¿Í °°À½
-        // skillOptionIndexs[buttonIndex]
+        // ì„ íƒí•œ ë²„íŠ¼ê³¼ ì¼ì¹˜í•˜ëŠ” ìŠ¤í‚¬ ì¸ë±ìŠ¤ë¥¼ í†µí•´ í”Œë ˆì´ì–´ ìŠ¤í‚¬ ì¶”ê°€
+        SkillManager.Instance.SelectSkill(skillOptionIndexs[buttonIndex]);
+        // ì¼ì‹œì •ì§€ í•´ì œ
+        Time.timeScale = 1;
+        // ìŠ¤í‚¬ ì„ íƒì´ ëë‚¬ìœ¼ë‹ˆ ë ˆë²¨ì—… íŒ¨ë„ ë¹„í™œì„±í™”
+        gameObject.SetActive(false);
     }
 
-    // ½ºÅ³ ¼±ÅÃ ¹öÆ°¿¡ ½ºÅ³ Á¤º¸¸¦ Ç¥½ÃÇÒ UI¿ÀºêÁ§Æ®µé
+    // ìŠ¤í‚¬ ì„ íƒ ë²„íŠ¼ì— ìŠ¤í‚¬ ì •ë³´ë¥¼ í‘œì‹œí•  UIì˜¤ë¸Œì íŠ¸ë“¤
     [Serializable]
     public class SkillOption
     {
         public TextMeshProUGUI name;
-        public TextMeshProUGUI level;
         public Image icon;
         public TextMeshProUGUI info;
     }
