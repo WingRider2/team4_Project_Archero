@@ -66,20 +66,32 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("F1");
+            Debug.Log("F1 : 트리플 샷");
             SkillManager.Instance.SelecteSkill(1);
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            Debug.Log("F2");
+            Debug.Log("F2 : 백 샷");
             SkillManager.Instance.SelecteSkill(2);
         }
 
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            Debug.Log("F3");
-            SkillManager.Instance.SelecteSkill(3);
+            Debug.Log("F3 : 공격력 업");
+            SkillManager.Instance.SelecteSkill(101);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            Debug.Log("F4 : 공격속도 업");
+            SkillManager.Instance.SelecteSkill(102);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            Debug.Log("F5 : 이동속도 업");
+            SkillManager.Instance.SelecteSkill(103);
         }
 
         TargetingSystem.findTarget();
@@ -92,7 +104,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("??????!");
+            //Debug.Log("??????!");
         }
     }
 
@@ -101,30 +113,27 @@ public class PlayerController : MonoBehaviour
         if (weaponHandler == null)
             return;
 
-        if (timeSinceLastAttack <= weaponHandler.Delay)
+        if (timeSinceLastAttack <= PlayerStats.attackSpeed)
         {
             timeSinceLastAttack += Time.deltaTime;
         }
 
-        if (isAttack && timeSinceLastAttack > weaponHandler.Delay)
+        if (isAttack && timeSinceLastAttack > PlayerStats.attackSpeed)
         {
             timeSinceLastAttack = 0;
             //여기서 이제 앵글값을 준다.
             bool isSkillAttack = false;
-            foreach (ISKill skill in SkillManager.Instance.SelectedSKills)
+            foreach (ISkill skill in SkillManager.Instance.SelectedSKills)
             {
                 if (skill is IAngleArrowSkill arrowSkill)
                 {
                     foreach (var angle in arrowSkill.GetAttackAngles())
                     {
-                        isSkillAttack = true;
                         Attack(angle);
                     }
                 }
             }
-
-            if (!isSkillAttack)
-                Attack();
+            Attack();
         }
     }
 
@@ -158,8 +167,8 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate(Vector2 direction)
     {
-        float rotZ   = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool  isLeft = Mathf.Abs(rotZ) > 90f;
+        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bool isLeft = Mathf.Abs(rotZ) > 90f;
 
         if (weaponPivot != null)
         {

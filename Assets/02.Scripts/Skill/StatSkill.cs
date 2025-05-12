@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatSkill : ISKill
+public class StatSkill : ISkill
 {
-    public int       Id    { get; }
-    public string    Name  { get; }
-    public SkillType Type  { get; }
-    public float     Value { get; }
+    public int Id { get; }
+    public string Name { get; }
+    public SkillType Type { get; }
+    public float Value { get; }
 
     public StatSkillType StatType { get; }
     private PlayerController player;
@@ -30,10 +30,10 @@ public class StatSkill : ISKill
                 player.PlayerStats.attackPower += (int)Value;
                 break;
             case StatSkillType.AttackSpd:
-                player.PlayerStats.attackSpeed += (int)Value;
+                player.PlayerStats.attackSpeed -= Value;
                 break;
             case StatSkillType.MoveSpd:
-                player.PlayerStats.moveSpeed += (int)Value;
+                player.PlayerStats.moveSpeed += Value;
                 break;
         }
     }
