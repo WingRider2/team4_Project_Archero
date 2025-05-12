@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum MonType
 {
-    Melee,Range
+    Melee,Range,Boss
 }
 [Serializable]
 public class MonsterData

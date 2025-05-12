@@ -25,14 +25,26 @@ MonoBehaviour:
     FindRange: 10
     AttackTime: 0.1
     CoolTime: 2
-  - Monster: {fileID: 9187412017079159352, guid: 104faf80b93a6a2459aa49a7d75d736c, type: 3}
-    ID: 2
-    Name: Imp
+  - Monster: {fileID: 2176916960467133013, guid: 34a916ef59a51aa4b98973f7f62ca357, type: 3}
+    ID: 3
+    Name: Necromancer
     Type: 1
     HP: 10
     ATK: 5
     DEF: 5
     MoveSpeed: 5
+    AttackRange: 5
+    FindRange: 10
+    AttackTime: 0.1
+    CoolTime: 2
+  - Monster: {fileID: 9187412017079159352, guid: 104faf80b93a6a2459aa49a7d75d736c, type: 3}
+    ID: 2
+    Name: Imp
+    Type: 2
+    HP: 50
+    ATK: 7
+    DEF: 5
+    MoveSpeed: 3
     AttackRange: 5
     FindRange: 10
     AttackTime: 0.1

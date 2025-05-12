@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterRangeSim : MonsterBase
+
+public class MonsterBoss : MonsterBase
 {
+
     MWeaponHandler m_Controller;
     protected override void Awake()
     {
         base.Awake();
-        m_Controller= GetComponentInChildren<MWeaponHandler>();
+        m_Controller = GetComponentInChildren<MWeaponHandler>();
 
     }
-    public override float Attack()
+    public  float Attack(int a)
     {
-        base.Attack();
-        Vector2 dir = Target.position-transform.position;
+        
+        Vector2 dir = Target.position - transform.position;
         m_Controller.Attack(dir);
         return atk;
     }

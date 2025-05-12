@@ -47,6 +47,7 @@ public class MonsterBase : MonoBehaviour
        
         characterRender = GetComponent<SpriteRenderer>();
         manationHandler= GetComponent<MAnimationHandler>();
+      
     }
     public void setPath(List<Vector2> _path)
     {
