@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SkillManager : Singleton<SkillManager>
+public class SkillManager : SceneOnlyManager<SkillManager>
 {
     // 플레이어 레벨업 판단 임시 변수
     [SerializeField]
@@ -21,8 +21,9 @@ public class SkillManager : Singleton<SkillManager>
 
     public List<ISkill> SelectedSKills { get; private set; } = new List<ISkill>();
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
     }
 
     private void Start()
@@ -45,7 +46,7 @@ public class SkillManager : Singleton<SkillManager>
             while (selectSkillList.Count < 3)
             {
                 int skillById = Random.Range(0, skillTable.DataDic.Count + 1);
-                var skill = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
+                var skill     = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
                 selectSkillList.Add(skill);
             }
         }
@@ -88,5 +89,10 @@ public class SkillManager : Singleton<SkillManager>
         {
             skills.Remove(skill);
         }
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
     }
 }

@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class MonsterManager : MonoBehaviour
+public class MonsterManager : SceneOnlyManager<MonsterManager>
 {
     List<MonsterBase> monsters;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
     }
 
     public List<MonsterBase> Monsters { get { return monsters; } }
@@ -59,4 +61,8 @@ public class MonsterManager : MonoBehaviour
     //    var ga = MakeMon(new Vector2(10, 0), 2);
 
     //}
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+    }
 }
