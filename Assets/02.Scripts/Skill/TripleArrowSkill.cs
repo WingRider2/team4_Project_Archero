@@ -9,6 +9,8 @@ public class TripleArrowSkill : IAngleArrowSkill, ISkill
     public SkillType Type { get; set; }
     public float Value { get; set; }
 
+    public Sprite SkillIcon { get; private set; }
+
     float[] angleOffsets = { -15f, 15f };
 
     public TripleArrowSkill(SkillData data)
@@ -17,6 +19,7 @@ public class TripleArrowSkill : IAngleArrowSkill, ISkill
         Name = data.Name;
         Type = data.Type;
         Value = data.Value;
+        SkillIcon = data.SkillIcon;
     }
 
     public float[] GetAttackAngles()
