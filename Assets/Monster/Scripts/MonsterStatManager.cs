@@ -16,15 +16,15 @@ public class MonsterStatManager : MonoBehaviour
         }
     }
 
-    public void ModifyStatValue(StatType statType, StatValueType valueType, float value)
+    public void IncreaseStatValue(StatType statType, StatValueType valueType, float value)
     {
         switch (valueType)
         {
             case StatValueType.Base:
-                monsterStatDic[statType].ModifyBaseValue(value);
+                monsterStatDic[statType].IncreaseBaseStat(value);
                 break;
             case StatValueType.Buff:
-                monsterStatDic[statType].ModifyBuffValue(value);
+                monsterStatDic[statType].IncreaseBuffStat(value);
                 break;
         }
 
@@ -33,6 +33,34 @@ public class MonsterStatManager : MonoBehaviour
             monsterStatDic[StatType.CurrentHp].MaxValue = monsterStatDic[StatType.MaxHp].FinalValue;
         }
     }
+
+    public void DecreaseStatValue(StatType statType, StatValueType valueType, float value)
+    {
+        switch (valueType)
+        {
+            case StatValueType.Base:
+                monsterStatDic[statType].DecreaseBaseValue(value);
+                break;
+            case StatValueType.Buff:
+                monsterStatDic[statType].DecreaseBuffValue(value);
+                break;
+        }
+
+        if (statType == StatType.MaxHp)
+        {
+            monsterStatDic[StatType.CurrentHp].MaxValue = monsterStatDic[StatType.MaxHp].FinalValue;
+        }
+    }
+
+    public void AllDecreaseStatValue(StatType statType, float value)
+    {
+        monsterStatDic[statType].DecreaseAllValue(value);
+        if (statType == StatType.MaxHp)
+        {
+            monsterStatDic[StatType.CurrentHp].MaxValue = monsterStatDic[StatType.MaxHp].FinalValue;
+        }
+    }
+
     public float GetFinalValue(StatType statType)
     {
         return monsterStatDic[statType].FinalValue;

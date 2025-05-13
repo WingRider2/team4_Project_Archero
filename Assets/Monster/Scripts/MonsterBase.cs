@@ -100,7 +100,7 @@ public class MonsterBase : MonoBehaviour
         Debug.Log("공격 받음");
         if (isInvincible)
             return;
-        MonsterStatManager.ModifyStatValue(StatType.CurrentHp, StatValueType.Buff, -damage);
+        MonsterStatManager.AllDecreaseStatValue(StatType.CurrentHp, -damage);
         float curHp = MonsterStatManager.GetFinalValue(StatType.CurrentHp);
         curHp -= damage;
         isInvincible = true;
