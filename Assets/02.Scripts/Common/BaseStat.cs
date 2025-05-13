@@ -32,6 +32,11 @@ public abstract class BaseStat
     public virtual void ModifyBaseValue(float value)
     {
         BaseValue += value;
+        if (BaseValue < 0)
+        {
+            BaseValue = Mathf.Max(BaseValue, 0);
+        }
+
         TriggerEvent(BaseValue);
     }
 
@@ -42,6 +47,12 @@ public abstract class BaseStat
     public virtual void ModifyBuffValue(float value)
     {
         BuffValue += value;
+        if (BuffValue < 0)
+        {
+            ModifyBaseValue(BuffValue);
+            BuffValue = Mathf.Max(BuffValue, 0);
+        }
+
         TriggerEvent(BuffValue);
     }
 
@@ -50,5 +61,6 @@ public abstract class BaseStat
     protected void TriggerEvent(float updateValue)
     {
         OnValueChanged?.Invoke(updateValue);
+        Debug.Log($"Value Changed to {updateValue} Final Value : {FinalValue}");
     }
 }
