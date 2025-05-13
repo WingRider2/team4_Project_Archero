@@ -1,48 +1,39 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Pool;
-using UnityEngine.Serialization;
 
 
 public class PlayerController : SceneOnlyManager<PlayerController>
 {
     private readonly int requestExp = 100;
-    private Rigidbody2D Rigidbody2D;
-    private PlayerInputHandler PlayerInputHandler;
-    public PlayerStats PlayerStats { get; private set; }
-    private TargetingSystem TargetingSystem;
-    protected AnimationHandler animationHandler;
-
+    private Rigidbody2D rgid2D;
+    private PlayerInputHandler playerInputHandler;
+    private TargetingSystem targetingSystem;
+    private AnimationHandler animationHandler;
     [SerializeField] private Transform weaponPivot;
     [SerializeField] private WeaponHandler weaponPrefab;
     private WeaponHandler weaponHandler;
 
-    public Vector2 LookDirection { get; private set; } = Vector2.right; //???? ????
 
     // ???? ???? ????? ???? ????? ????? ????
-    private bool isMove = false; // ????? ???????
-
+    private bool isMove = false;  // ????? ???????
     private bool isAttack = true; // ?????? ???????
 
-    // ??????? ????
-    // ?浹 ??? => 
     private float timeSinceLastAttack = float.MaxValue;
     private float rotateSpeed = 10.0f;
 
-
-    public int PlayerLevel { get; private set; }
-    public int Exp         { get; private set; }
+    public Vector2     LookDirection { get; private set; } = Vector2.right; //???? ????
+    public PlayerStats PlayerStats   { get; private set; }
+    public int         PlayerLevel   { get; private set; }
+    public int         Exp           { get; private set; }
 
     protected override void Awake()
     {
-        Rigidbody2D = GetComponent<Rigidbody2D>();
-        PlayerInputHandler = GetComponent<PlayerInputHandler>();
+        rgid2D = GetComponent<Rigidbody2D>();
+        playerInputHandler = GetComponent<PlayerInputHandler>();
         PlayerStats = GetComponent<PlayerStats>();
-        TargetingSystem = GetComponent<TargetingSystem>();
+        targetingSystem = GetComponent<TargetingSystem>();
         animationHandler = GetComponent<AnimationHandler>();
 
         if (weaponPrefab != null)
@@ -59,8 +50,8 @@ public class PlayerController : SceneOnlyManager<PlayerController>
 
     private void FixedUpdate()
     {
-        Vector2 moveDir = PlayerInputHandler.moveInput;
-        Rigidbody2D.velocity = moveDir * PlayerStats.MoveSpeed;
+        Vector2 moveDir = playerInputHandler.moveInput;
+        rgid2D.velocity = moveDir * PlayerStats.MoveSpeed;
         animationHandler.Move(moveDir * PlayerStats.MoveSpeed);
         bool wasMoving = isMove;
         isMove = moveDir.magnitude > 0.01f;
@@ -110,7 +101,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
             SkillManager.Instance.SelectSkill(103);
         }
 
-        GameObject findTarget = TargetingSystem.FindTarget();
+        GameObject findTarget = targetingSystem.FindTarget();
         if (findTarget == null)
             return;
         LookDirection = (findTarget.transform.position - transform.position).normalized;
@@ -166,18 +157,18 @@ public class PlayerController : SceneOnlyManager<PlayerController>
         */
     }
 
-    private void StateChanged(bool _isMove)
+    private void StateChanged(bool isMove)
     {
-        if (_isMove)
+        if (isMove)
         {
             Debug.Log("이동시작");
-            isMove = true;
+            this.isMove = true;
             isAttack = false;
         }
         else
         {
             Debug.Log("이동 종료");
-            isMove = false;
+            this.isMove = false;
             isAttack = true;
             timeSinceLastAttack = 0; // 공격 지연 시간 초기화
         }
@@ -196,7 +187,6 @@ public class PlayerController : SceneOnlyManager<PlayerController>
 
         weaponHandler?.Rotate(isLeft);
     }
-
 
     public void AddExp(int exp)
     {

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class SideArrowSkill : IAngleArrowSkill, ISkill
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Info { get; set; }
-    public SkillType Type { get; set; }
-    public float Value { get; set; }
+    public int       Id    { get; set; }
+    public string    Name  { get; set; }
+    public string    Info  { get; set; }
+    public SkillType Type  { get; set; }
+    public float     Value { get; set; }
 
     public Sprite SkillIcon { get; private set; }
 
-    float[] angleOffsets = { -90f, 90f };
+    public float[] angleOffsets { get; } = { -90f, 90f };
+
     public SideArrowSkill(SkillData data)
     {
         Id = data.Id;

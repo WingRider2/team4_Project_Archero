@@ -17,7 +17,6 @@ public enum PoolType
 
 public class ObjectPoolManager : SceneOnlyManager<ObjectPoolManager>
 {
-    //등록된 풀을 시각화 하여 보여주기 위해?
     [SerializeField] List<GameObject> poolObjectList = new List<GameObject>();
     private List<IPoolObject> pools = new List<IPoolObject>();
     private Dictionary<PoolType, Queue<GameObject>> poolObjects = new Dictionary<PoolType, Queue<GameObject>>();
@@ -55,6 +54,10 @@ public class ObjectPoolManager : SceneOnlyManager<ObjectPoolManager>
             if (obj.TryGetComponent<IPoolObject>(out var ipool))
             {
                 pools.Add(ipool);
+            }
+            else
+            {
+                Debug.LogError($"오브젝트에 IPoolObject이 상속 되어 있지 않습니다. {obj.name}");
             }
         }
     }

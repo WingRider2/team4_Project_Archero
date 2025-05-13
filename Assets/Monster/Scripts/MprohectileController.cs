@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class MprohectileController : MonoBehaviour, IPoolObject
 {
     [SerializeField] PoolType poolType;
     [SerializeField] private int poolSize = 20;
+
     private MWeaponHandler mWeaponHandler;
     private float currentDuration;
     private Vector2 direction;
@@ -18,9 +20,16 @@ public class MprohectileController : MonoBehaviour, IPoolObject
     public PoolType   PoolType   => poolType;
     public int        PoolSize   => poolSize;
 
+    private ObjectPoolManager mPoolManager;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        mPoolManager = ObjectPoolManager.Instance;
     }
 
     private void Update()
@@ -29,7 +38,7 @@ public class MprohectileController : MonoBehaviour, IPoolObject
         currentDuration += Time.deltaTime;
         if (currentDuration > mWeaponHandler.duration)
         {
-            Destroy(this.gameObject);
+            mPoolManager.ReturnObject(this);
         }
 
         rb.velocity = direction * mWeaponHandler.speed;
@@ -37,7 +46,7 @@ public class MprohectileController : MonoBehaviour, IPoolObject
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(this.gameObject);
+        mPoolManager.ReturnObject(this);
     }
 
     public void Init(Vector2 dir, MWeaponHandler weaponHandler)

@@ -290,6 +290,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4303015168331141316, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303015168331141316, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7450258485076249342, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
       propertyPath: m_Name
       value: Player
@@ -304,55 +312,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2034744695758390136, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
   m_PrefabInstance: {fileID: 331388763}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &424817001
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 424817002}
-  - component: {fileID: 424817003}
-  m_Layer: 0
-  m_Name: ObjectPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &424817002
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424817001}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &424817003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424817001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6d16acd1a411f8458749c0d9b21b54a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 5235075321537514784, guid: 01262b6b64f086047b816be5843fbb4f, type: 3}
-  - {fileID: 5424558168948920548, guid: dcf4d3c5f39e0664aa6934d9f0000097, type: 3}
-  - {fileID: 5141913648701243154, guid: 67d11a5e5ae07684a9bb32b473128b7a, type: 3}
-  poolSize: 30
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 331388764}
-  tilemap: {fileID: 5370193869514487525}
+  tilemap: {fileID: 40641239141551300}
   maxZoom: 0
 --- !u!1 &761699267
 GameObject:
@@ -5654,8 +5613,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Panel_Pause: {fileID: 636164746494177270}
+  gold_text: {fileID: 0}
+  level_text: {fileID: 0}
   continue_button_text: {fileID: 8513982554659969316}
   exit_button_text: {fileID: 6184743389585648145}
+  hpBar: {fileID: 0}
+  skill_icons: []
 --- !u!1 &4620826581459321303
 GameObject:
   m_ObjectHideFlags: 0
@@ -13352,7 +13315,6 @@ SceneRoots:
   - {fileID: 309147804}
   - {fileID: 1203914985}
   - {fileID: 761699269}
-  - {fileID: 424817002}
   - {fileID: 58322610}
   - {fileID: 1211378547}
   - {fileID: 102984500}
