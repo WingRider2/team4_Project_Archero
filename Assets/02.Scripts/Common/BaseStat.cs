@@ -31,9 +31,12 @@ public abstract class BaseStat
     /// <param name="value"></param>
     public virtual void ModifyBaseValue(float value)
     {
-        if (FinalValue <= MinValue)
-            return;
         BaseValue += value;
+        if (BaseValue < 0)
+        {
+            BaseValue = Mathf.Max(BaseValue, 0);
+        }
+
         TriggerEvent(BaseValue);
     }
 
@@ -43,9 +46,13 @@ public abstract class BaseStat
     /// <param name="value"></param>
     public virtual void ModifyBuffValue(float value)
     {
-        if (FinalValue <= MinValue)
-            return;
         BuffValue += value;
+        if (BuffValue < 0)
+        {
+            ModifyBaseValue(BuffValue);
+            BuffValue = Mathf.Max(BuffValue, 0);
+        }
+
         TriggerEvent(BuffValue);
     }
 

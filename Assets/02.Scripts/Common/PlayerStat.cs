@@ -33,6 +33,12 @@ public class PlayerStat : BaseStat
     public void ModifyEquipmentValue(float value)
     {
         EquipmentValue += value;
+        if (EquipmentValue < 0)
+        {
+            ModifyBuffValue(EquipmentValue);
+            EquipmentValue = Mathf.Max(EquipmentValue, 0);
+        }
+
         TriggerEvent(EquipmentValue);
     }
 
