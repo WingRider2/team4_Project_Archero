@@ -11,19 +11,16 @@ public class StatSkill : ISkill
     public SkillType Type  { get; }
     public float     Value { get; }
 
-    private List<StatType> StatType { get; }
     private readonly PlayerController player;
-    private List<SkillEffect> Effects { get; }
+    private List<StatSkillEffect> Effects { get; }
 
     public StatSkill(SkillData data)
     {
         Id = data.Id;
         Name = data.Name;
         Type = data.Type;
-        Value = data.Value;
-        StatType = data.StatSkillType;
         this.player = PlayerController.Instance;
-        Effects = data.SkillEffects;
+        Effects = data.StatSkillEffects;
     }
 
     public void ApplyStat()

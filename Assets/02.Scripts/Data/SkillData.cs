@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum SkillType
 {
@@ -33,8 +34,7 @@ public class SkillData
 {
     public int Id;
     public SkillType Type;
-    public List<SkillEffect> SkillEffects;
-    public List<StatType> StatSkillType;
+    public List<StatSkillEffect> StatSkillEffects;
     public float Value; // 공격 스킬과 스탯 스킬의 증가량 등을 조절하기 위한 변수
     public string Name;
     public string Info;
@@ -42,7 +42,7 @@ public class SkillData
 }
 
 [Serializable]
-public class SkillEffect
+public class StatSkillEffect
 {
     public StatType StatType;
     public float Value;
