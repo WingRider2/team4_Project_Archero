@@ -20,8 +20,8 @@ public abstract class BaseStat
     public          float    BuffValue  { get; protected set; }
     public abstract float    FinalValue { get; }
 
-    public float MinValue;
-    public float MaxValue;
+    public float MinValue = 0;
+    public float MaxValue = int.MaxValue;
 
     public event Action<float> OnValueChanged;
 
@@ -32,7 +32,6 @@ public abstract class BaseStat
     public virtual void ModifyBaseValue(float value)
     {
         BaseValue += value;
-        BaseValue = Math.Clamp(BaseValue, MinValue, MaxValue);
         TriggerEvent(BaseValue);
     }
 
@@ -43,7 +42,6 @@ public abstract class BaseStat
     public virtual void ModifyBuffValue(float value)
     {
         BuffValue += value;
-        BuffValue = Math.Clamp(BuffValue, MinValue, MaxValue);
         TriggerEvent(BuffValue);
     }
 
