@@ -35,8 +35,7 @@ public class UI_LevelUP : MonoBehaviour
             // UI 표시 정보 변경
             skillOptions[i].name.text = skillData.Name;
             skillOptions[i].icon.sprite = skillData.SkillIcon;
-            // 스킬 설명 없다??? >> 밤에 스킬 데이터 작업해도 되는지 물어보기
-            //skillOptions[i].info.text = skillData.;
+            skillOptions[i].info.text = skillData.Info;
 
             // 다음 인덱스로
             i++;

@@ -8,8 +8,8 @@ public class MprohectileController : MonoBehaviour
     private float currentDuration;
     private Vector2 direction;
     private bool isReady;
-  
 
+    float dmg = 1.0f;
     private Rigidbody2D rb;
     private void Awake()
     {
@@ -26,6 +26,11 @@ public class MprohectileController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "Player")
+        {
+            Debug.Log(collision);
+            collision.gameObject.GetComponent<HitPart>().Damaged(dmg);
+        }
         Destroy(this.gameObject);
     }
     public void Init(Vector2 dir,MWeaponHandler weaponHandler)

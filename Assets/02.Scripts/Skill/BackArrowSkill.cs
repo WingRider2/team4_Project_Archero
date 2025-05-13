@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class BackArrowSkill : IAngleArrowSkill, ISkill
 {
-    public int Id { get; private set; }
-    public string Name { get; private set; }
-    public SkillType Type { get; private set; }
-    public float Value { get; private set; }
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Info { get; set; }
+    public SkillType Type { get; set; }
+    public float Value { get; set; }
 
-    public Sprite SkillIcon { get; private set; }
+    public Sprite SkillIcon { get; set; }
 
     public BackArrowSkill(SkillData data)
     {
         Id = data.Id;
         Name = data.Name;
+        Info = data.Info;
         Type = data.Type;
         Value = data.Value;
         SkillIcon = data.SkillIcon;

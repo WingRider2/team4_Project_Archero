@@ -9,7 +9,7 @@ public class SceneOnlyManager<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (Instance == null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;

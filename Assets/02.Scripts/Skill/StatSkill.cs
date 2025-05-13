@@ -6,6 +6,7 @@ public class StatSkill : ISkill
 {
     public int Id { get; }
     public string Name { get; }
+    public string Info { get; set; }
     public SkillType Type { get; }
     public float Value { get; }
 
@@ -18,6 +19,7 @@ public class StatSkill : ISkill
     {
         Id = data.Id;
         Name = data.Name;
+        Info = data.Info;
         Type = data.Type;
         Value = data.Value;
         StatType = data.StatSkillType;
