@@ -43,17 +43,13 @@ public class ProjectileController : MonoBehaviour, IPoolObject
     {
         if (collision.CompareTag("Enemy") && collision.TryGetComponent(out MonsterBase monster))
         {
-<<<<<<< Updated upstream
             collision.gameObject.GetComponent<MonsterBase>().Damaged(10);
-=======
+
             // 스킬타입이 Attack이고, 디버프가 있을 경우에만 적용
             if (skillType == SkillType.Attack && debuffType != DebuffType.None)
             {
                 monster.ApplyDebuff(debuffType, debuffDPS, debuffDuration);
             }
-
-            // 충돌 처리
->>>>>>> Stashed changes
             rigid.velocity = Vector3.zero; // 속도 정보 제거
             mPoolManager.ReturnObject(this);
         }
