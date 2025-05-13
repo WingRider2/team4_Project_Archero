@@ -22,16 +22,16 @@ MonoBehaviour:
       ObstacleSpawnCount: 4
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 5
-    - MonsterSpawnCount: 5
+    - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
-    - MonsterSpawnCount: 5
+    - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
-    - MonsterSpawnCount: 5
+    - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
-    - MonsterSpawnCount: 5
+    - MonsterSpawnCount: 9
       ObstacleSpawnCount: 6
-    - MonsterSpawnCount: 5
+    - MonsterSpawnCount: 9
       ObstacleSpawnCount: 6
-    RewardDatas:
-    - RewardItemsList: 
-      RewardGold: 1000
+    RewardData:
+      RewardItemsList: 
+      RewardGold: 0

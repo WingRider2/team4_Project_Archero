@@ -284,6 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fxOnDestory: 1
+  attackType: 0
 --- !u!50 &4956696292598993985
 Rigidbody2D:
   serializedVersion: 4

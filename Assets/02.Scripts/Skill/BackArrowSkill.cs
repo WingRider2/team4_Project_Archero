@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class BackArrowSkill : IAngleArrowSkill, ISkill
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Info { get; set; }
-    public SkillType Type { get; set; }
-    public float Value { get; set; }
+    public int       Id    { get; set; }
+    public string    Name  { get; set; }
+    public string    Info  { get; set; }
+    public SkillType Type  { get; set; }
+    public float     Value { get; set; }
 
-    public Sprite SkillIcon { get; set; }
+    public Sprite  SkillIcon    { get; set; }
+    public float[] angleOffsets { get; } = { 180f };
 
     public BackArrowSkill(SkillData data)
     {
@@ -22,8 +23,9 @@ public class BackArrowSkill : IAngleArrowSkill, ISkill
         SkillIcon = data.SkillIcon;
     }
 
+
     public float[] GetAttackAngles()
     {
-        return new float[] { 180f };
+        return angleOffsets;
     }
 }

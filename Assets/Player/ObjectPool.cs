@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows;
+
 //using static UnityEditor.Progress;
 
 public enum AttackType
@@ -13,7 +14,8 @@ public enum AttackType
     PoisonArrow,
     BloodArrow,
 }
-public class ObjectPool : Singleton<ObjectPool>
+
+public class ObjectPool : SceneOnlyManager<ObjectPool>
 {
     //나중에 확장을 위해 흠..
     public GameObject[] prefabs;
@@ -27,14 +29,15 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             for (int i = 0; i < poolSize; i++)
             {
-                GameObject obj = Instantiate(item);
-                ProjectileController pc = obj.GetComponent<ProjectileController>();
+                GameObject           obj = Instantiate(item);
+                ProjectileController pc  = obj.GetComponent<ProjectileController>();
                 obj.transform.parent = transform;
                 obj.SetActive(false);
                 AttackType attackType = AttackType.None;
                 if (Enum.TryParse(item.name, out attackType))
                 {
-                    if (!pools.ContainsKey(attackType)) pools.Add(attackType, new());
+                    if (!pools.ContainsKey(attackType))
+                        pools.Add(attackType, new());
                     pc.attackType = attackType;
                     pools[attackType].Enqueue(obj);
                 }
@@ -64,7 +67,7 @@ public class ObjectPool : Singleton<ObjectPool>
     public void Return(GameObject obj)
     {
         obj.SetActive(false);
-        ProjectileController pc = obj.GetComponent<ProjectileController>();//추후 화살에 새로운 클래스가 추가 되면 그 클래스로 확인
+        ProjectileController pc = obj.GetComponent<ProjectileController>(); //추후 화살에 새로운 클래스가 추가 되면 그 클래스로 확인
         pools[pc.attackType].Enqueue(obj);
     }
 }

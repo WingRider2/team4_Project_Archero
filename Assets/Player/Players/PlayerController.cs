@@ -8,12 +8,12 @@ using UnityEngine.Pool;
 using UnityEngine.Serialization;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : SceneOnlyManager<PlayerController>
 {
     private readonly int requestExp = 100;
     private Rigidbody2D Rigidbody2D;
     private PlayerInputHandler PlayerInputHandler;
-    public PlayerStats PlayerStats { get; private set; }
+    public PlayerStatManager PlayerStats { get; private set; }
     private TargetingSystem TargetingSystem;
     protected AnimationHandler animationHandler;
 
@@ -23,9 +23,9 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 LookDirection { get; private set; } = Vector2.right;
 
-  
-    private bool isMove = false; 
-    private bool isAttack = true; 
+
+    private bool isMove = false;
+    private bool isAttack = true;
     private bool isDead = false;
 
     private float timeSinceLastAttack = float.MaxValue;
@@ -33,13 +33,13 @@ public class PlayerController : MonoBehaviour
 
 
     public int PlayerLevel { get; private set; }
-    public int Exp { get; private set; }
+    public int Exp         { get; private set; }
 
     private void Awake()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         PlayerInputHandler = GetComponent<PlayerInputHandler>();
-        PlayerStats = GetComponent<PlayerStats>();
+        PlayerStats = GetComponent<PlayerStatManager>();
         TargetingSystem = GetComponent<TargetingSystem>();
         animationHandler = GetComponent<AnimationHandler>();
 
@@ -60,8 +60,9 @@ public class PlayerController : MonoBehaviour
         if (isDead) return;
 
         Vector2 moveDir = PlayerInputHandler.moveInput;
-        Rigidbody2D.velocity = moveDir * PlayerStats.MoveSpeed;
-        animationHandler.Move(moveDir * PlayerStats.MoveSpeed);
+        float   moveSpd = PlayerStats.GetFinalValue(StatType.MoveSpeed);
+        Rigidbody2D.velocity = moveDir * moveSpd;
+        animationHandler.Move(moveDir * moveSpd);
         bool wasMoving = isMove;
         isMove = moveDir.magnitude > 0.01f;
 
@@ -117,8 +118,8 @@ public class PlayerController : MonoBehaviour
             return;
         LookDirection = (findTarget.transform.position - transform.position).normalized;
         HandleAttackDelay();
-
-        if (PlayerStats.currentHP <= 0)
+        float curHp = PlayerStats.GetFinalValue(StatType.CurrentHp);
+        if (curHp <= 0)
         {
             isDead = true;
             animationHandler.Dead();
@@ -126,7 +127,7 @@ public class PlayerController : MonoBehaviour
 
         if (isAttack)
         {
-            Rotate(LookDirection);            
+            Rotate(LookDirection);
         }
     }
 
@@ -135,12 +136,13 @@ public class PlayerController : MonoBehaviour
         if (weaponHandler == null)
             return;
 
-        if (timeSinceLastAttack <= PlayerStats.AttackSpeed)
+        float attackSpd = PlayerStats.GetFinalValue(StatType.AttackSpd);
+        if (timeSinceLastAttack <= attackSpd)
         {
             timeSinceLastAttack += Time.deltaTime;
         }
 
-        if (isAttack && timeSinceLastAttack > PlayerStats.AttackSpeed)
+        if (isAttack && timeSinceLastAttack > attackSpd)
         {
             timeSinceLastAttack = 0;
             //여기서 이제 앵글값을 준다.
@@ -183,8 +185,8 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate(Vector2 direction)
     {
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotZ) > 90f;
+        float rotZ   = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bool  isLeft = Mathf.Abs(rotZ) > 90f;
 
         if (weaponPivot != null)
         {

@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 public class SkillManager : SceneOnlyManager<SkillManager>
 {
     // 플레이어 레벨업 판단 임시 변수
-    [SerializeField]
     private PlayerController player;
 
     bool isPlayerLevelUp;
@@ -23,7 +22,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
 
     protected override void Awake()
     {
-        base.Awake();
+        player = PlayerController.Instance;
     }
 
     private void Start()
@@ -71,7 +70,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
             SkillType.Attack when skill.Id == 2 => new BackArrowSkill(skill),
             SkillType.Attack when skill.Id == 3 => new SideArrowSkill(skill),
 
-            SkillType.Stat => new StatSkill(skill, player),
+            SkillType.Stat => new StatSkill(skill),
 
             _ => null
         };
@@ -102,6 +101,5 @@ public class SkillManager : SceneOnlyManager<SkillManager>
 
     protected override void OnDestroy()
     {
-        base.OnDestroy();
     }
 }

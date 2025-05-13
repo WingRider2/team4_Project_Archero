@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    static T instance;
+    private static T instance;
+
     public static T Instance
     {
         get
@@ -14,9 +15,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 {
                     SetupInstance();
                 }
-                DontDestroyOnLoad(instance.gameObject);
 
+                DontDestroyOnLoad(instance.gameObject);
             }
+
             return instance;
         }
     }
@@ -25,6 +27,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         RemoveDuplicates();
     }
+
     void RemoveDuplicates()
     {
         if (instance == null)
@@ -35,12 +38,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         else
             Destroy(gameObject);
     }
+
     static void SetupInstance()
     {
         GameObject gameObj = new GameObject();
         gameObj.name = typeof(T).Name;
         instance = gameObj.AddComponent<T>();
     }
-
 }
-

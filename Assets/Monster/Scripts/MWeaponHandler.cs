@@ -8,9 +8,14 @@ public class MWeaponHandler : MonoBehaviour
     public float speed;
     public float duration;
     public MprohectileController controller;
+
     public void Attack(Vector2 dir)
     {
-        MprohectileController bullet = Instantiate(controller,transform);
-        bullet.Init(dir,this);
+        GameObject go = ObjectPoolManager.Instance.GetObject(PoolType.MonsterBullet);
+        if (go.TryGetComponent<MprohectileController>(out var bullet))
+        {
+            go.transform.position = this.transform.position;
+            bullet.Init(dir, this);
+        }
     }
 }

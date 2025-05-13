@@ -7,27 +7,31 @@ using UnityEngine.InputSystem.Processors;
 public class HitPart : MonoBehaviour
 {
     public float damagetMultiplier = 1f;
-    PlayerStats stats;
+
+    PlayerStatManager statManager;
+
     //public System.Action<float, Collision2D> OnHit;
     public void Awake()
     {
-        stats= GetComponentInParent<PlayerStats>();
+        statManager = GetComponentInParent<PlayerStatManager>();
     }
+
     public void Dead()
     {
-
     }
+
     public void Damaged(float dmg)
     {
-        stats.currentHP-=(int)dmg;
+        statManager.ModifyStatValue(StatType.CurrentHp, StatValueType.Base, -dmg);
         Debug.Log(dmg + "공격");
-        if (stats.currentHP < 0) {
+        if (statManager.GetFinalValue(StatType.CurrentHp) < 0)
+        {
             Dead();
         }
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-      
         //OnHit?.Invoke(damagetMultiplier, collision);
     }
 }

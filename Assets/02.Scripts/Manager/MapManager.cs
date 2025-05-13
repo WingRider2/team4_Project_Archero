@@ -22,19 +22,15 @@ public class MapManager : SceneOnlyManager<MapManager>
 
     [SerializeField] private GameObject playerObject;
 
-    private MonsterManager monsterManager;
 
     public Door CurrentDoor { get; private set; }
     private GameObject currentDoorObject;
     public Tilemap FloorMap => floorMap;
 
-    public List<Vector3> MonsterSpawnPositions { get; private set; }
+    public List<Vector3> MonsterSpawnPositions { get; private set; } = new List<Vector3>();
 
     protected override void Awake()
     {
-        base.Awake();
-        monsterManager = GetComponent<MonsterManager>();
-        MonsterSpawnPositions = new List<Vector3>();
     }
 
     void Start()
@@ -52,6 +48,7 @@ public class MapManager : SceneOnlyManager<MapManager>
         GenerateTile(colliderMap, tilemapData.ColliderTilemap);
         GenerateTile(doorTilemap, tilemapData.DoorTilemap);
         GenerateTile(playerSpawnTilemap, tilemapData.PlayerSpawnTilemap);
+
         SpawnPlayer();
         SpawnDoors();
         GenerateObstacle(stageData);
@@ -133,7 +130,7 @@ public class MapManager : SceneOnlyManager<MapManager>
         }
 
         //레벨
-        monsterManager.makeMonList(MonsterSpawnPositions, 1);
+        MonsterManager.Instance.makeMonList(MonsterSpawnPositions, 1);
     }
 
     private void SpawnDoors()
@@ -193,7 +190,7 @@ public class MapManager : SceneOnlyManager<MapManager>
                 Vector3 worldPos = floorMap.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f, 0);
 
                 // ✅ 그리기
-                Gizmos.color = new Color(0f, 1f, 0f, 0.3f); // 연한 녹색
+                Gizmos.color = new Color(0f, 1f, 0f, 0.1f); // 연한 녹색
                 Gizmos.DrawCube(worldPos, new Vector3(1f, 1f, 0.1f));
             }
         }
@@ -201,6 +198,5 @@ public class MapManager : SceneOnlyManager<MapManager>
 
     protected override void OnDestroy()
     {
-        base.OnDestroy();
     }
 }
