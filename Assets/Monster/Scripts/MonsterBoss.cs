@@ -13,12 +13,23 @@ public class MonsterBoss : MonsterBase
         m_Controller = GetComponentInChildren<MWeaponHandler>();
 
     }
-    public  float Attack(int a)
+    public  void Attack(int a)
     {
-        Debug.Log("공격확인");
-        Vector2 dir = Target.position - transform.position;
-        m_Controller.Attack(dir);
-        return atk;
+        if (!isAttack)
+        {
+            isAttack = true;
+            StartCoroutine(Timer(MonsterStatManager.monsterStatDic[StatType.AttackSpd].FinalValue, () => isAttack = false));
+
+            Debug.Log("공격확인");
+            Vector2 dir = Target.position - transform.position;
+            m_Controller.Attack(dir);
+        }
+        
+    }
+    IEnumerator Timer(float time, System.Action onComplete)
+    {
+        yield return new WaitForSeconds(time);
+        onComplete();
     }
     public bool Teleport(Vector2 pos)
     {

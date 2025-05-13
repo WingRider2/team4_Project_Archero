@@ -7,9 +7,14 @@ public class MonsterCloseSim : MonsterBase
     
     public override float Attack()
     {
-        
-        StartCoroutine(AttackMotion());
-        return base.Attack();
+
+
+        if (!isAttack)
+        {
+            StartCoroutine(AttackMotion());
+            return base.Attack();
+        }
+        return 0;
     }
   
     IEnumerator AttackMotion()

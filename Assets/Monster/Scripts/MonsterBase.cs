@@ -77,12 +77,14 @@ public class MonsterBase : MonoBehaviour
 
     public virtual float Attack()
     {
+      
         movementDir = Vector2.zero;
         lookDir = (target.position - transform.position).normalized;
         Move();
         isAttack = true;
         Debug.Log("공격" + MonsterStatManager.monsterStatDic[StatType.AttackPow].FinalValue);
         StartCoroutine(Timer(MonsterStatManager.monsterStatDic[StatType.AttackSpd].FinalValue, () => isAttack = false));
+        
         return MonsterStatManager.monsterStatDic[StatType.AttackPow].FinalValue;
     }
 
