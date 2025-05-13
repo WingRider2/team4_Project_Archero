@@ -21,15 +21,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private WeaponHandler weaponPrefab;
     private WeaponHandler weaponHandler;
 
-    public Vector2 LookDirection { get; private set; } = Vector2.right; //???? ????
+    public Vector2 LookDirection { get; private set; } = Vector2.right;
 
-    // ???? ???? ????? ???? ????? ????? ????
-    private bool isMove = false; // ????? ???????
+  
+    private bool isMove = false; 
+    private bool isAttack = true; 
+    private bool isDead = false;
 
-    private bool isAttack = true; // ?????? ???????
-
-    // ??????? ????
-    // ?浹 ??? => 
     private float timeSinceLastAttack = float.MaxValue;
     private float rotateSpeed = 10.0f;
 
@@ -59,6 +57,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isDead) return;
+
         Vector2 moveDir = PlayerInputHandler.moveInput;
         Rigidbody2D.velocity = moveDir * PlayerStats.MoveSpeed;
         animationHandler.Move(moveDir * PlayerStats.MoveSpeed);
@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (isDead) return;
+
         // 테스트용 코드
         if (Input.GetKeyDown(KeyCode.F1))
         {
@@ -114,19 +116,21 @@ public class PlayerController : MonoBehaviour
         if (findTarget == null)
             return;
         LookDirection = (findTarget.transform.position - transform.position).normalized;
-        Rotate(LookDirection);
+        HandleAttackDelay();
+
+        if (PlayerStats.currentHP <= 0)
+        {
+            isDead = true;
+            animationHandler.Dead();
+        }
 
         if (isAttack)
         {
-            HandleAttackDelay();
-        }
-        else
-        {
-            Debug.Log("이동중");
+            Rotate(LookDirection);            
         }
     }
 
-    private void HandleAttackDelay() //???? ???? ?? ????? ?ð? ???
+    private void HandleAttackDelay()
     {
         if (weaponHandler == null)
             return;
@@ -152,19 +156,12 @@ public class PlayerController : MonoBehaviour
             }
 
             Attack();
-            
         }
     }
 
     private void Attack(float angle = 0)
     {
         weaponHandler.Attack(angle);
-
-        /* ???? ??? ????
-        weaponHandler.Attack(-30);
-        weaponHandler.Attack(0);
-        weaponHandler.Attack(30);
-        */
     }
 
     private void StateChanged(bool _isMove)
@@ -191,7 +188,6 @@ public class PlayerController : MonoBehaviour
 
         if (weaponPivot != null)
         {
-            //weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ); // ???? ?????? ???????.
             weaponPivot.rotation = Quaternion.Lerp(weaponPivot.rotation, Quaternion.Euler(0, 0, rotZ), Time.deltaTime * rotateSpeed);
         }
 

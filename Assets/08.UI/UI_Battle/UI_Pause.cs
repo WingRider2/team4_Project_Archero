@@ -1,61 +1,54 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using System.Linq;
 
 public class UI_Pause : MonoBehaviour
 {
     [SerializeField] Transform Panel_Skills;
 
-    // ½ºÅ³ÀÇ ÀÎµ¦½ºµéÀ» ¸ğÀº °Í
-    List<int> skills_index;
+    // ìŠ¤í‚¬ì˜ ì¸ë±ìŠ¤ë“¤ì„ ëª¨ì€ ê²ƒ
+    List<int> skills_index = new List<int>();
 
-    UIManager_Battle uIManager_Battle;
-
-    private void Awake()
-    {
-        uIManager_Battle = GetComponentInParent<UIManager_Battle>();
-    }
-
-    // È°¼ºÈ­ ¶§ È¹µæÇÑ ½ºÅ³µé¿¡ ¸ÂÃç ½ºÅ³ ¾ÆÀÌÄÜÀ» Ãâ·ÂÇÏ°Ô²û
+    // í™œì„±í™” ë•Œ íšë“í•œ ìŠ¤í‚¬ë“¤ì— ë§ì¶° ìŠ¤í‚¬ ì•„ì´ì½˜ì„ ì¶œë ¥í•˜ê²Œë”
     private void OnEnable()
     {
-        // !!!!! ÇÃ·¹ÀÌ¾î ½ºÅ³ ¸®½ºÆ®¸¸ °¡Á®¿À¸é µ¿ÀÛÇÏ°Ô²û ¸¸µé¾î µÒ
-        // SkillIconsInit("ÇÃ·¹ÀÌ¾î ½ºÅ³ ¸®½ºÆ®");
+        // ì‹œê°„ ë¹„ìœ¨ì„ 0ìœ¼ë¡œ >> ê²Œì„ ì¼ì‹œì •ì§€
+        Time.timeScale = 0;
+        // í”Œë ˆì´ì–´ ìŠ¤í‚¬ ë¦¬ìŠ¤íŠ¸ë§Œ ê°€ì ¸ì˜¤ë©´ ë™ì‘í•˜ê²Œë” ë§Œë“¤ì–´ ë‘ 
+        SkillIconsInit(SkillManager.Instance.SelectedSKills);
     }
 
-    void SkillIconsInit(List<int> playerSkills)
+    void SkillIconsInit(List<ISkill> playerSkills)
     {
-        // ÀÌÀüÀÇ ½ºÅ³ ¸®½ºÆ®¿Í °°´Ù¸é ¸®ÅÏ
-        if (skills_index.SequenceEqual(playerSkills))
-            return;
-
-        // ±âÁ¸ÀÇ ½ºÅ³ ¼ö
+        // ê¸°ì¡´ì˜ ìŠ¤í‚¬ ìˆ˜
         int previous_skillCount = skills_index.Count;
-        // ÀÌÀüº¸´Ù ¸¹¾ÆÁø ½ºÅ³µé¿¡ ´ëÇØ
+        // ì´ì „ë³´ë‹¤ ë§ì•„ì§„ ìŠ¤í‚¬ë“¤ì— ëŒ€í•´
         for (int i = previous_skillCount; i < playerSkills.Count; i++)
         {
-            // ÇØ´ç À§Ä¡¿¡ Ãß°¡ÇÒ ½ºÅ³
-            int tmpSkill = playerSkills[i];
-            // »õ·Î ¾òÀº ½ºÅ³À» ¸®½ºÆ®¿¡ Ãß°¡
+            // í•´ë‹¹ ìœ„ì¹˜ì— ì¶”ê°€í•  ìŠ¤í‚¬
+            int tmpSkill = playerSkills[i].Id;
+            // ìƒˆë¡œ ì–»ì€ ìŠ¤í‚¬ì„ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
             skills_index.Add(tmpSkill);
-            // »õ·Î ¾òÀº ½ºÅ³À» Ç¥½ÃÇÒ ºñÈ°¼ºÈ­ »óÅÂÀÇ ÀÚ½Ä ¿ÀºêÁ§Æ®
-            Transform skillIconObject = transform.GetChild(i);
-            // ½ºÅ³ Å×µÎ¸®/½ºÅ³ ¹è°æ/½ºÅ³ ¾ÆÀÌÄÜ °èÃş ¼ø¼­·Î µÇ¾î ÀÖÀ½
-            // ½ºÅ³ ¾ÆÀÌÄÜ Image ÄÄÆ÷³ÍÆ®¿¡ Á¢±ÙÇÏ¿© ÇØ´ç ½ºÅ³ ¾ÆÀÌÄÜÀ¸·Î º¯°æ
+            // ìƒˆë¡œ ì–»ì€ ìŠ¤í‚¬ì„ í‘œì‹œí•  ë¹„í™œì„±í™” ìƒíƒœì˜ ìì‹ ì˜¤ë¸Œì íŠ¸
+            Transform skillIconObject = Panel_Skills.GetChild(i);
+            // ìŠ¤í‚¬ í…Œë‘ë¦¬/ìŠ¤í‚¬ ë°°ê²½/ìŠ¤í‚¬ ì•„ì´ì½˜ ê³„ì¸µ ìˆœì„œë¡œ ë˜ì–´ ìˆìŒ
+            // ìŠ¤í‚¬ ì•„ì´ì½˜ Image ì»´í¬ë„ŒíŠ¸ì— ì ‘ê·¼
             if (skillIconObject.GetChild(0).GetChild(0).TryGetComponent(out Image iconImage))
-                iconImage.sprite = uIManager_Battle.GetSkillIcon(tmpSkill);
-            // È°¼ºÈ­ÇÏ¿© ½ºÅ³ ¾ÆÀÌÄÜ Ç¥½Ã
-            skillIconObject.gameObject.SetActive(true);
+            {
+                // í•´ë‹¹ ìŠ¤í‚¬ì— ì•Œë§ëŠ” ì•„ì´ì½˜ ì„¤ì •
+                iconImage.sprite = TableManager.Instance.GetTable<SkillTable>().GetDataByID(tmpSkill).SkillIcon;
+                // í™œì„±í™”í•˜ì—¬ ìŠ¤í‚¬ ì•„ì´ì½˜ì„ í™”ë©´ì— í‘œì‹œ
+                skillIconObject.gameObject.SetActive(true);
+            }
         }
     }
 
-    // ÀÏ½ÃÁ¤Áö ÆĞ³Î ºñÈ°¼ºÈ­
+    // ì¼ì‹œì •ì§€ íŒ¨ë„ ë¹„í™œì„±í™”
     public void Disable_PausePanel()
     {
-        // ½Ã°£ ºñÀ²À» ¿ø »óÅÂ·Î µ¹¸®°í
+        // ì‹œê°„ ë¹„ìœ¨ì„ ì› ìƒíƒœë¡œ ëŒë¦¬ê³ 
         Time.timeScale = 1;
-        // ÆĞ³Î ºñÈ°¼ºÈ­
+        // íŒ¨ë„ ë¹„í™œì„±í™”
         gameObject.SetActive(false);  
     }
 }
