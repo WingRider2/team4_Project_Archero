@@ -70,7 +70,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
             SkillType.Attack when skill.Id == 2 => new BackArrowSkill(skill),
             SkillType.Attack when skill.Id == 3 => new SideArrowSkill(skill),
 
-            SkillType.Stat => new StatSkill(skill, player),
+            SkillType.Stat => new StatSkill(skill),
 
             _ => null
         };

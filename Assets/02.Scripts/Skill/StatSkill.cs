@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class StatSkill : ISkill
 {
@@ -10,10 +11,11 @@ public class StatSkill : ISkill
     public SkillType Type  { get; }
     public float     Value { get; }
 
-    private StatSkillType StatType { get; }
-    private PlayerController player;
+    private List<StatType> StatType { get; }
+    private readonly PlayerController player;
+    private List<SkillEffect> Effects { get; }
 
-    public StatSkill(SkillData data, PlayerController player)
+    public StatSkill(SkillData data)
     {
         Id = data.Id;
         Name = data.Name;
@@ -21,27 +23,14 @@ public class StatSkill : ISkill
         Value = data.Value;
         StatType = data.StatSkillType;
         this.player = PlayerController.Instance;
+        Effects = data.SkillEffects;
     }
 
     public void ApplyStat()
     {
-        switch (StatType)
+        foreach (var effect in Effects)
         {
-            case StatSkillType.AttackPow:
-                player.PlayerStats.attackPower += (int)Value;
-                break;
-            case StatSkillType.AttackSpd:
-                player.PlayerStats.AttackSpeed -= Value;
-                break;
-            case StatSkillType.MoveSpd:
-                player.PlayerStats.MoveSpeed += Value;
-                break;
-            case StatSkillType.MaxHp:
-                player.PlayerStats.maxHP += (int)Value;
-                break;
-            case StatSkillType.CurrentHp:
-                player.PlayerStats.currentHP += (int)Value;
-                break;
+            player.PlayerStatManager.ModifyStatValue(effect.StatType, StatValueType.Buff, effect.Value);
         }
     }
 }

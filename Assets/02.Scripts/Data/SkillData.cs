@@ -33,9 +33,17 @@ public class SkillData
 {
     public int Id;
     public SkillType Type;
-    public StatSkillType StatSkillType;
+    public List<SkillEffect> SkillEffects;
+    public List<StatType> StatSkillType;
+    public float Value; // 공격 스킬과 스탯 스킬의 증가량 등을 조절하기 위한 변수
     public string Name;
     public string Info;
-    public float Value; // 공격 스킬과 스탯 스킬의 증가량 등을 조절하기 위한 변수
     public Sprite SkillIcon;
+}
+
+[Serializable]
+public class SkillEffect
+{
+    public StatType StatType;
+    public float Value;
 }
