@@ -113,7 +113,10 @@ public class MonsterBase : MonoBehaviour
 
     private void Dead()
     {
-        statusEffectManager.ClearAllDebuffs();
+        if (statusEffectManager != null)
+        {
+            statusEffectManager.ClearAllDebuffs();
+        }
 
         manationHandler.Dead();
         isDead = true;

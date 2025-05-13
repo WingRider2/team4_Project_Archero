@@ -56,7 +56,7 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
     public MonsterBase MakeMon(Vector3 pos, int num)
     {
         MonsterData monData = TableManager.Instance.GetTable<MonsterTable>().GetDataByID(num);
-        MonsterBase mon     = Instantiate(monData.Monster, pos, Quaternion.identity);
+        MonsterBase mon = Instantiate(monData.Monster, pos, Quaternion.identity);
         mon.Init(monData);
         mon.OnDeath += HandleMonsterDeath;
         if (mon == null)
