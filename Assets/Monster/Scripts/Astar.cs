@@ -16,13 +16,9 @@ public class Astar
       
 
         int mask = LayerMask.GetMask("Obstacle");
-        //��ֹ�/�� Ȯ��
+    
         Collider2D col = Physics2D.OverlapBox(new Vector2(x,y),new Vector2(1,1), mask);
-
-        if (col != null)
-            Debug.Log($"��ֹ� �߰�{x},{y}: {col.name}");
-        else
-            Debug.Log($"({x},{y})�� ��ֹ� ����");
+        
         return col != null;
        
 
@@ -30,9 +26,10 @@ public class Astar
    
     public List<Vector2> MakePath(Node lastNode)
     {
+        Debug.Log("경로 출력");
         List<Vector2> path=new List<Vector2>();
         while (lastNode != null) {
-            Debug.Log(lastNode.x + ", " + lastNode.y);
+           
             path.Add(new Vector2(lastNode.x,lastNode.y));
             lastNode = lastNode.parent;
             
@@ -49,7 +46,7 @@ public class Astar
     public List<Vector2> FindPath(Vector2 start, Vector2 target)
     {
 
-        Debug.Log("����");
+        Debug.Log("탐색 시작");
         List<Node> openNodes = new List<Node>();
         HashSet<Vector2> closedNodes = new HashSet<Vector2>();
 
@@ -61,23 +58,30 @@ public class Astar
         int loopNum = 0;
         while (openNodes.Count > 0)
         {
+        
+            
+            openNodes.Sort((a, b) => a.f.CompareTo(b.f));
+            //foreach (Node node in openNodes) { 
+            //    if(node.f<currentNode.f)
+            //        currentNode = node;
+            //}
             currentNode = openNodes[0];
-            foreach (Node node in openNodes) { 
-                if(node.f<currentNode.f)
-                    currentNode = node;
-            }
-            if (currentNode.x == targetNode.x && currentNode.y == targetNode.y) {
-               
-                return MakePath(currentNode);
-                
-            }
             closedNodes.Add(new Vector2(currentNode.x,currentNode.y));
             openNodes.Remove(currentNode);
             for (int i = 0; i < 4; i++)
             {
                 int nx=dx[i]+currentNode.x;
                 int ny=dy[i]+currentNode.y;
-                if(IsObs(nx,ny))
+                if (nx == targetNode.x && ny == targetNode.y)
+                {
+                    Node endNode = new Node(nx, ny, currentNode.g + 10);
+                 
+                 
+                    endNode.parent = currentNode;
+                    return MakePath(currentNode);
+
+                }
+                if (IsObs(nx,ny))
                     continue;
                 Node nowNode= new Node(nx,ny,currentNode.g+10);
                 nowNode.SetH(targetNode);
@@ -116,6 +120,7 @@ public class Astar
             if (loopNum++ > 10000)
                 throw new Exception("Infinite Loop");
         }
+        Debug.Log("실패");
         return null;
     }
 }

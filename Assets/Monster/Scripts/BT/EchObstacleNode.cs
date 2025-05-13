@@ -14,7 +14,7 @@ public class EchObstacleNode : INode
     bool isFind = false;
     bool isOb = false;
     float findTimer = 0;
-    private const float FindCooldown = 2f;
+    private const float FindCooldown = 0.5f;
     INode.ENodeState INode.Evaluate()
     {
         if (isFind)
@@ -33,13 +33,13 @@ public class EchObstacleNode : INode
         }
         if (isOb)
         {
-            Debug.Log("장애물");
+      
             isFind = true;
             return INode.ENodeState.Success;
         }
         else
         {
-            Debug.Log("없음");
+     
             return INode.ENodeState.Failure;
         }
     }

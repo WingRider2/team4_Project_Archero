@@ -1,40 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TripleArrowSkill : IAngleArrowSkill, ISkill
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public string Info { get; set; }
     public SkillType Type { get; set; }
     public float Value { get; set; }
+
+    public Sprite SkillIcon { get; private set; }
 
     public TripleArrowSkill(SkillData data)
     {
         Id = data.Id;
         Name = data.Name;
+        Info = data.Info;
         Type = data.Type;
         Value = data.Value;
-        //GameObject arrow = ObjectPool.Instance.Get(AttackType.Arrow);
-        //ProjectileController controller = arrow.GetComponent<ProjectileController>();
-        float[] angleOffsets = { -15f, 0f, 15f };
+        SkillIcon = data.SkillIcon;
 
-        foreach (float offset in angleOffsets)
-        {
-            //float angle = _angle + offset;
-
-            //Vector2 direction = Quaternion.Euler(0, 0, _angle) * player.lookDirection;
-
-            //arrow.transform.position = Quaternion.Euler(0, 0, angle);
-
-            //Rigidbody2D rb = arrow.GetComponent<Rigidbody2D>();
-
-            //if (rb != null)
-            //{
-            //    rb.velocity = shootDir.normalized * 10f;
-            //}
-
-        }
+        float[] angleOffsets = { -15f, 15f };
     }
 
     public float[] GetAttackAngles()

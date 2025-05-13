@@ -6,16 +6,21 @@ public class SideArrowSkill : IAngleArrowSkill, ISkill
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public string Info { get; set; }
     public SkillType Type { get; set; }
     public float Value { get; set; }
+
+    public Sprite SkillIcon { get; private set; }
 
     float[] angleOffsets = { -90f, 90f };
     public SideArrowSkill(SkillData data)
     {
         Id = data.Id;
         Name = data.Name;
+        Info = data.Info;
         Type = data.Type;
         Value = data.Value;
+        SkillIcon = data.SkillIcon;
     }
 
     public float[] GetAttackAngles()

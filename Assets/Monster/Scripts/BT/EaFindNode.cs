@@ -18,9 +18,10 @@ public class EaFindNode : INode
     bool isMoving = false;
     bool isFind = false;
     float findTimer = 0;
-    private const float FindCooldown = 2f;
+    private const float FindCooldown = 1f;
     public INode.ENodeState Evaluate()
     {
+      
         if (isFind)
         {
             findTimer += Time.deltaTime;
@@ -34,7 +35,7 @@ public class EaFindNode : INode
         if (_enemy.Target == null)
             return INode.ENodeState.Failure;
         if (!isFind) {
-       
+            Debug.Log("경로 탐색");
             isFind = true;
             path = null;
             if (path == null || Vector2.Distance(lastPos, _enemy.transform.position) > Threshold)
@@ -44,7 +45,7 @@ public class EaFindNode : INode
             }
         }
     
-        if(path==null||path.Count<1)
+        if(path==null||path.Count<2)
             return INode.ENodeState.Failure;
         Vector2 nowPos=path[0];
         Vector2 targetPos=path[1];
@@ -52,7 +53,7 @@ public class EaFindNode : INode
         _enemy.movementDir = dir;
         _enemy.lookDir = dir;
         _enemy.Move();
-        Debug.Log("탐색 이동 중");
+      
         if(Vector2.Distance(_enemy.transform.position,targetPos) < Threshold)
         {
             path.RemoveAt(0);

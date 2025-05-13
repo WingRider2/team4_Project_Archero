@@ -81,7 +81,7 @@ public class MonsterBase : MonoBehaviour
         onComplete();
 
     }
-    private void Damaged(float damage)
+    public void Damaged(float damage)
     {
         currenHP -= damage;
         Damaged(currenHP);
@@ -125,18 +125,17 @@ public class MonsterBase : MonoBehaviour
         Vector2 boxWidth = new Vector2(0.7f,0.7f);
         int mask = (1 << iL) | (1 << pL);
         RaycastHit2D hit = Physics2D.BoxCast(transform.position,boxWidth,0f,dir.normalized,distance,mask);
-       // Debug.DrawRay(transform.position, dir.normalized * distance, Color.red);
+        // Debug.DrawRay(transform.position, dir.normalized * distance, Color.red);
 
-        if(hit.collider != null ) 
-        Debug.Log("Ȯ��"+hit.collider.tag);
 
-        if (hit == null)
+
+        if (hit.collider == null)
         {
             return false;
         }
         if (hit.collider.CompareTag("Obstacle"))
         {
-            Debug.Log("�� ����");
+     
             return true;
         }
         return false;
@@ -151,11 +150,16 @@ public class MonsterBase : MonoBehaviour
         knockbackDuration= duration;
         knockback=-(other.position - transform.position).normalized*power;   
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isAttack &&collision.tag=="Player")
+        {
+            collision.gameObject.GetComponent<HitPart>().Damaged(atk);
+   
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isAttack)
-        {
-            //플레이어 데미지 소환.
-        }
+        
     }
 }
