@@ -17,6 +17,19 @@ MonoBehaviour:
     ID: 1
     Name: Imp
     Type: 0
+    Stats:
+    - StatType: 0
+      Value: 10
+    - StatType: 1
+      Value: 10
+    - StatType: 2
+      Value: 5
+    - StatType: 4
+      Value: 2
+    - StatType: 3
+      Value: 5
+    - StatType: 5
+      Value: 5
     HP: 10
     ATK: 5
     DEF: 5
@@ -29,6 +42,19 @@ MonoBehaviour:
     ID: 2
     Name: Imp
     Type: 1
+    Stats:
+    - StatType: 0
+      Value: 10
+    - StatType: 1
+      Value: 10
+    - StatType: 2
+      Value: 5
+    - StatType: 3
+      Value: 5
+    - StatType: 5
+      Value: 5
+    - StatType: 4
+      Value: 2
     HP: 10
     ATK: 5
     DEF: 5

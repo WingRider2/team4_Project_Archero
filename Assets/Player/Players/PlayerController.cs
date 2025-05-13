@@ -23,16 +23,16 @@ public class PlayerController : SceneOnlyManager<PlayerController>
     private float timeSinceLastAttack = float.MaxValue;
     private float rotateSpeed = 10.0f;
 
-    public Vector2     LookDirection { get; private set; } = Vector2.right; //???? ????
-    public PlayerStats PlayerStats   { get; private set; }
-    public int         PlayerLevel   { get; private set; }
-    public int         Exp           { get; private set; }
+    public Vector2           LookDirection     { get; private set; } = Vector2.right; //???? ????
+    public PlayerStatManager PlayerStatManager { get; private set; }
+    public int               PlayerLevel       { get; private set; }
+    public int               Exp               { get; private set; }
 
     protected override void Awake()
     {
         rgid2D = GetComponent<Rigidbody2D>();
         playerInputHandler = GetComponent<PlayerInputHandler>();
-        PlayerStats = GetComponent<PlayerStats>();
+        PlayerStatManager = GetComponent<PlayerStatManager>();
         targetingSystem = GetComponent<TargetingSystem>();
         animationHandler = GetComponent<AnimationHandler>();
 
@@ -51,8 +51,9 @@ public class PlayerController : SceneOnlyManager<PlayerController>
     private void FixedUpdate()
     {
         Vector2 moveDir = playerInputHandler.moveInput;
-        rgid2D.velocity = moveDir * PlayerStats.MoveSpeed;
-        animationHandler.Move(moveDir * PlayerStats.MoveSpeed);
+        float   moveSpd = PlayerStatManager.GetFinalValue(StatType.MoveSpeed);
+        rgid2D.velocity = moveDir * moveSpd;
+        animationHandler.Move(moveDir * moveSpd);
         bool wasMoving = isMove;
         isMove = moveDir.magnitude > 0.01f;
 
@@ -121,13 +122,13 @@ public class PlayerController : SceneOnlyManager<PlayerController>
     {
         if (weaponHandler == null)
             return;
-
-        if (timeSinceLastAttack <= PlayerStats.AttackSpeed)
+        float attackSpd = PlayerStatManager.GetFinalValue(StatType.MoveSpeed);
+        if (timeSinceLastAttack <= attackSpd)
         {
             timeSinceLastAttack += Time.deltaTime;
         }
 
-        if (isAttack && timeSinceLastAttack > PlayerStats.AttackSpeed)
+        if (isAttack && timeSinceLastAttack > attackSpd)
         {
             timeSinceLastAttack = 0;
             //여기서 이제 앵글값을 준다.

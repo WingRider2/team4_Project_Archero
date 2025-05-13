@@ -44,7 +44,7 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
     {
         MonsterData monData = TableManager.Instance.GetTable<MonsterTable>().GetDataByID(num);
         MonsterBase mon     = Instantiate(monData.Monster, pos, Quaternion.identity);
-        mon.Init(num, monData.Name, monData.HP, monData.ATK, monData.DEF, monData.MoveSpeed, monData.AttackRange, monData.FindRange);
+        mon.Init(monData);
         if (mon == null)
         {
             Debug.Log("���� ���� ����");
@@ -66,4 +66,3 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
     {
     }
 }
-
