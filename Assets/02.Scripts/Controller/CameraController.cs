@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
-public class CameraController : MonoBehaviour
+public class CameraController : SceneOnlyManager<CameraController>
 {
     [SerializeField] private Transform target;
 
@@ -18,22 +18,21 @@ public class CameraController : MonoBehaviour
 
     private Camera mainCamera;
 
+    protected override void Awake()
+    {
+        mainCamera = Camera.main;
+    }
 
     private void Start()
     {
-        mainCamera = Camera.main;
-        //
-        // mainCamera.transparencySortMode = TransparencySortMode.CustomAxis;
-        // mainCamera.transparencySortAxis = Vector3.up;
+        MapUpdate();
+    }
 
+    public void MapUpdate()
+    {
         camHalfHeight = mainCamera.orthographicSize;
         camHalfWidth = camHalfHeight * mainCamera.aspect;
         mapBounds = tilemap.localBounds;
-    }
-
-    private void Update()
-    {
-        // HandleZoom();
     }
 
     private void LateUpdate()
@@ -65,4 +64,7 @@ public class CameraController : MonoBehaviour
     //         camHalfWidth = camHalfHeight * mainCamera.aspect;
     //     }
     // }
+    protected override void OnDestroy()
+    {
+    }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
@@ -22,12 +23,14 @@ public class MapManager : SceneOnlyManager<MapManager>
 
     [SerializeField] private GameObject playerObject;
 
-
     public Door CurrentDoor { get; private set; }
     private GameObject currentDoorObject;
     public Tilemap FloorMap => floorMap;
 
     public List<Vector3> MonsterSpawnPositions { get; private set; } = new List<Vector3>();
+
+    public int currentStage = 0;
+    List<GameObject> instanceObstacleObjects = new List<GameObject>();
 
     protected override void Awake()
     {
@@ -35,13 +38,22 @@ public class MapManager : SceneOnlyManager<MapManager>
 
     void Start()
     {
-        GenerateMap(TableManager.Instance.GetTable<StageTable>().GetDataByID(1));
+        GenerateMap(GameManager.Instance.SelectedChapter);
     }
 
 
-    public void GenerateMap(ChapterData chapterData)
+    public void GenerateMap(int chapterID)
     {
-        StageData   stageData   = chapterData.StageDatas[Random.Range(0, chapterData.StageDatas.Count)];
+        var chapterData = TableManager.Instance.GetTable<StageTable>().GetDataByID(chapterID);
+        if (chapterData == null)
+        {
+            print($"Chapter ID {chapterID} not found");
+            return;
+        }
+
+        instanceObstacleObjects.ForEach(Destroy);
+
+        StageData   stageData   = chapterData.StageDatas[currentStage % chapterData.StageDatas.Count];
         TilemapData tilemapData = tilemapDatas[Random.Range(0, tilemapDatas.Length)];
         GenerateTile(floorMap, tilemapData.FloorTilemap);
         GenerateTile(wallMap, tilemapData.WallTilemap);
@@ -49,9 +61,11 @@ public class MapManager : SceneOnlyManager<MapManager>
         GenerateTile(doorTilemap, tilemapData.DoorTilemap);
         GenerateTile(playerSpawnTilemap, tilemapData.PlayerSpawnTilemap);
 
+
         SpawnPlayer();
         SpawnDoors();
         GenerateObstacle(stageData);
+        CameraController.Instance.MapUpdate();
     }
 
     private void GenerateTile(Tilemap tilemap, Tilemap dataTilemap)
@@ -65,6 +79,8 @@ public class MapManager : SceneOnlyManager<MapManager>
             if (tile != null)
                 tilemap.SetTile(pos, tile);
         }
+
+        tilemap.CompressBounds();
     }
 
     /// <summary>
@@ -88,6 +104,7 @@ public class MapManager : SceneOnlyManager<MapManager>
             GameObject go = Instantiate(obstacleObjects[Random.Range(0, obstacleObjects.Length)]);
             go.transform.position = floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f, 0.5f);
             vaildPositions.RemoveAt(index);
+            instanceObstacleObjects.Add(go);
         }
 
         SpawnMonster(stageData, vaildPositions);
@@ -100,7 +117,7 @@ public class MapManager : SceneOnlyManager<MapManager>
 
         for (int x = bounds.xMin + 1; x < bounds.xMax - 1; x++)
         {
-            for (int y = bounds.yMin + 1; y < bounds.yMax - 2; y++)
+            for (int y = bounds.yMin + 1; y < bounds.yMax - 1; y++)
             {
                 Vector3Int pos = new Vector3Int(x, y, 0);
                 if (wallMap.HasTile(pos)) continue;
@@ -181,7 +198,7 @@ public class MapManager : SceneOnlyManager<MapManager>
 
         for (int x = bounds.xMin + 1; x < bounds.xMax - 1; x++)
         {
-            for (int y = bounds.yMin + 1; y < bounds.yMax - 2; y++)
+            for (int y = bounds.yMin + 1; y < bounds.yMax - 1; y++)
             {
                 Vector3Int cellPos = new Vector3Int(x, y, 0);
                 if (!floorMap.HasTile(cellPos)) continue;
