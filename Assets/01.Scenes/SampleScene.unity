@@ -302,6 +302,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7924123529974193062, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -374,7 +378,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 12
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -498,6 +502,7 @@ MonoBehaviour:
     PlayerSpawnTilemap: {fileID: 6457384072592340580, guid: bf6f94ca0d4401e4bbddaa0ca7bf57a7, type: 3}
   testPrefab: {fileID: 6237139047231323186, guid: b41b04994467ed8429b24ed92d66a37f, type: 3}
   playerObject: {fileID: 1486095767}
+  currentStage: 0
 --- !u!4 &761699269
 Transform:
   m_ObjectHideFlags: 0
@@ -639,6 +644,7 @@ MonoBehaviour:
   - {fileID: 5235075321537514784, guid: c222e0c143b8ed947aef2f63caf88949, type: 3}
   - {fileID: 5424558168948920548, guid: 4c4c59247573bc846abd8c08e64cde67, type: 3}
   - {fileID: 946409857160832092, guid: 8f59e0ed23fd2674f95555afc59da65f, type: 3}
+  - {fileID: 946409857160832092, guid: 17bdda0a8eda5c1419758a8f9edcf4d5, type: 3}
   - {fileID: 5141913648701243154, guid: cbdfb37ea30dfac4089803dfc5857bb2, type: 3}
 --- !u!4 &1211378547
 Transform:
@@ -5613,12 +5619,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Panel_Pause: {fileID: 636164746494177270}
+  Panel_LevelUp: {fileID: 0}
+  Panel_GameOver: {fileID: 0}
   gold_text: {fileID: 0}
   level_text: {fileID: 0}
   continue_button_text: {fileID: 8513982554659969316}
   exit_button_text: {fileID: 6184743389585648145}
   hpBar: {fileID: 0}
-  skill_icons: []
 --- !u!1 &4620826581459321303
 GameObject:
   m_ObjectHideFlags: 0

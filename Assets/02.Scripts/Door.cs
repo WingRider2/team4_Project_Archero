@@ -18,6 +18,14 @@ public class Door : MonoBehaviour
     public void DoorControl(bool isOpen)
     {
         doorSpriteRenderer.sprite = isOpen ? openSprite : closeSprite;
-        doorCollider.enabled = !isOpen;
+        doorCollider.isTrigger = isOpen;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            GameManager.Instance.ReStart();
+        }
     }
 }
