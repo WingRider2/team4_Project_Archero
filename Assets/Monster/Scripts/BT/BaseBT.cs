@@ -24,9 +24,9 @@ public class BaseBT : MonoBehaviour
     }
     protected virtual void Init()
     {
-        MonsterBase enemy = GetComponent<MonsterBase>();
-        live = new EchLiveNode(enemy);
         enemy = GetComponent<MonsterBase>();
+        live = new EchLiveNode(enemy);
+       
         echlive = new EchLiveNode(enemy);
       attack = new EattackNode(enemy);
          chase = new EchaseNode(enemy);

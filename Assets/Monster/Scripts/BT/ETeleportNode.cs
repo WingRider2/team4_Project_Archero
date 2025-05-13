@@ -11,7 +11,13 @@ public class ETeleportNode : INode
     }
     public INode.ENodeState Evaluate()
     {
-        throw new System.NotImplementedException();
+        if(enemy == null)
+        return INode.ENodeState.Failure;
+
+        MonsterBoss boss = enemy as MonsterBoss;
+        boss.Teleport(enemy.Target.position);
+        return INode.ENodeState.Success;
+
     }
 
   

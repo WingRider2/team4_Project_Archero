@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class BossBT : BaseBT
 {
-    
-      protected override void MakeRoot()
+    protected override void Init()
+    {
+        
+        base.Init();
+    }
+    protected override void MakeRoot()
     {
         base.MakeRoot();
         INode attack1 = new BossAttackNode(enemy, 1);
@@ -14,11 +18,10 @@ public class BossBT : BaseBT
         INode attackSeq = new SequenceNode(new List<INode> { check, attack1 });
         INode chaseSel = new SelectorNode(new List<INode> { attackSeq, attack2 });
         INode findTSeq = new SequenceNode(new List<INode> { findTar, teleport });
-        INode astarSel=new SelectorNode(new List<INode> {  astar,teleport });
-        INode findObS = new SequenceNode(new List<INode> {  findObs, astarSel });
+        INode findObS = new SequenceNode(new List<INode> {  findObs, teleport });
         INode selR = new SelectorNode(new List<INode> {findObS, chaseSel, findTSeq });
     
-        root = new SequenceNode(new List<INode> { live ,selR });
+        root = new SequenceNode(new List<INode> { live ,chaseSel });
 
     }
 }

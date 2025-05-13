@@ -5,8 +5,12 @@ using UnityEngine;
 public class CloseSimBT : BaseBT
 {
     // Start is called before the first frame update
-    
 
+    protected override void Init()
+    {
+        MonsterBase enemy = GetComponent<MonsterBase>();
+        base.Init();
+    }
     // Update is called once per frame
     protected override void MakeRoot()
     {
