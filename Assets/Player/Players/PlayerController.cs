@@ -8,7 +8,7 @@ using UnityEngine.Pool;
 using UnityEngine.Serialization;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : SceneOnlyManager<PlayerController>
 {
     private readonly int requestExp = 100;
     private Rigidbody2D Rigidbody2D;

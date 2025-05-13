@@ -30,7 +30,7 @@ public class StatSkill : ISkill
     {
         foreach (var effect in Effects)
         {
-            player.PlayerStatManager.ModifyStatValue(effect.StatType, StatValueType.Buff, effect.Value);
+            player.PlayerStats.ModifyStatValue(effect.StatType, StatValueType.Buff, effect.Value);
         }
     }
 }
