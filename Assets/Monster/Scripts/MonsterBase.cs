@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(MonsterStatManager))]
 public class MonsterBase : MonoBehaviour
 {
     protected Rigidbody2D _rigidbody;
@@ -32,7 +33,6 @@ public class MonsterBase : MonoBehaviour
     protected bool isAttack = false;
     public bool IsAttack { get { return isAttack; } }
     protected float attackTime = 0.2f;
-    private float coolTime = 2.0f;
     private Vector2 knockback = Vector2.zero;
     private float knockbackDuration = 0.0f;
     private bool isInvincible = false;
@@ -47,6 +47,8 @@ public class MonsterBase : MonoBehaviour
         characterRender = GetComponent<SpriteRenderer>();
 
         manationHandler = GetComponent<MAnimationHandler>();
+
+        MonsterStatManager = GetComponent<MonsterStatManager>();
 
     }
 

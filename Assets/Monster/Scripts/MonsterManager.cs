@@ -51,7 +51,7 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
             return null;
         }
 
-        mon.SetTarget(GameObject.FindWithTag("Player").transform);
+        mon.SetTarget(PlayerController.Instance.transform);
         return mon;
     }
 
