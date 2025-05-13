@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TutorialManager : SceneOnlyManager<TutorialManager>
 {
-    //Æ©Åä¸®¾ó Àü¹İÀûÀÎ °ü¸®
+    //íŠœí† ë¦¬ì–¼ ì „ë°˜ì ì¸ ê´€ë¦¬
     public GameObject playerPrefab;
     public GameObject monsterPrefab;
 
-    bool canMove = false; // ÀÌµ¿ÀÌ °¡´ÉÇÑÁö È®ÀÎ
-    bool canAttack = false; //°ø°İÀÌ °¡´ÉÇÑÁö.
+    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private Button NextButton;
+    [SerializeField] int nextTextCount = 1;
+
+    bool canMove = false; // ì´ë™
+    bool canAttack = false; //ê³µê²©
 
     public string[] tutorialLines;
 }
