@@ -1,12 +1,12 @@
 using UnityEngine;
 using TMPro;
 
-public class UIManager_Battle : MonoBehaviour
+public class UIManager_Battle : SceneOnlyManager<UIManager_Battle>
 {
-    [SerializeField] Transform Panel_Pause;
+    [SerializeField] Transform Panel_Pause, Panel_LevelUp, Panel_GameOver;
     
-    // ·¹º§, °ñµå : °ÔÀÓ ÇÃ·¹ÀÌ Áß ½áÁÖ±â À§ÇÔ
-    // °è¼ÓÇÏ±â, ³ª°¡±â ¹öÆ°ÀÇ ÅØ½ºÆ®´Â ±ÛÀÚ Å©±â¸¦ ¸ÂÃçÁÖ±â À§ÇØ °¡Á®¿È
+    // ë ˆë²¨, ê³¨ë“œ : ê²Œì„ í”Œë ˆì´ ì¤‘ ì¨ì£¼ê¸° ìœ„í•¨
+    // ê³„ì†í•˜ê¸°, ë‚˜ê°€ê¸° ë²„íŠ¼ì˜ í…ìŠ¤íŠ¸ëŠ” ê¸€ì í¬ê¸°ë¥¼ ë§ì¶°ì£¼ê¸° ìœ„í•´ ê°€ì ¸ì˜´
     [SerializeField] 
     TextMeshProUGUI 
         gold_text,
@@ -14,111 +14,101 @@ public class UIManager_Battle : MonoBehaviour
         continue_button_text, 
         exit_button_text;
 
-    // Ã¼·Â¹Ù
+    // ì²´ë ¥ë°”
     [SerializeField] RectTransform hpBar;
 
-    // ½ºÅ³ ¾ÆÀÌÄÜ. ½ºÅ³ÀÇ ¼ø¼­¿Í ¸ÂÃâ ÇÊ¿ä°¡ ÀÖÀ½ !!!!!
-    [SerializeField] Sprite[] skill_icons;
-    public Sprite GetSkillIcon(int index) => skill_icons[index];
+    float targetAspectRatio; // ë„ˆë¹„/ë†’ì´ë¡œ ê²Œì„ í™”ë©´ ë¹„ìœ¨ ê³„ì‚°í•œ ê°’
 
-
-    float targetAspectRatio; // ³Êºñ/³ôÀÌ·Î °ÔÀÓ È­¸é ºñÀ² °è»êÇÑ °ª
-
-    void Awake()
+    protected override void Awake()
     {
-        // °ÔÀÓ ½ÇÇà½ÃÀÇ ÇØ»óµµ ºñÀ²À» ±â¾ï
+        // ë‹¤ë¥¸ ìŠ¤í¬ë¦½íŠ¸ì—ì„œë„ ì‰½ê²Œ ì ‘ê·¼ ê°€ëŠ¥í•˜ê²Œë” ì¸ìŠ¤í„´ìŠ¤ ìƒì„±
+        base.Awake();
+
+        // ê²Œì„ ì‹¤í–‰ì‹œì˜ í•´ìƒë„ ë¹„ìœ¨ì„ ê¸°ì–µ
         if (TryGetComponent(out UnityEngine.UI.CanvasScaler canvasScaler))
         {
             Screen.SetResolution((int)canvasScaler.referenceResolution.x, (int)canvasScaler.referenceResolution.y, false);
             targetAspectRatio = canvasScaler.referenceResolution.x / canvasScaler.referenceResolution.y;
         }
         else
-            Debug.Log("Äµ¹ö½º ½ºÄÉÀÏ·¯°¡ ¾ø¾î¿ä");
+            Debug.Log("ìº”ë²„ìŠ¤ ìŠ¤ì¼€ì¼ëŸ¬ê°€ ì—†ì–´ìš”");
 
-        // ÀÏ½ÃÁ¤Áö È­¸éÀÇ ¹öÆ° ÅØ½ºÆ® Å©±â ÅëÀÏ
+        // ì¼ì‹œì •ì§€ í™”ë©´ì˜ ë²„íŠ¼ í…ìŠ¤íŠ¸ í¬ê¸° í†µì¼
         Pause_Buttons_TextSize_Unify(continue_button_text, exit_button_text); 
     }
 
-    // RectTransform ÀÚÃ¼°¡ º¯°æµÇ¾úÀ» ¶§ È£Ãâ >> ºôµå ÈÄ Ã¢ Å©±â º¯°æ ¶§ È£Ãâ
+    // RectTransform ìì²´ê°€ ë³€ê²½ë˜ì—ˆì„ ë•Œ í˜¸ì¶œ >> ë¹Œë“œ í›„ ì°½ í¬ê¸° ë³€ê²½ ë•Œ í˜¸ì¶œ
     void OnRectTransformDimensionsChange()
     {
         MaintainAspectRatio();
     }
 
-    /* »ç¿ëÀÚ°¡ ÇÁ·Î±×·¥ Ã¢ Å©±â¸¦ Á¶ÀıÇÒ ¶§ ¼³Á¤ÇÑ È­¸é ºñÀ²¿¡ ¸Â°Ô ´Ã¾î³ª°Å³ª ÁÙ¾îµé°Ô²û
-     * Á¦ÀÛ »çÀ¯ : ºó ºÎºĞ º¸ÀÌ¸é ¸ôÀÔ°¨À» ÇØÄ¥ ¼ö ÀÖÀ½
-     * È£Ãâ ½ÃÁ¡ : Ã¢ Å©±â°¡ ¹Ù²ğ ¶§¸¶´Ù
+    /* ì‚¬ìš©ìê°€ í”„ë¡œê·¸ë¨ ì°½ í¬ê¸°ë¥¼ ì¡°ì ˆí•  ë•Œ ì„¤ì •í•œ í™”ë©´ ë¹„ìœ¨ì— ë§ê²Œ ëŠ˜ì–´ë‚˜ê±°ë‚˜ ì¤„ì–´ë“¤ê²Œë”
+     * ì œì‘ ì‚¬ìœ  : ë¹ˆ ë¶€ë¶„ ë³´ì´ë©´ ëª°ì…ê°ì„ í•´ì¹  ìˆ˜ ìˆìŒ
+     * í˜¸ì¶œ ì‹œì  : ì°½ í¬ê¸°ê°€ ë°”ë€” ë•Œë§ˆë‹¤
      * 
-     * »óÇÏ·Î ´ç±â´Â °Ç ´ëÀÀÀÌ µÇ³ª ÁÂ¿ì´Â ´ëÀÀÀÌ µÇÁö ¾Ê¾Æ ½ÃµµÇÏ´Ù ²¿¿©¼­ ¿øº¹... >> »ı°¢º¸´Ù ±ò²ûÇÏ°Ô µÇÁö´Â ¾Ê³×¿ä
-     * !!!!! : ´çÀå ±ŞÇÏÁø ¾ÊÀ¸´Ï ³ªÁß¿¡ ¼öÁ¤
+     * ìƒí•˜ë¡œ ë‹¹ê¸°ëŠ” ê±´ ëŒ€ì‘ì´ ë˜ë‚˜ ì¢Œìš°ëŠ” ëŒ€ì‘ì´ ë˜ì§€ ì•Šì•„ ì‹œë„í•˜ë‹¤ ê¼¬ì—¬ì„œ ì›ë³µ... >> ìƒê°ë³´ë‹¤ ê¹”ë”í•˜ê²Œ ë˜ì§€ëŠ” ì•Šë„¤ìš”
+     * !!!!! : ë‹¹ì¥ ê¸‰í•˜ì§„ ì•Šìœ¼ë‹ˆ ë‚˜ì¤‘ì— ìˆ˜ì •
      */
     void MaintainAspectRatio()
     {
-        // ÇöÀç ÇÁ·Î±×·¥Ã¢ ³Êºñ, ³ôÀÌ
+        // í˜„ì¬ í”„ë¡œê·¸ë¨ì°½ ë„ˆë¹„, ë†’ì´
         int newWidth = Screen.width,
             newHeight = Screen.height;
 
-        // ÃÊ±â È­¸éºñ¿¡ ¸ÂÃçÁÖ±â
+        // ì´ˆê¸° í™”ë©´ë¹„ì— ë§ì¶°ì£¼ê¸°
         newWidth = Mathf.RoundToInt(newHeight * targetAspectRatio);
 
-        // ÇØ»óµµ ¼³Á¤
+        // í•´ìƒë„ ì„¤ì •
         Screen.SetResolution(newWidth, newHeight, false);
     }
 
-    // ÀÏ½ÃÁ¤Áö ÆĞ³Î È°¼ºÈ­
-    public void Eable_PausePanel()
-    {
-        // ½Ã°£ ºñÀ²À» 0À¸·Î >> °ÔÀÓ ÀÏ½ÃÁ¤Áö
-        Time.timeScale = 0;
-        // ÀÏ½ÃÁ¤Áö ÆĞ³Î È°¼ºÈ­
-        Panel_Pause.gameObject.SetActive(false);
-    }
+    // ì¼ì‹œì •ì§€ UI í™œì„±í™”
+    public void Enable_Pause() => Panel_Pause.gameObject.SetActive(true);
 
-    // °ñµå È¹µæ·® Ç¥½Ã º¯È­
-    public void SetGoldText(int gold)
-    {
-        gold_text.text = gold.ToString();
-    }
+    // ë ˆë²¨ì—… UI í™œì„±í™”
+    public void Enable_LevelUp() => Panel_LevelUp.gameObject.SetActive(true);
 
-    // exp ¹Ù Ã¤¿öÁø ¾ç Ç¥½Ã º¯È­
-    public void SetExpRatio(float ratio)
-    {
-        hpBar.localScale = new Vector3(ratio, 1, 1);
-    }
+    // ê²Œì„ì˜¤ë²„/ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ UI í™œì„±í™”
+    public void Enable_GameOver() => Panel_GameOver.gameObject.SetActive(true);
 
-    // ÀüÅõ¿¡¼­ ³ª°¡±â ¹öÆ°
+    // ê³¨ë“œ íšë“ëŸ‰ í‘œì‹œ ë³€í™”
+    public void SetGoldText(int gold) => gold_text.text = gold.ToString();
+
+    // exp ë°” ì±„ì›Œì§„ ì–‘ í‘œì‹œ ë³€í™”
+    public void SetExpRatio(float ratio) => hpBar.localScale = new Vector3(ratio, 1, 1);
+
+    // ì „íˆ¬ì—ì„œ ë‚˜ê°€ê¸° ë²„íŠ¼
+    // ì „íˆ¬ UIì˜ ëª¨ë“  ë©”ì¸ í™”ë©´ìœ¼ë¡œ ë‚˜ê°€ê¸° ë²„íŠ¼ì—ì„œ í•´ë‹¹ ë©”ì„œë“œ ì°¸ì¡°(ë˜‘ê°™ì€ ê¸°ëŠ¥)
     public void Button_Exit()
     {
-        // !!!!! °ø¿ëÀ¸·Î ¾²´Â ¾À ÀüÈ¯ ¸Å´ÏÀú¸¦ ¸¸µé °ÍÀÌ¶ó¸é ±×°É °¡Á®´Ù ¾²±â. µû·Î ¾ø´Ù°í ÇÏ¸é ¿©±â¼­ ¾À ÀüÈ¯ÇØº¸ÀÚ
-        // ÇöÀç ¹öÆ°¿¡ ¿¬°áÀº ÇØµĞ »óÅÂ
-        Debug.Log("³ª°¡±â!");
+        // !!!!! ê³µìš©ìœ¼ë¡œ ì“°ëŠ” ì”¬ ì „í™˜ ë§¤ë‹ˆì €ë¥¼ ë§Œë“¤ ê²ƒì´ë¼ë©´ ê·¸ê±¸ ê°€ì ¸ë‹¤ ì“°ê¸°. ë”°ë¡œ ì—†ë‹¤ê³  í•˜ë©´ ì—¬ê¸°ì„œ ì”¬ ì „í™˜í•´ë³´ì
+        // í˜„ì¬ ë²„íŠ¼ì— ì—°ê²°ì€ í•´ë‘” ìƒíƒœ
+        Debug.Log("ë‚˜ê°€ê¸°!");
     }
 
-    // ·¹º§ Ç¥½Ã º¯°æ
-    public void SetLevelText(int nextLevel)
-    {
-        level_text.text = $"Lv. {nextLevel}";
-    }
+    // ë ˆë²¨ í‘œì‹œ ë³€ê²½
+    public void SetLevelText(int nextLevel) => level_text.text = $"Lv. {nextLevel}";
 
     /*
-       ÀÏ½ÃÁ¤Áö UIÀÇ ÀüÅõ ³ª°¡±â, °è¼ÓÇÏ±â ¹öÆ°ÀÇ ¾È³» ÅØ½ºÆ® »çÀÌÁî ÅëÀÏ
-       Å×½ºÆ® °á°ú °ÔÀÓ ½ÇÇà ¶§ 1¹ø¸¸ ¸ÂÃçÁÖ¸é ÀÌÈÄ¿¡ Ã¢ Å©±â¸¦ ÁÙÀÌ°Å³ª ´Ã·Áµµ ÅØ½ºÆ® »çÀÌÁî°¡ µ¿ÀÏÇÔÀ» È®ÀÎ
-       Á¦ÀÛ »çÀ¯ : ±ÛÀÚ Å©±â Â÷ÀÌ°¡ ³ª¸é ¾ø¾îº¸ÀÓ
+       ì¼ì‹œì •ì§€ UIì˜ ì „íˆ¬ ë‚˜ê°€ê¸°, ê³„ì†í•˜ê¸° ë²„íŠ¼ì˜ ì•ˆë‚´ í…ìŠ¤íŠ¸ ì‚¬ì´ì¦ˆ í†µì¼
+       í…ŒìŠ¤íŠ¸ ê²°ê³¼ ê²Œì„ ì‹¤í–‰ ë•Œ 1ë²ˆë§Œ ë§ì¶°ì£¼ë©´ ì´í›„ì— ì°½ í¬ê¸°ë¥¼ ì¤„ì´ê±°ë‚˜ ëŠ˜ë ¤ë„ í…ìŠ¤íŠ¸ ì‚¬ì´ì¦ˆê°€ ë™ì¼í•¨ì„ í™•ì¸
+       ì œì‘ ì‚¬ìœ  : ê¸€ì í¬ê¸° ì°¨ì´ê°€ ë‚˜ë©´ ì—†ì–´ë³´ì„
     */
     public void Pause_Buttons_TextSize_Unify(TextMeshProUGUI text1, TextMeshProUGUI text2)
     {
-        // ÆùÆ® ÀÚµ¿ »çÀÌÁî ¿É¼ÇÀ» µÑ ´Ù ÄÑÁÖ±â
+        // í°íŠ¸ ìë™ ì‚¬ì´ì¦ˆ ì˜µì…˜ì„ ë‘˜ ë‹¤ ì¼œì£¼ê¸°
         text1.enableAutoSizing = text2.enableAutoSizing = true;
 
-        // ÆùÆ® ÀÚµ¿ »çÀÌÁî ¿É¼Ç Àû¿ë ½Ã ³ª°¡±â, °è¼ÓÇÏ±â ¹öÆ°ÀÇ ÅØ½ºÆ® »çÀÌÁî
+        // í°íŠ¸ ìë™ ì‚¬ì´ì¦ˆ ì˜µì…˜ ì ìš© ì‹œ ë‚˜ê°€ê¸°, ê³„ì†í•˜ê¸° ë²„íŠ¼ì˜ í…ìŠ¤íŠ¸ ì‚¬ì´ì¦ˆ
         float
             continue_text_size = text1.fontSize,
             exit_text_size = text2.fontSize;
 
-        // ÅØ½ºÆ® »çÀÌÁî°¡ ÀÛÀº ÂÊÀ¸·Î ÅëÀÏ 
+        // í…ìŠ¤íŠ¸ ì‚¬ì´ì¦ˆê°€ ì‘ì€ ìª½ìœ¼ë¡œ í†µì¼ 
         if (continue_text_size > exit_text_size)
         {
-            // ÀÚµ¿ ÅØ½ºÆ® »çÀÌÁî ¿É¼Ç ÇØÁ¦ÇÏ°í, ÅØ½ºÆ® »çÀÌÁî ÅëÀÏ
+            // ìë™ í…ìŠ¤íŠ¸ ì‚¬ì´ì¦ˆ ì˜µì…˜ í•´ì œí•˜ê³ , í…ìŠ¤íŠ¸ ì‚¬ì´ì¦ˆ í†µì¼
             text1.enableAutoSizing = false;
             text1.fontSize = exit_text_size;
         }
@@ -127,5 +117,10 @@ public class UIManager_Battle : MonoBehaviour
             text2.enableAutoSizing = false;
             text2.fontSize = continue_text_size;
         }
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
     }
 }

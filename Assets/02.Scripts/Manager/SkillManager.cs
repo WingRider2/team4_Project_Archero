@@ -18,7 +18,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
 
     List<ISkill> skills = new List<ISkill>();
 
-    public List<ISkill> SelectedSKills { get; private set; } = new List<ISkill>();
+    public List<ISkill> SelectedSKills { get; set; } = new List<ISkill>();
 
     protected override void Awake()
     {
@@ -36,20 +36,29 @@ public class SkillManager : SceneOnlyManager<SkillManager>
     }
 
     // 레벨업이나 스테이지 클리어 시 선택할 스킬 뽑아주기
-    HashSet<SkillData> GetSkillToSelect()
+    public HashSet<SkillData> GetSkillToSelect()
     {
         HashSet<SkillData> selectSkillList = new HashSet<SkillData>();
 
-        if (isPlayerLevelUp || isStageClear)
-        {
-            while (selectSkillList.Count < 3)
-            {
-                int skillById = Random.Range(0, skillTable.DataDic.Count + 1);
-                var skill     = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
-                selectSkillList.Add(skill);
-            }
-        }
+        // !수정 내용!
+        // 오류: 스킬 인덱스가 아닌 번호가 나오기도 함
+        // 이유: 0 ~ 스킬 인덱스 중 랜덤 값이 나옴. 스킬 인덱스는 0~n, 100~100+n번까지 2가지 유형으로 분포하기에 갯수로만 뽑으면 에러가 남
+        // 해결: 스킬 데이터에서 인덱스 값을 모아서 랜덤 돌려버리기
 
+        // 그리고, isPlayerLevelUp, isStageClear로 판정할 필요 없이
+        // 스킬 선택이 필요한 상황에서 UIManager_Battle.Instance.Enable_LevelUp(); 사용
+        while (selectSkillList.Count < 3)
+        {
+            //int skillById = Random.Range(0, skillTable.DataDic.Count + 1);
+            List<int> tmp_DataDic_Id = new List<int>();
+            for (int i = 0; i < skills.Count; i++)
+            {
+                tmp_DataDic_Id.Add(skills[i].Id);
+            }
+            int skillById = tmp_DataDic_Id[Random.Range(0, skills.Count)];
+            var skill = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
+            selectSkillList.Add(skill);
+        }
         return selectSkillList;
     }
 
