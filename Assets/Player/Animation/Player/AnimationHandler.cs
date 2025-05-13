@@ -5,9 +5,9 @@ using UnityEngine;
 public class AnimationHandler : MonoBehaviour
 {
     private static readonly int IsRun = Animator.StringToHash("IsRun");
+    private static readonly int IsDead = Animator.StringToHash("IsDead");
 
-
-    private Animator animator;
+    protected Animator animator;
 
     protected virtual void Awake()
     {
@@ -16,6 +16,11 @@ public class AnimationHandler : MonoBehaviour
 
     public void Move(Vector2 obj)
     {
-        animator.SetBool(IsRun, obj.magnitude > .2f);
+        animator.SetBool(IsRun, obj.magnitude > .2f);        
+    }
+
+    public void Dead()
+    {
+        animator.SetBool(IsDead, true);
     }
 }
