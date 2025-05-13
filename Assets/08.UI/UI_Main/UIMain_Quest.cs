@@ -12,7 +12,7 @@ public class UIMain_Quest : MonoBehaviour
     // questPanel 로부터 각 항목별로 출력에 필요한 오브젝트들을 가져와 배열로 정리한 것!
     List<Quest_Output_Form> quest_Output_Forms = new List<Quest_Output_Form>();
 
-    private void Awake()
+    private void Start()
     {
         // savequestdata : 이름, 보상값이 포함되어 있지 않음
         // 그러니 QuestData에 접근할 필요가 있.. 퀘스트 테이블에서 값을 빼와서 쓰면 안되나??
@@ -115,7 +115,7 @@ public class Quest_Output_Form
         // 0: 퀘스트 이름, 1: 퀘스트 진행도 / 목표, 2: 보상
         TextMeshProUGUI[] texts = questObj.GetComponentsInChildren<TextMeshProUGUI>();
         // 이미지가 너무 많아서 진행도 바는 이름으로 찾기로
-        Image progressBar = questObj.transform.Find("ProgressBar").GetComponent<Image>();
+        Image progressBar = questObj.transform.Find("ProgressBar_Frame").Find("ProgressBar").GetComponent<Image>();
         this.name = texts[0];
         this.reward_text = texts[1];
         this.progress_text = texts[2];
