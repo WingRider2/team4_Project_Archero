@@ -44,7 +44,7 @@ public class MonsterBase : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
 
-        characterRender = GetComponent<SpriteRenderer>();
+        characterRender = GetComponentInChildren<SpriteRenderer>();
         manationHandler = GetComponent<MAnimationHandler>();
         MonsterStatManager = GetComponent<MonsterStatManager>();
     }
