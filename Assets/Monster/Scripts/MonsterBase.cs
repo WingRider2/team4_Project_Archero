@@ -81,9 +81,7 @@ public class MonsterBase : MonoBehaviour
         movementDir = Vector2.zero;
         lookDir = (target.position - transform.position).normalized;
         Move();
-       
-        Debug.Log("공격" + MonsterStatManager.monsterStatDic[StatType.AttackPow].FinalValue);
-       // StartCoroutine(Timer(MonsterStatManager.monsterStatDic[StatType.AttackSpd].FinalValue, () => isAttack = false));
+        // StartCoroutine(Timer(MonsterStatManager.monsterStatDic[StatType.AttackSpd].FinalValue, () => isAttack = false));
         
         return MonsterStatManager.monsterStatDic[StatType.AttackPow].FinalValue;
     }
@@ -96,12 +94,15 @@ public class MonsterBase : MonoBehaviour
 
     public void Damaged(float damage)
     {
+        Debug.Log("공격 받음");
+        if(isInvincible) 
+            return;
         MonsterStatManager.ModifyStatValue(StatType.CurrentHp, StatValueType.Base, -damage);
         float curHp = MonsterStatManager.GetFinalValue(StatType.CurrentHp);
-        Damaged(curHp);
+        curHp -= damage;
         isInvincible = true;
         manationHandler.Damaged();
-        StartCoroutine(Timer(1.0f, () => isInvincible = false));
+        StartCoroutine(Timer(0.2f, () => isInvincible = false));
         if (curHp <= 0)
             Dead();
     }

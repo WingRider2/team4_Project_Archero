@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 3866600819892150138}
   m_Layer: 0
   m_Name: RangeSimMon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   duration: 3
-  controller: {fileID: 7658929886774658512, guid: e8766a269e05b3b43b640996cf3e2578, type: 3}
+  Circle: {fileID: 0}
 --- !u!114 &6873391933262993685
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,7 +37,7 @@ public class ProjectileController : MonoBehaviour, IPoolObject
     {
         if (collision.CompareTag("Enemy"))
         {
-            // 충돌 처리
+            collision.gameObject.GetComponent<MonsterBase>().Damaged(10);
             rigid.velocity = Vector3.zero; // 속도 정보 제거
             mPoolManager.ReturnObject(this);
         }

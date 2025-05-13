@@ -30,7 +30,7 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
     private void HandleMonsterDeath(MonsterBase mon)
     {
         mon.OnDeath -= HandleMonsterDeath;
-        Debug.Log($"{mon.name} ����");
+        Debug.Log($"{mon.name} 몬스터 사망");
         //TODO : 보스몬스터일때 보스 퀘스트로 증가
         QuestManager.Instance.UpdateCurrentCount(QuestConditionType.MonsterKill, 1);
         monsters.Remove(mon);
@@ -45,6 +45,7 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
         MonsterData monData = TableManager.Instance.GetTable<MonsterTable>().GetDataByID(num);
         MonsterBase mon     = Instantiate(monData.Monster, pos, Quaternion.identity);
         mon.Init(monData);
+        mon.OnDeath += HandleMonsterDeath;
         if (mon == null)
         {
             Debug.Log("���� ���� ����");

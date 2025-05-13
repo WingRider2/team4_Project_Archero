@@ -13,7 +13,7 @@ public class BossAttackNode : INode
     }
     public INode.ENodeState Evaluate()
     {
-        Debug.Log("공격중");
+     
         MonsterBoss boss = _enemy as MonsterBoss;
         boss.Attack(num);
         return INode.ENodeState.Success;

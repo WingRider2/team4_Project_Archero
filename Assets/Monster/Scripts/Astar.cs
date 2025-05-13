@@ -120,7 +120,7 @@ public class Astar
             if (loopNum++ > 10000)
                 throw new Exception("Infinite Loop");
         }
-        Debug.Log("실패");
+      
         return null;
     }
 }
