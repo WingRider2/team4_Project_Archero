@@ -63,7 +63,7 @@ public class PlayerStatManager : MonoBehaviour
             StatType.CurrentHp => new PlayerStat(type, 5),
             StatType.AttackPow => new PlayerStat(type, 5),
             StatType.Defense   => new PlayerStat(type, 5),
-            StatType.AttackSpd => new PlayerStat(type, 5, 0.2f, 3f),
+            StatType.AttackSpd => new PlayerStat(type, 1f, 0.2f, 3f),
             StatType.MoveSpeed => new PlayerStat(type, 5, 2, 8),
             _                  => null
         };

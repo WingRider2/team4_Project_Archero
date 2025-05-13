@@ -31,6 +31,8 @@ public abstract class BaseStat
     /// <param name="value"></param>
     public virtual void ModifyBaseValue(float value)
     {
+        if (FinalValue <= MinValue)
+            return;
         BaseValue += value;
         TriggerEvent(BaseValue);
     }
@@ -41,6 +43,8 @@ public abstract class BaseStat
     /// <param name="value"></param>
     public virtual void ModifyBuffValue(float value)
     {
+        if (FinalValue <= MinValue)
+            return;
         BuffValue += value;
         TriggerEvent(BuffValue);
     }
@@ -50,5 +54,6 @@ public abstract class BaseStat
     protected void TriggerEvent(float updateValue)
     {
         OnValueChanged?.Invoke(updateValue);
+        Debug.Log($"Value Changed to {updateValue} Final Value : {FinalValue}");
     }
 }
