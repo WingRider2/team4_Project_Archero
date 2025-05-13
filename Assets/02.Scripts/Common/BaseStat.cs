@@ -25,38 +25,29 @@ public abstract class BaseStat
 
     public event Action<float> OnValueChanged;
 
-    /// <summary>
-    /// 직접 호출해서 사용하면 X 반드시 StatManager를 통해 호출
-    /// </summary>
-    /// <param name="value"></param>
-    public virtual void ModifyBaseValue(float value)
+    public void IncreaseBaseStat(float value)
     {
         BaseValue += value;
-        if (BaseValue < 0)
-        {
-            BaseValue = Mathf.Max(BaseValue, 0);
-        }
-
-        TriggerEvent(BaseValue);
     }
 
-    /// <summary>
-    /// 직접 호출해서 사용하면 X 반드시 StatManager를 통해 호출
-    /// </summary>
-    /// <param name="value"></param>
-    public virtual void ModifyBuffValue(float value)
+    public float DecreaseBaseValue(float value)
+    {
+        float decreaseAmount = Mathf.Min(BaseValue, value);
+        BaseValue -= decreaseAmount;
+        return value - decreaseAmount;
+    }
+
+    public void IncreaseBuffStat(float value)
     {
         BuffValue += value;
-        if (BuffValue < 0)
-        {
-            ModifyBaseValue(BuffValue);
-            BuffValue = Mathf.Max(BuffValue, 0);
-        }
-
-        TriggerEvent(BuffValue);
     }
 
-    public abstract void ClampValues();
+    public float DecreaseBuffValue(float value)
+    {
+        float decreaseAmount = Mathf.Min(BuffValue, value);
+        BuffValue -= decreaseAmount;
+        return value - decreaseAmount;
+    }
 
     protected void TriggerEvent(float updateValue)
     {

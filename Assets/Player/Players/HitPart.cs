@@ -22,7 +22,7 @@ public class HitPart : MonoBehaviour
 
     public void Damaged(float dmg)
     {
-        statManager.ModifyStatValue(StatType.CurrentHp, StatValueType.Base, -dmg);
+        statManager.AllDecreaseStatValue(StatType.CurrentHp, -dmg);
         Debug.Log(dmg + "공격");
         if (statManager.GetFinalValue(StatType.CurrentHp) < 0)
         {            
