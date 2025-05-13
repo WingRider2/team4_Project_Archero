@@ -8,31 +8,31 @@ public class MprohectileController : MonoBehaviour, IPoolObject
     [SerializeField] PoolType poolType;
     [SerializeField] private int poolSize = 20;
 
-    private MWeaponHandler mWeaponHandler;
-    private float currentDuration;
-    private Vector2 direction;
-    private bool isReady;
+    protected MWeaponHandler mWeaponHandler;
+    protected float currentDuration;
+    protected Vector2 direction;
+    protected bool isReady;
 
 
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     public GameObject GameObject => gameObject;
     public PoolType   PoolType   => poolType;
     public int        PoolSize   => poolSize;
 
-    private ObjectPoolManager mPoolManager;
+    protected ObjectPoolManager mPoolManager;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         mPoolManager = ObjectPoolManager.Instance;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (!isReady) return;
         currentDuration += Time.deltaTime;
@@ -44,7 +44,7 @@ public class MprohectileController : MonoBehaviour, IPoolObject
         rb.velocity = direction * mWeaponHandler.speed;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         mPoolManager.ReturnObject(this);
     }

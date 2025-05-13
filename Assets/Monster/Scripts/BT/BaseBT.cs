@@ -28,13 +28,15 @@ public class BaseBT : MonoBehaviour
         live = new EchLiveNode(enemy);
        
         echlive = new EchLiveNode(enemy);
-      attack = new EattackNode(enemy);
+        attack = new CoolDownNode(new EattackNode(enemy), enemy.MonsterStatManager.monsterStatDic[StatType.AttackSpd].FinalValue);
          chase = new EchaseNode(enemy);
-       check = new EcheckNode(enemy);
+       check = new FindTargetNode(enemy, enemy.AttackRange);
          findObs = new EchObstacleNode(enemy);
        astar = new EaFindNode(enemy);
-        findTar = new FindTargetNode(enemy);
+        findTar = new InverterNode(new FindTargetNode(enemy, enemy.FindRange));
+            
         idle = new EIdleNode(enemy);
+        
 
     }
     protected virtual void MakeRoot()

@@ -15,15 +15,14 @@ public class MonsterBoss : MonsterBase
     }
     public  void Attack(int a)
     {
-        if (!isAttack)
-        {
-            isAttack = true;
-            StartCoroutine(Timer(MonsterStatManager.monsterStatDic[StatType.AttackSpd].FinalValue, () => isAttack = false));
-
+        
             Debug.Log("공격확인");
             Vector2 dir = Target.position - transform.position;
-            m_Controller.Attack(dir);
-        }
+            if(a==1)
+                m_Controller.CircleAttack();
+            if(a==2)
+                m_Controller.Attack(dir);
+       
         
     }
     IEnumerator Timer(float time, System.Action onComplete)
@@ -33,6 +32,7 @@ public class MonsterBoss : MonsterBase
     }
     public bool Teleport(Vector2 pos)
     {
+        Debug.Log("이동");
         transform.position = pos+new Vector2(0,1);
         return true;
     }

@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 5321215055927690480}
   - component: {fileID: 5379375051078838552}
   - component: {fileID: 1397342083386743377}
+  - component: {fileID: 2212523706906131536}
   m_Layer: 0
   m_Name: BossMon
   m_TagString: Untagged
@@ -97,7 +98,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &6283995165634402157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   duration: 3
-  controller: {fileID: 7658929886774658512, guid: e8766a269e05b3b43b640996cf3e2578, type: 3}
+  Circle: {fileID: 946409857160832092, guid: 17bdda0a8eda5c1419758a8f9edcf4d5, type: 3}
 --- !u!95 &1424248699048177788
 Animator:
   serializedVersion: 5
@@ -270,3 +271,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.2}
   m_EdgeRadius: 0
+--- !u!114 &2212523706906131536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6578222442908969417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b0e96be5aa2914f906dfffdf2f9697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

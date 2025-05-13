@@ -12,15 +12,17 @@ public class BossBT : BaseBT
     protected override void MakeRoot()
     {
         base.MakeRoot();
-        INode attack1 = new BossAttackNode(enemy, 1);
-        INode attack2 = new BossAttackNode(enemy, 2);
+        INode attack1 = new CoolDownNode(new BossAttackNode(enemy, 1), enemy.MonsterStatManager.monsterStatDic[StatType.AttackSpd].FinalValue);
+        INode attack2 = new CoolDownNode(new BossAttackNode(enemy, 2), enemy.MonsterStatManager.monsterStatDic[StatType.AttackSpd].FinalValue);
+
         INode teleport = new ETeleportNode(enemy);
-        INode attackSeq = new SequenceNode(new List<INode> { check, attack1 });
+        INode checkClose = new FindTargetNode(enemy, 0.5f);
+        INode attackSeq = new SequenceNode(new List<INode> { check,attack1,checkClose,chase });
         INode chaseSel = new SelectorNode(new List<INode> { attackSeq, attack2 });
-        INode findTSeq = new SequenceNode(new List<INode> { findTar, teleport });
+        INode findTSeq = new SequenceNode(new List<INode> { findTar, idle });
         INode findObS = new SequenceNode(new List<INode> {  findObs, teleport });
         INode selR = new SelectorNode(new List<INode> {findObS, chaseSel, findTSeq });
-    
+     
         root = new SequenceNode(new List<INode> { live ,chaseSel });
 
     }

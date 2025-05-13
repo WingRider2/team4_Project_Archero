@@ -17,13 +17,12 @@ public class MonsterRangeSim : MonsterBase
     public override float Attack()
     {
        
-        if (!isAttack)
-        {
+       
             base.Attack();
             Vector2 dir = Target.position - transform.position;
             m_Controller.Attack(dir);
             return MonsterStatManager.GetFinalValue(StatType.AttackPow);
-        }
-        else return 0;
+     
+
     }
 }

@@ -5,9 +5,10 @@ using UnityEngine;
 public class FindTargetNode : INode
 {
     private MonsterBase _enemy;
-
-    public FindTargetNode(MonsterBase enemy)
+    private float range;
+    public FindTargetNode(MonsterBase enemy,float _range)
     {
+        range = _range;
         _enemy = enemy;
     }
     INode.ENodeState INode.Evaluate()
@@ -17,15 +18,15 @@ public class FindTargetNode : INode
             return INode.ENodeState.Failure;
         float distance = Vector2.Distance(_enemy.transform.position, _enemy.Target.position);
       
-        if (distance <= _enemy.FindRange)
+        if (distance <= range)
         {
 
-            return INode.ENodeState.Failure;
+            return INode.ENodeState.Success;
         }
         else
         {
       
-            return INode.ENodeState.Success;
+            return INode.ENodeState.Failure;
         }
     }
 }
