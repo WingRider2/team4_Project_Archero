@@ -15,11 +15,11 @@ public class MonsterBase : MonoBehaviour
     string name;
     float exp = 10f;
     public float EXP { get { return exp; } }
-    public float ID  { get { return id; } }
+    public float ID { get { return id; } }
     float attackRange;
     Transform target;
-    public Transform Target      { get { return target; } }
-    public float     AttackRange { get { return attackRange; } }
+    public Transform Target { get { return target; } }
+    public float AttackRange { get { return attackRange; } }
     float findRange;
     public float FindRange { get { return findRange; } }
     public Vector2 movementDir = Vector2.zero;
@@ -39,6 +39,7 @@ public class MonsterBase : MonoBehaviour
     public bool IsInvincible { get { return isInvincible; } }
 
     public MonsterStatManager MonsterStatManager { get; private set; }
+    private StatusEffectManager statusEffectManager;
 
     protected virtual void Awake()
     {
@@ -51,6 +52,7 @@ public class MonsterBase : MonoBehaviour
 
         MonsterStatManager = GetComponent<MonsterStatManager>();
 
+        statusEffectManager = GetComponent<StatusEffectManager>();
     }
 
     public void setPath(List<Vector2> _path)
@@ -77,12 +79,14 @@ public class MonsterBase : MonoBehaviour
 
     public virtual float Attack()
     {
-      
+
         movementDir = Vector2.zero;
         lookDir = (target.position - transform.position).normalized;
         Move();
+
+        Debug.Log("공격" + MonsterStatManager.monsterStatDic[StatType.AttackPow].FinalValue);
         // StartCoroutine(Timer(MonsterStatManager.monsterStatDic[StatType.AttackSpd].FinalValue, () => isAttack = false));
-        
+
         return MonsterStatManager.monsterStatDic[StatType.AttackPow].FinalValue;
     }
 
@@ -95,7 +99,7 @@ public class MonsterBase : MonoBehaviour
     public void Damaged(float damage)
     {
         Debug.Log("공격 받음");
-        if(isInvincible) 
+        if (isInvincible)
             return;
         MonsterStatManager.ModifyStatValue(StatType.CurrentHp, StatValueType.Base, -damage);
         float curHp = MonsterStatManager.GetFinalValue(StatType.CurrentHp);
@@ -109,6 +113,8 @@ public class MonsterBase : MonoBehaviour
 
     private void Dead()
     {
+        statusEffectManager.ClearAllDebuffs();
+
         manationHandler.Dead();
         isDead = true;
         OnDeath?.Invoke(this);
@@ -131,20 +137,20 @@ public class MonsterBase : MonoBehaviour
 
     private void Rotate(Vector2 direction)
     {
-        float rotZ   = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool  isLeft = Mathf.Abs(rotZ) > 90;
+        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bool isLeft = Mathf.Abs(rotZ) > 90;
         characterRender.flipX = isLeft;
     }
 
     public bool ShootObstacle()
     {
-        Vector2      dir      = (Vector2)(target.position - transform.position);
-        float        distance = dir.magnitude;
-        int          iL       = 6;
-        int          pL       = 7;
-        Vector2      boxWidth = new Vector2(0.7f, 0.7f);
-        int          mask     = (1 << iL) | (1 << pL);
-        RaycastHit2D hit      = Physics2D.BoxCast(transform.position, boxWidth, 0f, dir.normalized, distance, mask);
+        Vector2 dir = (Vector2)(target.position - transform.position);
+        float distance = dir.magnitude;
+        int iL = 6;
+        int pL = 7;
+        Vector2 boxWidth = new Vector2(0.7f, 0.7f);
+        int mask = (1 << iL) | (1 << pL);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxWidth, 0f, dir.normalized, distance, mask);
         // Debug.DrawRay(transform.position, dir.normalized * distance, Color.red);
 
 
@@ -183,5 +189,11 @@ public class MonsterBase : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+    }
+
+    // 몬스터에게 디버프를 적용시켜줄 함수
+    public void ApplyDebuff(DebuffType type, float debuffDPS, float duration)
+    {
+        statusEffectManager?.ApplyDebuff(type, debuffDPS, duration);
     }
 }
