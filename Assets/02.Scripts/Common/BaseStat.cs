@@ -49,6 +49,6 @@ public abstract class BaseStat
 
     protected void TriggerEvent(float updateValue)
     {
-        OnValueChanged.Invoke(updateValue);
+        OnValueChanged?.Invoke(updateValue);
     }
 }
