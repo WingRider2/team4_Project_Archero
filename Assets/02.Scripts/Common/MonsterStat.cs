@@ -25,8 +25,12 @@ public class MonsterStat : BaseStat
         base.ModifyBuffValue(value);
     }
 
+    public void ReduceStatInReversePriority(float value)
+    {
+        
+    }
+
     public override void ClampValues()
     {
-        throw new System.NotImplementedException();
     }
 }

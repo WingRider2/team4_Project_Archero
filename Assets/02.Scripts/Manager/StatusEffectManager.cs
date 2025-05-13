@@ -37,7 +37,7 @@ public class StatusEffectManager : MonoBehaviour
 
         while (elapsed < duration)
         {
-            monster.MonsterStatManager.ModifyStatValue(StatType.CurrentHp, StatValueType.Base, -damage);
+            monster.MonsterStatManager.ModifyStatValue(StatType.CurrentHp, StatValueType.Buff, -damage);
 
             // 몬스터의 체력이 0 이하인 경우 사망 처리
             float currentHp = monster.MonsterStatManager.GetFinalValue(StatType.CurrentHp);
@@ -62,6 +62,7 @@ public class StatusEffectManager : MonoBehaviour
         {
             StopCoroutine(pair.Value);
         }
+
         activeDebuffs.Clear();
     }
 }

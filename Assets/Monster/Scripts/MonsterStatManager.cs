@@ -33,7 +33,6 @@ public class MonsterStatManager : MonoBehaviour
             monsterStatDic[StatType.CurrentHp].MaxValue = monsterStatDic[StatType.MaxHp].FinalValue;
         }
     }
-
     public float GetFinalValue(StatType statType)
     {
         return monsterStatDic[statType].FinalValue;

@@ -15,11 +15,11 @@ public class MonsterBase : MonoBehaviour
     string name;
     float exp = 10f;
     public float EXP { get { return exp; } }
-    public float ID { get { return id; } }
+    public float ID  { get { return id; } }
     float attackRange;
     Transform target;
-    public Transform Target { get { return target; } }
-    public float AttackRange { get { return attackRange; } }
+    public Transform Target      { get { return target; } }
+    public float     AttackRange { get { return attackRange; } }
     float findRange;
     public float FindRange { get { return findRange; } }
     public Vector2 movementDir = Vector2.zero;
@@ -79,7 +79,6 @@ public class MonsterBase : MonoBehaviour
 
     public virtual float Attack()
     {
-
         movementDir = Vector2.zero;
         lookDir = (target.position - transform.position).normalized;
         Move();
@@ -101,7 +100,7 @@ public class MonsterBase : MonoBehaviour
         Debug.Log("공격 받음");
         if (isInvincible)
             return;
-        MonsterStatManager.ModifyStatValue(StatType.CurrentHp, StatValueType.Base, -damage);
+        MonsterStatManager.ModifyStatValue(StatType.CurrentHp, StatValueType.Buff, -damage);
         float curHp = MonsterStatManager.GetFinalValue(StatType.CurrentHp);
         curHp -= damage;
         isInvincible = true;
@@ -137,20 +136,20 @@ public class MonsterBase : MonoBehaviour
 
     private void Rotate(Vector2 direction)
     {
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotZ) > 90;
+        float rotZ   = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bool  isLeft = Mathf.Abs(rotZ) > 90;
         characterRender.flipX = isLeft;
     }
 
     public bool ShootObstacle()
     {
-        Vector2 dir = (Vector2)(target.position - transform.position);
-        float distance = dir.magnitude;
-        int iL = 6;
-        int pL = 7;
-        Vector2 boxWidth = new Vector2(0.7f, 0.7f);
-        int mask = (1 << iL) | (1 << pL);
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, boxWidth, 0f, dir.normalized, distance, mask);
+        Vector2      dir      = (Vector2)(target.position - transform.position);
+        float        distance = dir.magnitude;
+        int          iL       = 6;
+        int          pL       = 7;
+        Vector2      boxWidth = new Vector2(0.7f, 0.7f);
+        int          mask     = (1 << iL) | (1 << pL);
+        RaycastHit2D hit      = Physics2D.BoxCast(transform.position, boxWidth, 0f, dir.normalized, distance, mask);
         // Debug.DrawRay(transform.position, dir.normalized * distance, Color.red);
 
 
