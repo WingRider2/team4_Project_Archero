@@ -3,8 +3,9 @@ using TMPro;
 using UnityEngine.SceneManagement;
 public class UI_GameOver : MonoBehaviour
 {
-    // 게임 클리어 여부
-    [SerializeField] TextMeshProUGUI ButtonText_Exit, ButtonText_Next;
+    [SerializeField] TextMeshProUGUI 
+        ButtonText_Exit, ButtonText_Next,
+        RewardGoldText;
 
     private void Awake()
     {
@@ -17,13 +18,22 @@ public class UI_GameOver : MonoBehaviour
         Time.timeScale = 0;
 
         // 플레이어 사망 여부에 따라 다른 UI 출현
-        if(PlayerController.Instance.IsDead)
+        if (PlayerController.Instance.IsDead)
             transform.GetChild(0).gameObject.SetActive(true);
         else
+        {
+            // 스테이지 보상 골드 써주기
+            RewardGoldText.text = TableManager.Instance.GetTable<StageTable>().GetDataByID(GameManager.Instance.SelectedChapter).RewardData.RewardGold.ToString();
             transform.GetChild(1).gameObject.SetActive(true);
+        }
     }
 
     private void OnDisable()
+    {
+        Time.timeScale = 1;
+    }
+
+    private void OnDestroy()
     {
         Time.timeScale = 1;
     }
