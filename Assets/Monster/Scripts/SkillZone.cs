@@ -7,7 +7,7 @@ public class SkillZone : MonoBehaviour, IPoolObject
     public float time = 2f;
     [SerializeField] PoolType poolType;
     [SerializeField] private int poolSize = 20;
-
+    [SerializeField] AudioClip audio;
     protected MWeaponHandler mWeaponHandler;
     public float duration=2f;
     public float attackDuration=1f;
@@ -62,8 +62,9 @@ public class SkillZone : MonoBehaviour, IPoolObject
         timer += Time.deltaTime;
         float t = Mathf.Clamp01(timer/duration);
         spriteRenderer.color=Color.Lerp(startColor, endColor, t);
-        if (timer >= duration) {
+        if (timer >= duration&&!isAttack) {
             isAttack = true;
+            SoundManager.PlayClip(audio);
         }
         if (timer > duration + attackDuration)
         {
