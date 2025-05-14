@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     {
         MapManager.Instance.CurrentDoor.DoorControl(true);
         MapManager.Instance.currentStage++;
+        UIManager_Battle.Instance.Enable_LevelUp();
     }
 
     public void ChapterClear(ChapterData chapter)
