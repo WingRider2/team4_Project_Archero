@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 9110448834125520510}
   - component: {fileID: 5491786786946445347}
   - component: {fileID: 4303015168331141316}
-  - component: {fileID: 4115253135861829324}
+  - component: {fileID: 3853522779031550574}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -219,10 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8708af189f76bac418ce9d34014bf9f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 5
-  currentHP: 5
-  attackPower: 5
-  defense: 5
 --- !u!114 &9110448834125520510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +322,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4115253135861829324
+--- !u!114 &3853522779031550574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

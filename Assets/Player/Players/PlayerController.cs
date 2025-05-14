@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
 
-
+[RequireComponent(typeof(AnimationHandler))]
 public class PlayerController : SceneOnlyManager<PlayerController>
 {
     private readonly int requestExp = 100;

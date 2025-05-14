@@ -8,8 +8,8 @@ public class ProjectileController : MonoBehaviour, IPoolObject
     [SerializeField] private PoolType poolType;
     [SerializeField] private int poolSize = 30;
     public GameObject GameObject => gameObject;
-    public PoolType PoolType => poolType;
-    public int PoolSize => poolSize;
+    public PoolType   PoolType   => poolType;
+    public int        PoolSize   => poolSize;
 
     private WeaponHandler weaponHandler; //무기 정보 
     private Rigidbody2D rigid;
@@ -17,11 +17,11 @@ public class ProjectileController : MonoBehaviour, IPoolObject
 
     public bool fxOnDestory = true;
 
-    // 디버프 관련 정보
-    public DebuffType debuffType = DebuffType.None;
-    public float debuffDPS = 1f;
-    public float debuffDuration = 5f;
-    public SkillType skillType;
+    // // 디버프 관련 정보
+    // public DebuffType debuffType = DebuffType.None;
+    // public float debuffDPS = 1f;
+    // public float debuffDuration = 5f;
+    // public SkillType skillType;
 
 
     //임시
@@ -45,11 +45,20 @@ public class ProjectileController : MonoBehaviour, IPoolObject
         {
             collision.gameObject.GetComponent<MonsterBase>().Damaged(10);
 
-            // 스킬타입이 Attack이고, 디버프가 있을 경우에만 적용
-            if (skillType == SkillType.Attack && debuffType != DebuffType.None)
+            foreach (ISkill skill in SkillManager.Instance.SelectedSKills)
             {
-                monster.ApplyDebuff(debuffType, debuffDPS, debuffDuration);
+                if (skill is IDebuffSkill debuffSkill)
+                {
+                    monster.ApplyDebuff(debuffSkill.DebuffType, debuffSkill.DPS, debuffSkill.Duration);
+                }
             }
+
+            // 스킬타입이 Attack이고, 디버프가 있을 경우에만 적용
+            // if (skillType == SkillType.Attack && debuffType != DebuffType.None)
+            // {
+            //     monster.ApplyDebuff(debuffType, debuffDPS, debuffDuration);
+            // }
+
             rigid.velocity = Vector3.zero; // 속도 정보 제거
             mPoolManager.ReturnObject(this);
         }

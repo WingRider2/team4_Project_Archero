@@ -52,6 +52,8 @@ public class PlayerStatManager : MonoBehaviour
 
     public void DecreaseStatValue(StatType statType, StatValueType valueType, float value)
     {
+        if (value < 0)
+            value *= -1;
         switch (valueType)
         {
             case StatValueType.Base:
