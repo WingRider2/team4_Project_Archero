@@ -11,6 +11,7 @@ public class UIManager_Battle : SceneOnlyManager<UIManager_Battle>
     // 계속하기, 나가기 버튼의 텍스트는 글자 크기를 맞춰주기 위해 가져옴
     [Header("텍스트"), SerializeField]
     TextMeshProUGUI gold_text;
+
     [SerializeField] TextMeshProUGUI level_text, continue_button_text, exit_button_text;
 
     // 체력바
@@ -18,7 +19,7 @@ public class UIManager_Battle : SceneOnlyManager<UIManager_Battle>
 
     float targetAspectRatio; // 너비/높이로 게임 화면 비율 계산한 값
 
-    const string MainSceneName = "UI_Main";
+    const string MainSceneName = "MainScene";
 
     protected override void Awake()
     {
@@ -35,7 +36,7 @@ public class UIManager_Battle : SceneOnlyManager<UIManager_Battle>
             Debug.Log("캔버스 스케일러가 없어요");
 
         // 일시정지 화면의 버튼 텍스트 크기 통일
-        Pause_Buttons_TextSize_Unify(continue_button_text, exit_button_text); 
+        Pause_Buttons_TextSize_Unify(continue_button_text, exit_button_text);
     }
 
     // RectTransform 자체가 변경되었을 때 호출 >> 빌드 후 창 크기 변경 때 호출
@@ -47,14 +48,14 @@ public class UIManager_Battle : SceneOnlyManager<UIManager_Battle>
     /* 사용자가 프로그램 창 크기를 조절할 때 설정한 화면 비율에 맞게 늘어나거나 줄어들게끔
      * 제작 사유 : 빈 부분 보이면 몰입감을 해칠 수 있음
      * 호출 시점 : 창 크기가 바뀔 때마다
-     * 
+     *
      * 상하로 당기는 건 대응이 되나 좌우는 대응이 되지 않아 시도하다 꼬여서 원복... >> 생각보다 깔끔하게 되지는 않네요
      * !!!!! : 당장 급하진 않으니 나중에 수정
      */
     void MaintainAspectRatio()
     {
         // 현재 프로그램창 너비, 높이
-        int newWidth = Screen.width,
+        int newWidth  = Screen.width,
             newHeight = Screen.height;
 
         // 초기 화면비에 맞춰주기
@@ -102,7 +103,7 @@ public class UIManager_Battle : SceneOnlyManager<UIManager_Battle>
         // 폰트 자동 사이즈 옵션 적용 시 나가기, 계속하기 버튼의 텍스트 사이즈
         float
             continue_text_size = text1.fontSize,
-            exit_text_size = text2.fontSize;
+            exit_text_size     = text2.fontSize;
 
         // 텍스트 사이즈가 작은 쪽으로 통일 
         if (continue_text_size > exit_text_size)
