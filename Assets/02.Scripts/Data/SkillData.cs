@@ -45,7 +45,6 @@ public class SkillData
     public float duration;
 
     public Sprite SkillIcon;
-
 }
 
 [Serializable]

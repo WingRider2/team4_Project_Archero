@@ -75,7 +75,7 @@ public class StatusEffectManager : MonoBehaviour
             case DebuffType.Slow:
                 {
                     float originalMoveSpeed = monster.MonsterStatManager.GetFinalValue(StatType.MoveSpeed);
-                    float reducedSpeed      = originalMoveSpeed * (1 - value); // ex) value가 0.3이면 30% 감소
+                    float reducedSpeed = originalMoveSpeed * (1 - value); // ex) value가 0.3이면 30% 감소
 
                     Debug.Log(originalMoveSpeed);
                     monster.MonsterStatManager.DecreaseStatValue(StatType.MoveSpeed, StatValueType.Buff, originalMoveSpeed - reducedSpeed);
@@ -117,7 +117,7 @@ public class StatusEffectManager : MonoBehaviour
             case DebuffType.Slow:
                 {
                     float originalMoveSpeed = monster.MonsterStatManager.GetFinalValue(StatType.MoveSpeed);
-                    float reducedSpeed      = originalMoveSpeed * (1 - debuffSkill.Duration); // ex) value가 0.3이면 30% 감소
+                    float reducedSpeed = originalMoveSpeed * (1 - debuffSkill.Duration); // ex) value가 0.3이면 30% 감소
 
                     Debug.Log($"MoveSpd : {originalMoveSpeed}");
                     monster.MonsterStatManager.DecreaseStatValue(StatType.MoveSpeed, StatValueType.Buff, originalMoveSpeed - reducedSpeed);
@@ -134,7 +134,6 @@ public class StatusEffectManager : MonoBehaviour
                     break;
                 }
         }
-
         debuffSkills.Remove(debuffSkill.DebuffType);
     }
 

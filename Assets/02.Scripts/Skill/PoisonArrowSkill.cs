@@ -5,16 +5,15 @@ using UnityEngine;
 public class PoisonArrowSkill : ISkill, IDebuffSkill
 {
     private readonly SkillData data;
-    public int       Id        { get; }
-    public string    Name      { get; }
-    public string    Info      { get; }
-    public SkillType Type      { get; }
-    public float     Value     { get; }
-    public Sprite    SkillIcon { get; set; }
-
+    public int Id { get; }
+    public string Name { get; }
+    public string Info { get; }
+    public SkillType Type { get; }
+    public float Value { get; }
+    public Sprite SkillIcon { get; set; }
     public DebuffType DebuffType { get; }
-    public float      DPS        { get; }
-    public float      Duration   { get; set; }
+    public float DPS { get; }
+    public float Duration { get; set; }
 
     public IDebuffSkill Clone()
     {

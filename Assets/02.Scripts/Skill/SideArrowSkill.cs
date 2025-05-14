@@ -9,7 +9,6 @@ public class SideArrowSkill : IAngleArrowSkill, ISkill
     public string Info { get; set; }
     public SkillType Type { get; set; }
     public float Value { get; set; }
-
     public Sprite SkillIcon { get; set; }
 
     public float[] angleOffsets { get; } = { -90f, 90f };

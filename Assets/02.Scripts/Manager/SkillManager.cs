@@ -10,8 +10,6 @@ public class SkillManager : SceneOnlyManager<SkillManager>
     // 플레이어 레벨업 판단 임시 변수
     private PlayerController player;
 
-    bool isPlayerLevelUp;
-
     // 스테이지 클리어 임시 변수
     bool isStageClear;
     SkillTable skillTable;
@@ -51,8 +49,6 @@ public class SkillManager : SceneOnlyManager<SkillManager>
         // 스킬 선택이 필요한 상황에서 UIManager_Battle.Instance.Enable_LevelUp(); 사용
         while (selectSkillList.Count < 3)
         {
-            //int skillById = Random.Range(0, skillTable.DataDic.Count + 1);
-
             int skillById = skillIDs[Random.Range(0, skills.Count)];
             var skill = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
             selectSkillList.Add(skill);
