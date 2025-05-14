@@ -73,6 +73,7 @@ UIManager_Main, UIManager_Battle 구조 분리
 
 # 🧠 사용한 디자인 패턴
 패턴	          사용 위치
+
 Singleton	   || GameManager, SaveManager, SoundManager, TableManager, 등
 
 Factory	     || StatFactory(), CreateSkill() 내부
