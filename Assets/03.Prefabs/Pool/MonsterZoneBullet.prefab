@@ -146,6 +146,7 @@ MonoBehaviour:
   time: 2
   poolType: 5
   poolSize: 20
+  audio: {fileID: 8300000, guid: 5aa33f9859b65664eadda9bad91eb96a, type: 3}
   duration: 2
   attackDuration: 1
   damage: 20

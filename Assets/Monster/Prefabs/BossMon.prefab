@@ -163,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementDir: {x: 0, y: 0}
   lookDir: {x: 0, y: 0}
+  audio: {fileID: 8300000, guid: 5e8b22185b47a994f8e2a09827b06203, type: 3}
 --- !u!114 &5321215055927690480
 MonoBehaviour:
   m_ObjectHideFlags: 0
