@@ -27,6 +27,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
     private bool isMove = false;
     private bool isAttack = true;
     private bool isDead = false;
+    public bool IsDead { get; }
 
     private float timeSinceLastAttack = float.MaxValue;
     private float rotateSpeed = 10.0f;
@@ -200,6 +201,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
     {
         isDead = true;
         animationHandler.Dead();
+        UIManager_Battle.Instance.Enable_GameOver();
     }
 
     public void AddExp(int exp)
