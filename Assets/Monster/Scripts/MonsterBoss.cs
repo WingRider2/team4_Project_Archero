@@ -18,7 +18,7 @@ public class MonsterBoss : MonsterBase
     public  void Attack(int a)
     {
 
-
+        Attack();
        
             Vector2 dir = Target.position - transform.position;
         if (a == 1)

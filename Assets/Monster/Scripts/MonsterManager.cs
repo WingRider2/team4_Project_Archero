@@ -79,7 +79,7 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
     {
         // MakeMon(new Vector2(0, 0), 1);
         // var ga = MakeMon(new Vector2(10, 0), 2);
-        // MakeMon(new Vector2(5, 0), 3);
+        //MakeMon(new Vector2(5, 0), 3);
     }
 
     protected override void OnDestroy()
