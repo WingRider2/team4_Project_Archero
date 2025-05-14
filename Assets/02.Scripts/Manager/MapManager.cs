@@ -52,7 +52,6 @@ public class MapManager : SceneOnlyManager<MapManager>
         }
 
         instanceObstacleObjects.ForEach(Destroy);
-
         StageData   stageData   = chapterData.StageDatas[currentStage % chapterData.StageDatas.Count];
         TilemapData tilemapData = tilemapDatas[Random.Range(0, tilemapDatas.Length)];
         GenerateTile(floorMap, tilemapData.FloorTilemap);
@@ -66,6 +65,7 @@ public class MapManager : SceneOnlyManager<MapManager>
         SpawnDoors();
         GenerateObstacle(stageData);
         CameraController.Instance.MapUpdate();
+        QuestManager.Instance.UpdateCurrentCount(QuestConditionType.Challenge, 1);
     }
 
     private void GenerateTile(Tilemap tilemap, Tilemap dataTilemap)
