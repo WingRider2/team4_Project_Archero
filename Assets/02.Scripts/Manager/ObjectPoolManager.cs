@@ -157,8 +157,10 @@ public class ObjectPoolManager : SceneOnlyManager<ObjectPoolManager>
 
         yield return new WaitForSeconds(returnTime);
         obj.GameObject.SetActive(false);
+        obj.GameObject.transform.position = Vector3.zero;
         action?.Invoke();
         poolObjects[obj.PoolType].Enqueue(obj.GameObject);
+        obj.GameObject.transform.SetParent(parentCache[obj.PoolType]);
     }
 
 

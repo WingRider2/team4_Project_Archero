@@ -33,45 +33,15 @@ public class PlayerStatManager : MonoBehaviour
         }
     }
 
-    public void IncreaseStatValue(StatType statType, StatValueType valueType, float value)
+    public void ApplyStatEffect(StatType statType, StatValueType valueType, float value)
     {
         switch (valueType)
         {
             case StatValueType.Base:
-                playerStatDic[statType].IncreaseBaseStat(value);
+                playerStatDic[statType].IncreaseBaseStat(value); // value 음수도 허용 가능
                 break;
             case StatValueType.Buff:
-                playerStatDic[statType].ApplyBuffStat(value);
-                break;
-            case StatValueType.Equipment:
-                playerStatDic[statType].IncreaseEquipmentValue(value);
-                break;
-        }
-
-        if (statType == StatType.MaxHp)
-        {
-            playerStatDic[StatType.CurrentHp].MaxValue = playerStatDic[StatType.MaxHp].FinalValue;
-        }
-        else if (statType == StatType.CurrentHp)
-        {
-            PlayerController.Instance.HpBarUI.UpdateFill(playerStatDic[StatType.CurrentHp].FinalValue, playerStatDic[StatType.MaxHp].FinalValue);
-        }
-    }
-
-    public void DecreaseStatValue(StatType statType, StatValueType valueType, float value)
-    {
-        if (value < 0)
-            value *= -1;
-        switch (valueType)
-        {
-            case StatValueType.Base:
-                playerStatDic[statType].DecreaseBaseValue(value);
-                break;
-            case StatValueType.Buff:
-                playerStatDic[statType].DecreaseBuffValue(value);
-                break;
-            case StatValueType.Equipment:
-                playerStatDic[statType].DecreaseEquipmentValue(value);
+                playerStatDic[statType].ApplyBuffStat(value); // 디버프는 음수
                 break;
         }
 

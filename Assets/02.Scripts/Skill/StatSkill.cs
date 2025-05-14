@@ -5,11 +5,11 @@ using UnityEngine.Assertions.Must;
 
 public class StatSkill : ISkill
 {
-    public int Id { get; }
-    public string Name { get; }
-    public string Info { get; }
-    public SkillType Type { get; }
-    public float Value { get; }
+    public int       Id    { get; }
+    public string    Name  { get; }
+    public string    Info  { get; }
+    public SkillType Type  { get; }
+    public float     Value { get; }
 
     private readonly PlayerController player;
     private List<StatSkillEffect> Effects { get; }
@@ -27,10 +27,7 @@ public class StatSkill : ISkill
     {
         foreach (var effect in Effects)
         {
-            if (effect.Value > 0)
-                player.PlayerStats.IncreaseStatValue(effect.StatType, StatValueType.Buff, effect.Value);
-            else
-                player.PlayerStats.DecreaseStatValue(effect.StatType, StatValueType.Buff, effect.Value);
+            player.PlayerStats.ApplyStatEffect(effect.StatType, StatValueType.Buff, effect.Value);
         }
     }
 }

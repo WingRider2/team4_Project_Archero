@@ -23,12 +23,14 @@ public class HealthBarManager : SceneOnlyManager<HealthBarManager>
         HPBarUI bar = ObjectPoolManager.Instance.GetObject(PoolType.HealthBar).GetComponent<HPBarUI>();
         bar.Initialize(targetTransform);
         activeBars.Add(bar);
+        Debug.Log("Active HP Bar");
         return bar;
     }
 
     public void DespawnHealthBar(IPoolObject bar)
     {
-        ObjectPoolManager.Instance.ReturnObject(bar);
+        Debug.Log("DeActive HP Bar");
         activeBars.Remove(bar.GameObject.GetComponent<HPBarUI>());
+        ObjectPoolManager.Instance.ReturnObject(bar);
     }
 }

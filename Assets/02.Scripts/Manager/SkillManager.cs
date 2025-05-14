@@ -50,7 +50,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
         while (selectSkillList.Count < 3)
         {
             ISkill randomSkill = skills[Random.Range(0, skills.Count)];
-            var skill = TableManager.Instance.GetTable<SkillTable>().GetDataByID(randomSkill.Id);
+            var    skill       = TableManager.Instance.GetTable<SkillTable>().GetDataByID(randomSkill.Id);
             selectSkillList.Add(skill);
         }
 
@@ -85,7 +85,8 @@ public class SkillManager : SceneOnlyManager<SkillManager>
         if (skill == null)
             return;
 
-        SelectedSKills.Add(skill);
+        if (!SelectedSKills.Contains(skill))
+            SelectedSKills.Add(skill);
 
         if (skill is StatSkill statSkill)
         {

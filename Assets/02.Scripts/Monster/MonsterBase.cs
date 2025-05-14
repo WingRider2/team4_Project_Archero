@@ -63,7 +63,6 @@ public class MonsterBase : MonoBehaviour
 
     public void Start()
     {
-        hpBarUI = HealthBarManager.Instance.SpawnHealthBar(transform);
     }
 
     public void setPath(List<Vector2> _path)
@@ -87,6 +86,7 @@ public class MonsterBase : MonoBehaviour
         findRange = monsterData.FindRange;
         MonsterStatManager.Initialize(monsterData);
         MonsterData = monsterData;
+        hpBarUI = HealthBarManager.Instance.SpawnHealthBar(transform);
     }
 
     public virtual float Attack()
@@ -110,7 +110,8 @@ public class MonsterBase : MonoBehaviour
     {
         // if (isInvincible)
         //     return;
-       
+        if (isDead)
+            return;
         soundPlayer.Play(UnitSoundType.Hit);
         MonsterStatManager.AllDecreaseStatValue(StatType.CurrentHp, damage);
         float curHp = MonsterStatManager.GetFinalValue(StatType.CurrentHp);
@@ -124,6 +125,7 @@ public class MonsterBase : MonoBehaviour
 
     private void Dead()
     {
+        hpBarUI.UnLink();
         soundPlayer.Play(UnitSoundType.Die);
         if (statusEffectManager != null)
         {
@@ -133,7 +135,6 @@ public class MonsterBase : MonoBehaviour
         manationHandler.Dead();
         isDead = true;
         OnDeath?.Invoke(this);
-        hpBarUI.UnLink();
 
         Destroy(gameObject);
     }
@@ -194,7 +195,6 @@ public class MonsterBase : MonoBehaviour
 
     public void SetTarget(Transform _target)
     {
-        
         target = _target;
     }
 
