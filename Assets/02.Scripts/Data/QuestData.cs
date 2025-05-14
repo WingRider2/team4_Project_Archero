@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 [Serializable]
@@ -60,7 +61,6 @@ public class SaveQuestData
             var questData = TableManager.Instance.GetTable<QuestTable>().GetDataByID(ID);
             if (questData == null)
                 return;
-            //TODO: 리워드 추가
             var rewordData = questData.RewardData;
             if (rewordData == null)
                 return;
@@ -75,10 +75,8 @@ public class SaveQuestCondition
 {
     public int CurrentCount;
     public int RequiredCount;
-
-
-    private readonly int nextValue;
-    private readonly QuestType questType;
+    public QuestType QuestType;
+    public int nextValue;
 
     public SaveQuestCondition()
     {
@@ -89,7 +87,7 @@ public class SaveQuestCondition
         CurrentCount = 0;
         RequiredCount = condition.RequiredCount;
         nextValue = condition.NextValue;
-        this.questType = questType;
+        this.QuestType = questType;
     }
 
     public bool IsComplete => CurrentCount >= RequiredCount;
@@ -110,7 +108,7 @@ public class SaveQuestCondition
         if (CurrentCount < RequiredCount)
             return false;
 
-        if (questType != QuestType.Achievement)
+        if (QuestType != QuestType.Achievement)
             CurrentCount -= RequiredCount;
 
         if (nextValue > 0)
