@@ -13,6 +13,7 @@ public class MapManager : SceneOnlyManager<MapManager>
     [SerializeField] private Tilemap colliderMap;
     [SerializeField] private Tilemap doorTilemap;
     [SerializeField] private Tilemap playerSpawnTilemap;
+    [SerializeField] private Tilemap bossSpawnTilemap;
 
     [SerializeField] private GameObject[] obstacleObjects;
     [SerializeField] private GameObject doorPrefabs;
@@ -59,6 +60,7 @@ public class MapManager : SceneOnlyManager<MapManager>
         GenerateTile(colliderMap, tilemapData.ColliderTilemap);
         GenerateTile(doorTilemap, tilemapData.DoorTilemap);
         GenerateTile(playerSpawnTilemap, tilemapData.PlayerSpawnTilemap);
+        GenerateTile(bossSpawnTilemap, tilemapData.BossSpawnTilemap);
 
 
         SpawnPlayer();
@@ -96,6 +98,9 @@ public class MapManager : SceneOnlyManager<MapManager>
         HashSet<int> tileIndex = new HashSet<int>();
         while (tileIndex.Count < stageData.ObstacleSpawnCount)
         {
+            if (tileIndex.Count == vaildPositions.Count)
+                break;
+
             tileIndex.Add(Random.Range(0, vaildPositions.Count));
         }
 
@@ -123,6 +128,7 @@ public class MapManager : SceneOnlyManager<MapManager>
                 if (wallMap.HasTile(pos)) continue;
                 if (playerSpawnTilemap.HasTile(pos)) continue;
                 if (!floorMap.HasTile(pos)) continue;
+                if (bossSpawnTilemap.HasTile(pos)) continue;
 
                 result.Add(pos);
             }
@@ -141,13 +147,15 @@ public class MapManager : SceneOnlyManager<MapManager>
             tileIndex.Add(Random.Range(0, vaildPositions.Count));
         }
 
+
         foreach (var index in tileIndex)
         {
             MonsterSpawnPositions.Add(floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f, 0.5f));
         }
 
-        //레벨
         MonsterManager.Instance.makeMonList(MonsterSpawnPositions, 1);
+        if (stageData.IsBossStage)
+            MonsterManager.Instance.MakeBossMonster(SpawnBoss());
     }
 
     private void SpawnDoors()
@@ -188,6 +196,19 @@ public class MapManager : SceneOnlyManager<MapManager>
             Vector3 worldPos = playerSpawnTilemap.CellToWorld(pos);
             playerObject.transform.position = worldPos;
         }
+    }
+
+    private Vector3 SpawnBoss()
+    {
+        foreach (var pos in bossSpawnTilemap.cellBounds.allPositionsWithin)
+        {
+            if (!bossSpawnTilemap.HasTile(pos))
+                continue;
+
+            return bossSpawnTilemap.CellToWorld(pos);
+        }
+
+        return Vector3.zero;
     }
 
     private void OnDrawGizmosSelected()

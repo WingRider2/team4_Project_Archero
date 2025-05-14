@@ -18,20 +18,28 @@ MonoBehaviour:
     StageDatas:
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 3
+      IsBossStage: 0
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 4
+      IsBossStage: 0
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 5
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 9
       ObstacleSpawnCount: 6
-    - MonsterSpawnCount: 9
-      ObstacleSpawnCount: 6
+      IsBossStage: 0
+    - MonsterSpawnCount: 3
+      ObstacleSpawnCount: 0
+      IsBossStage: 1
     RewardData:
       RewardItemsList: 
       RewardGold: 1000
@@ -40,20 +48,28 @@ MonoBehaviour:
     StageDatas:
     - MonsterSpawnCount: 6
       ObstacleSpawnCount: 5
+      IsBossStage: 0
     - MonsterSpawnCount: 6
       ObstacleSpawnCount: 5
+      IsBossStage: 0
     - MonsterSpawnCount: 6
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 8
       ObstacleSpawnCount: 8
+      IsBossStage: 0
     - MonsterSpawnCount: 8
       ObstacleSpawnCount: 8
+      IsBossStage: 0
     - MonsterSpawnCount: 8
       ObstacleSpawnCount: 8
+      IsBossStage: 0
     - MonsterSpawnCount: 10
       ObstacleSpawnCount: 8
-    - MonsterSpawnCount: 10
-      ObstacleSpawnCount: 8
+      IsBossStage: 0
+    - MonsterSpawnCount: 5
+      ObstacleSpawnCount: 0
+      IsBossStage: 1
     RewardData:
       RewardItemsList: 
       RewardGold: 2000
@@ -62,20 +78,28 @@ MonoBehaviour:
     StageDatas:
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 5
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 5
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 9
       ObstacleSpawnCount: 8
+      IsBossStage: 0
     - MonsterSpawnCount: 9
       ObstacleSpawnCount: 8
+      IsBossStage: 0
     - MonsterSpawnCount: 9
       ObstacleSpawnCount: 8
+      IsBossStage: 0
     - MonsterSpawnCount: 11
       ObstacleSpawnCount: 8
-    - MonsterSpawnCount: 11
-      ObstacleSpawnCount: 8
+      IsBossStage: 0
+    - MonsterSpawnCount: 7
+      ObstacleSpawnCount: 0
+      IsBossStage: 1
     RewardData:
       RewardItemsList: 
       RewardGold: 3000
@@ -84,20 +108,28 @@ MonoBehaviour:
     StageDatas:
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 3
+      IsBossStage: 0
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 4
+      IsBossStage: 0
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 5
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 9
       ObstacleSpawnCount: 6
-    - MonsterSpawnCount: 9
-      ObstacleSpawnCount: 6
+      IsBossStage: 0
+    - MonsterSpawnCount: 8
+      ObstacleSpawnCount: 0
+      IsBossStage: 0
     RewardData:
       RewardItemsList: 
       RewardGold: 4000
@@ -106,20 +138,28 @@ MonoBehaviour:
     StageDatas:
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 3
+      IsBossStage: 0
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 4
+      IsBossStage: 0
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 5
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 9
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 9
-      ObstacleSpawnCount: 6
+      ObstacleSpawnCount: 0
+      IsBossStage: 1
     RewardData:
       RewardItemsList: 
       RewardGold: 5000
@@ -128,20 +168,28 @@ MonoBehaviour:
     StageDatas:
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 3
+      IsBossStage: 0
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 4
+      IsBossStage: 0
     - MonsterSpawnCount: 5
       ObstacleSpawnCount: 5
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 7
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 9
       ObstacleSpawnCount: 6
+      IsBossStage: 0
     - MonsterSpawnCount: 9
-      ObstacleSpawnCount: 6
+      ObstacleSpawnCount: 0
+      IsBossStage: 1
     RewardData:
       RewardItemsList: 
       RewardGold: 6000

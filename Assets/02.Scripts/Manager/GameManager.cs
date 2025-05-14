@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public int SelectedChapter = 1;
-
+    public int BestChapter = 1;
 
     public void StageClear()
     {
@@ -18,6 +18,13 @@ public class GameManager : Singleton<GameManager>
     {
         RewardManager.Instance.GiveReward(chapter.RewardData);
         QuestManager.Instance.UpdateCurrentCount(QuestConditionType.ChapterClear, 1);
+        if (BestChapter < SelectedChapter)
+        {
+            BestChapter = SelectedChapter;
+        }
+
+        UIManager_Battle.Instance.Enable_GameOver();
+        //게임 챕터 클리어 
     }
 
     public void StartGame()
