@@ -58,4 +58,11 @@ public class SoundManager : Singleton<SoundManager>
         SoundSource soundSource = obj.GetComponent<SoundSource>();
         soundSource.Play(clip, Instance.soundEffectVolume, Instance.soundEffectPitch);
     }
+    public static SoundSource GetClip(AudioClip clip)
+    {
+        SoundSource obj = Instantiate(Instance.soundPrefab);
+        SoundSource soundSource = obj.GetComponent<SoundSource>();
+        soundSource.LoopMake(clip, Instance.soundEffectVolume, Instance.soundEffectPitch);
+        return soundSource;
+    }
 }

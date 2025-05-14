@@ -4990,6 +4990,7 @@ GameObject:
   - component: {fileID: 881162820061362553}
   - component: {fileID: 8086747300806247738}
   - component: {fileID: -6178094355369049613}
+  - component: {fileID: -3336034485038509986}
   m_Layer: 9
   m_Name: CloseSimMon
   m_TagString: Enemy
@@ -5184,3 +5185,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2464e526acc384c93897170f45580a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3336034485038509986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6274456286949566377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 396b9ac36e6f9d745add014a2ce19b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundBase: {fileID: 11400000, guid: bb5da3ab366f5e043b3339d44b443730, type: 2}

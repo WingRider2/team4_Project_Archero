@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149767031c577e048b6c2a89b823cc8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 5
+  poolType: 6
   poolSize: 15
   barRect: {fileID: 5282149988755060871}
   fillImage: {fileID: 7492426421658504900}

@@ -14,6 +14,7 @@ public class MonsterBase : MonoBehaviour
     int id;
     string name;
     float exp = 10f;
+    protected UnitSoundPlayer soundPlayer;
     public float EXP { get { return exp; } }
     public float ID  { get { return id; } }
     float attackRange;
@@ -56,8 +57,10 @@ public class MonsterBase : MonoBehaviour
         MonsterStatManager = GetComponent<MonsterStatManager>();
 
         statusEffectManager = GetComponent<StatusEffectManager>();
-
+        soundPlayer = GetComponent<UnitSoundPlayer>();
         hpBarUI = HealthBarManager.Instance.SpawnHealthBar(transform);
+      
+  
     }
 
     public void setPath(List<Vector2> _path)
@@ -84,6 +87,7 @@ public class MonsterBase : MonoBehaviour
 
     public virtual float Attack()
     {
+      
         movementDir = Vector2.zero;
         lookDir = (target.position - transform.position).normalized;
         Move();
@@ -104,6 +108,7 @@ public class MonsterBase : MonoBehaviour
         // if (isInvincible)
         //     return;
         Debug.Log($"공격 받음 {damage}");
+        soundPlayer.Play(UnitSoundType.Hit);
         MonsterStatManager.AllDecreaseStatValue(StatType.CurrentHp, damage);
         float curHp = MonsterStatManager.GetFinalValue(StatType.CurrentHp);
         // isInvincible = true;
@@ -112,10 +117,12 @@ public class MonsterBase : MonoBehaviour
         // StartCoroutine(Timer(0.2f, () => isInvincible = false));
         if (curHp <= 0)
             Dead();
+        
     }
 
     private void Dead()
     {
+        soundPlayer.Play(UnitSoundType.Die);
         if (statusEffectManager != null)
         {
             statusEffectManager.ClearAllDebuffs();
@@ -125,20 +132,28 @@ public class MonsterBase : MonoBehaviour
         isDead = true;
         OnDeath?.Invoke(this);
         hpBarUI.UnLink();
+       
         Destroy(gameObject);
     }
+   
 
     public void Move()
     {
         Rotate(lookDir);
         Movement(movementDir);
     }
-
+    SoundSource move=null;
     private void Movement(Vector2 direction)
     {
         float moveSpeed = MonsterStatManager.GetFinalValue(StatType.MoveSpeed);
         direction = direction * moveSpeed;
         _rigidbody.velocity = direction;
+        if (move == null)
+            move=soundPlayer.MakeLoop(UnitSoundType.Move);
+        if(direction == Vector2.zero)
+            move.LoopStop();
+        else
+            move.LoopStart();
         manationHandler.Move(direction);
     }
 

@@ -15,7 +15,7 @@ public enum PoolType
     MonsterBullet,
     MonsterCircleBullet,
 
-    MonsterZoneBullet
+    MonsterZoneBullet,
 
     HealthBar
 }
