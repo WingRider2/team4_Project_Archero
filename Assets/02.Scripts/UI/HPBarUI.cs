@@ -24,7 +24,7 @@ public class HPBarUI : MonoBehaviour, IPoolObject
     {
         mainCamera = Camera.main;
     }
-    
+
     public void Initialize(Transform targetTrans)
     {
         target = targetTrans;
@@ -33,6 +33,8 @@ public class HPBarUI : MonoBehaviour, IPoolObject
 
     public void UpdatePosion()
     {
+        if (target == null)
+            return;
         Vector3 screenPos = mainCamera.WorldToScreenPoint(target.position + offset);
         barRect.position = screenPos;
     }
