@@ -14,6 +14,13 @@ public class UI_QuestPanel : MonoBehaviour
 
     [SerializeField] Button GetReward_Button;
 
+    UI_GoldText ui_GoldText;
+
+    private void Awake()
+    {
+        ui_GoldText = FindObjectOfType<UI_GoldText>();
+    }
+
     private void Start()
     {
         // 해당 퀘스트 번호에 해당하는 퀘스트 정보를 써주기!
@@ -82,6 +89,13 @@ public class UI_QuestPanel : MonoBehaviour
     // 퀘스트 버튼을 눌렀을 때, 보상 받기
     public void GetQuestReward()
     {
+        // 보상 지급
         QuestManager.Instance.QusetList[transform.GetSiblingIndex()].ClearQuest();
+
+        // 업적 형태로 점점 늘어나게끔 디자인 되어 있어 이를 새로고침하여 다시 써주기
+        PrintQuest_Init(QuestManager.Instance.QusetList[transform.GetSiblingIndex()]);
+
+        // 바뀐 골드에 맞게 텍스트 변경
+        ui_GoldText.RenewalGoldText();
     }
 }
