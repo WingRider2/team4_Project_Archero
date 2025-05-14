@@ -35,13 +35,17 @@ public class RewardData
     public int RewardGold;
 }
 
-
+[Serializable]
 public class SaveQuestData
 {
     public int ID;
     public int ClearCount;
     public SaveQuestCondition Condition;
     public bool IsComplete => Condition.IsComplete;
+
+    public SaveQuestData()
+    {
+    }
 
     public SaveQuestData(QuestData questData)
     {
@@ -66,6 +70,7 @@ public class SaveQuestData
     }
 }
 
+[Serializable]
 public class SaveQuestCondition
 {
     public int CurrentCount;
@@ -74,6 +79,10 @@ public class SaveQuestCondition
 
     private readonly int nextValue;
     private readonly QuestType questType;
+
+    public SaveQuestCondition()
+    {
+    }
 
     public SaveQuestCondition(QuestCondition condition, QuestType questType)
     {

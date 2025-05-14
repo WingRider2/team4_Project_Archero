@@ -388,23 +388,26 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4303015168331141316, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
+      propertyPath: m_Size.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303015168331141316, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
       propertyPath: m_Size.y
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4303015168331141316, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
       propertyPath: m_Offset.y
-      value: -0.1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319187899753900559, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
+      propertyPath: m_Size.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7450258485076249342, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7924123529974193062, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3853522779031550574, guid: baa74e37868a70d409e4dacb2e10e179, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1203,7 +1206,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &1508822428
 RectTransform:

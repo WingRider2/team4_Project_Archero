@@ -24,23 +24,33 @@ public enum QuestConditionType
 
 public class QuestManager : Singleton<QuestManager>
 {
-    public List<SaveQuestData> QusetList      { get; private set; } = new List<SaveQuestData>();
+    public List<SaveQuestData> QuestList      { get; private set; } = new List<SaveQuestData>();
     public List<int>           ClearQuestList { get; private set; } = new List<int>();
 
     private Dictionary<QuestConditionType, List<SaveQuestCondition>> questConditionsMap = new Dictionary<QuestConditionType, List<SaveQuestCondition>>();
 
     private void Start()
     {
-        var questTb = TableManager.Instance.GetTable<QuestTable>();
-        foreach (var questData in questTb.DataDic)
+        if (SaveManager.Instance.SaveData.QuestData.Count > 0)
         {
-            AcceptQuest(questData.Value);
+            for (int i = 0; i < SaveManager.Instance.SaveData.QuestData.Count; i++)
+            {
+                LoadQuestList(SaveManager.Instance.SaveData.QuestData[i]);
+            }
+        }
+        else
+        {
+            var questTb = TableManager.Instance.GetTable<QuestTable>();
+            foreach (var questData in questTb.DataDic)
+            {
+                AcceptQuest(questData.Value);
+            }
         }
     }
 
     private void AcceptQuest(QuestData quest)
     {
-        if (QusetList.Exists(x => x.ID == quest.ID))
+        if (QuestList.Exists(x => x.ID == quest.ID))
             return;
         SaveQuestData questData = new SaveQuestData(quest);
 
@@ -51,7 +61,19 @@ public class QuestManager : Singleton<QuestManager>
         }
 
         questConditionsMap[quest.Condition.ConditionType].Add(condition);
-        QusetList.Add(questData);
+        QuestList.Add(questData);
+    }
+
+    private void LoadQuestList(SaveQuestData questData)
+    {
+        var data = TableManager.Instance.GetTable<QuestTable>().GetDataByID(questData.ID);
+        if (!questConditionsMap.ContainsKey(data.Condition.ConditionType))
+        {
+            questConditionsMap[data.Condition.ConditionType] = new List<SaveQuestCondition>();
+        }
+
+        questConditionsMap[data.Condition.ConditionType].Add(questData.Condition);
+        QuestList.Add(questData);
     }
 
     public void UpdateCurrentCount(QuestConditionType type, int count)

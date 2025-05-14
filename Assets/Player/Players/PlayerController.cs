@@ -33,8 +33,9 @@ public class PlayerController : SceneOnlyManager<PlayerController>
     private float rotateSpeed = 10.0f;
 
 
-    public int PlayerLevel { get; private set; }
-    public int Exp         { get; private set; }
+    public int     PlayerLevel { get; private set; }
+    public int     Exp         { get; private set; }
+    public HPBarUI HpBarUI     { get; private set; }
 
     private void Awake()
     {
@@ -43,7 +44,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
         PlayerStats = GetComponent<PlayerStatManager>();
         TargetingSystem = GetComponent<TargetingSystem>();
         animationHandler = GetComponent<AnimationHandler>();
-        soundPlayer=GetComponent<UnitSoundPlayer>();
+        soundPlayer = GetComponent<UnitSoundPlayer>();
         if (weaponPrefab != null)
             weaponHandler = Instantiate(weaponPrefab, weaponPivot); //???????
         else
@@ -54,6 +55,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
 
     private void Start()
     {
+        HpBarUI = HealthBarManager.Instance.SpawnHealthBar(transform);
     }
 
     private void FixedUpdate()
@@ -167,7 +169,9 @@ public class PlayerController : SceneOnlyManager<PlayerController>
         soundPlayer.Play(UnitSoundType.Attack);
         weaponHandler.Attack(angle);
     }
+
     SoundSource moveSound = null;
+
     private void StateChanged(bool _isMove)
     {
         if (_isMove)
@@ -181,8 +185,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
         }
         else
         {
-            
-                moveSound?.LoopStop();
+            moveSound?.LoopStop();
             Debug.Log("이동 종료");
             isMove = false;
             isAttack = true;

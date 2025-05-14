@@ -58,6 +58,10 @@ public class MonsterBase : MonoBehaviour
 
         statusEffectManager = GetComponent<StatusEffectManager>();
         soundPlayer = GetComponent<UnitSoundPlayer>();
+    }
+
+    public void Start()
+    {
         hpBarUI = HealthBarManager.Instance.SpawnHealthBar(transform);
     }
 
