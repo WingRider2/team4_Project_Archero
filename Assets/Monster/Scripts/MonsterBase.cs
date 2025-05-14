@@ -88,7 +88,6 @@ public class MonsterBase : MonoBehaviour
         lookDir = (target.position - transform.position).normalized;
         Move();
 
-        Debug.Log("공격" + MonsterStatManager.monsterStatDic[StatType.AttackPow].FinalValue);
         // StartCoroutine(Timer(MonsterStatManager.monsterStatDic[StatType.AttackSpd].FinalValue, () => isAttack = false));
 
         return MonsterStatManager.monsterStatDic[StatType.AttackPow].FinalValue;
@@ -102,15 +101,15 @@ public class MonsterBase : MonoBehaviour
 
     public void Damaged(float damage)
     {
+        // if (isInvincible)
+        //     return;
         Debug.Log($"공격 받음 {damage}");
-        if (isInvincible)
-            return;
         MonsterStatManager.AllDecreaseStatValue(StatType.CurrentHp, damage);
         float curHp = MonsterStatManager.GetFinalValue(StatType.CurrentHp);
-        isInvincible = true;
+        // isInvincible = true;
         manationHandler.Damaged();
         hpBarUI.UpdateFill(curHp, MonsterStatManager.GetFinalValue(StatType.MaxHp));
-        StartCoroutine(Timer(0.2f, () => isInvincible = false));
+        // StartCoroutine(Timer(0.2f, () => isInvincible = false));
         if (curHp <= 0)
             Dead();
     }
@@ -199,5 +198,10 @@ public class MonsterBase : MonoBehaviour
     public void ApplyDebuff(DebuffType type, float debuffDPS, float duration)
     {
         statusEffectManager?.ApplyDebuff(type, debuffDPS, duration);
+    }
+
+    public void ApplyDebuff(IDebuffSkill debuffSkill)
+    {
+        statusEffectManager?.ApplyDebuff(debuffSkill);
     }
 }

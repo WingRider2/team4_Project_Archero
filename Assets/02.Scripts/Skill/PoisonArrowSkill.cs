@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PoisonArrowSkill : ISkill, IDebuffSkill
 {
+    private readonly SkillData data;
     public int       Id        { get; }
     public string    Name      { get; }
     public string    Info      { get; }
@@ -13,10 +14,17 @@ public class PoisonArrowSkill : ISkill, IDebuffSkill
 
     public DebuffType DebuffType { get; }
     public float      DPS        { get; }
-    public float      Duration   { get; }
+    public float      Duration   { get; set; }
+
+    public IDebuffSkill Clone()
+    {
+        return new PoisonArrowSkill(data);
+    }
 
     public PoisonArrowSkill(SkillData data)
     {
+        this.data = data;
+
         Id = data.Id;
         Name = data.Name;
         Info = data.Info;
