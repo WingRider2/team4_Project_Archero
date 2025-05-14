@@ -7,7 +7,12 @@ public class UI_GoldText : MonoBehaviour
 
     private void Start()
     {
-        if(TryGetComponent(out goldText))
-            goldText.text = AccountManager.Instance.Gold.ToString();
+        if (TryGetComponent(out goldText))
+            RenewalGoldText();
+    }
+
+    public void RenewalGoldText()
+    {
+        goldText.text = AccountManager.Instance.Gold.ToString();
     }
 }
