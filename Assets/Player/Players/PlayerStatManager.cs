@@ -22,10 +22,14 @@ public class PlayerStatManager : MonoBehaviour
 
     private void Initialize()
     {
-        for (int i = 0; i < Enum.GetValues(typeof(StatType)).Length; i++)
+        var playerData = TableManager.Instance.GetTable<PlayerTable>().GetDataByID(1);
+        for (int i = 0; i < playerData.statData.Count; i++)
         {
-            StatType type = (StatType)i;
-            playerStatDic[type] = StatFactory(type);
+            StatType type     = playerData.statData[i].StatType;
+            float    value    = playerData.statData[i].Value;
+            var      statData = StatFactory(type, value);
+
+            playerStatDic[type] = statData;
         }
     }
 
@@ -47,6 +51,10 @@ public class PlayerStatManager : MonoBehaviour
         if (statType == StatType.MaxHp)
         {
             playerStatDic[StatType.CurrentHp].MaxValue = playerStatDic[StatType.MaxHp].FinalValue;
+        }
+        else if (statType == StatType.CurrentHp)
+        {
+            PlayerController.Instance.HpBarUI.UpdateFill(playerStatDic[StatType.CurrentHp].FinalValue, playerStatDic[StatType.MaxHp].FinalValue);
         }
     }
 
@@ -71,6 +79,10 @@ public class PlayerStatManager : MonoBehaviour
         {
             playerStatDic[StatType.CurrentHp].MaxValue = playerStatDic[StatType.MaxHp].FinalValue;
         }
+        else if (statType == StatType.CurrentHp)
+        {
+            PlayerController.Instance.HpBarUI.UpdateFill(playerStatDic[StatType.CurrentHp].FinalValue, playerStatDic[StatType.MaxHp].FinalValue);
+        }
     }
 
     public void AllDecreaseStatValue(StatType statType, float value)
@@ -80,6 +92,10 @@ public class PlayerStatManager : MonoBehaviour
         {
             playerStatDic[StatType.CurrentHp].MaxValue = playerStatDic[StatType.MaxHp].FinalValue;
         }
+        else if (statType == StatType.CurrentHp)
+        {
+            PlayerController.Instance.HpBarUI.UpdateFill(playerStatDic[StatType.CurrentHp].FinalValue, playerStatDic[StatType.MaxHp].FinalValue);
+        }
     }
 
     public float GetFinalValue(StatType statType)
@@ -87,16 +103,16 @@ public class PlayerStatManager : MonoBehaviour
         return playerStatDic[statType].FinalValue;
     }
 
-    private PlayerStat StatFactory(StatType type)
+    private PlayerStat StatFactory(StatType type, float value)
     {
         return type switch
         {
-            StatType.MaxHp     => new PlayerStat(type, 5),
-            StatType.CurrentHp => new PlayerStat(type, 5),
-            StatType.AttackPow => new PlayerStat(type, 5),
-            StatType.Defense   => new PlayerStat(type, 5),
-            StatType.AttackSpd => new PlayerStat(type, 1f, 0.2f, 3f),
-            StatType.MoveSpeed => new PlayerStat(type, 5, 2, 8),
+            StatType.MaxHp     => new PlayerStat(type, value),
+            StatType.CurrentHp => new PlayerStat(type, value),
+            StatType.AttackPow => new PlayerStat(type, value),
+            StatType.Defense   => new PlayerStat(type, value),
+            StatType.AttackSpd => new PlayerStat(type, value, 0.2f, 3f),
+            StatType.MoveSpeed => new PlayerStat(type, value, 2, 8),
             _                  => null
         };
     }
