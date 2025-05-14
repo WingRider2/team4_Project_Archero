@@ -30,8 +30,10 @@ public class SaveManager : Singleton<SaveManager>
             SaveData.BestChapter = GameManager.Instance.BestChapter;
         }
 
-        var sJson = JsonConvert.SerializeObject(SaveData, Formatting.Indented);
-        File.WriteAllText(path, sJson);
+        var    sJson     = JsonConvert.SerializeObject(SaveData, Formatting.Indented);
+        string encrypted = AESUtil.Encrypt(sJson);
+
+        File.WriteAllText(path, encrypted);
     }
 
     public void LoadFile()
@@ -45,7 +47,9 @@ public class SaveManager : Singleton<SaveManager>
             }
 
             string encrypted = File.ReadAllText(path);
-            SaveData = JsonConvert.DeserializeObject<SaveData>(encrypted);
+            string decrypted = AESUtil.Decrypt(encrypted);
+
+            SaveData = JsonConvert.DeserializeObject<SaveData>(decrypted);
         }
         catch (Exception e)
         {
