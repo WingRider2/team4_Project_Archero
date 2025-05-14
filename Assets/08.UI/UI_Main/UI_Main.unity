@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 11822613}
   - component: {fileID: 11822612}
   - component: {fileID: 11822611}
+  - component: {fileID: 11822614}
   m_Layer: 5
   m_Name: Button (3)
   m_TagString: Untagged
@@ -339,7 +340,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11822612}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11822614}
+        m_TargetAssemblyTypeName: KeyRemapper, Assembly-CSharp
+        m_MethodName: StartRebinding
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: left
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &11822612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,6 +391,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11822609}
   m_CullTransparentMesh: 1
+--- !u!114 &11822614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11822609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce1ba3dccfc97e4d824d4fb8b6c9e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAction: {fileID: -3658510120406034354, guid: 5d0c0bda3bedab54ea37bc2f52d90edd, type: 3}
+  bindingDisplayNameText: {fileID: 987453008}
+  Button: {fileID: 11822611}
+  displayStringOptions: 0
 --- !u!1 &47965777
 GameObject:
   m_ObjectHideFlags: 0
@@ -4411,6 +4440,7 @@ GameObject:
   - component: {fileID: 753832406}
   - component: {fileID: 753832405}
   - component: {fileID: 753832404}
+  - component: {fileID: 753832407}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -4481,7 +4511,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 753832405}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 753832407}
+        m_TargetAssemblyTypeName: KeyRemapper, Assembly-CSharp
+        m_MethodName: StartRebinding
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: down
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &753832405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4520,6 +4562,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753832402}
   m_CullTransparentMesh: 1
+--- !u!114 &753832407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753832402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce1ba3dccfc97e4d824d4fb8b6c9e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAction: {fileID: -3658510120406034354, guid: 5d0c0bda3bedab54ea37bc2f52d90edd, type: 3}
+  bindingDisplayNameText: {fileID: 264895190}
+  Button: {fileID: 753832404}
+  displayStringOptions: 0
 --- !u!1 &787534563
 GameObject:
   m_ObjectHideFlags: 0
@@ -5959,9 +6017,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce1ba3dccfc97e4d824d4fb8b6c9e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAction: {fileID: 0}
-  bindingDisplayNameText: {fileID: 0}
-  Button: {fileID: 0}
+  currentAction: {fileID: -3658510120406034354, guid: 5d0c0bda3bedab54ea37bc2f52d90edd, type: 3}
+  bindingDisplayNameText: {fileID: 787534565}
+  Button: {fileID: 1142480228}
   displayStringOptions: 0
 --- !u!114 &1142480228
 MonoBehaviour:
@@ -6010,13 +6068,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1142480227}
         m_TargetAssemblyTypeName: KeyRemapper, Assembly-CSharp
         m_MethodName: StartRebinding
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: up
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1142480229
@@ -8480,6 +8538,7 @@ GameObject:
   - component: {fileID: 1866508376}
   - component: {fileID: 1866508375}
   - component: {fileID: 1866508374}
+  - component: {fileID: 1866508377}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -8550,7 +8609,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1866508375}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1866508377}
+        m_TargetAssemblyTypeName: KeyRemapper, Assembly-CSharp
+        m_MethodName: StartRebinding
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: right
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1866508375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8589,6 +8660,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866508372}
   m_CullTransparentMesh: 1
+--- !u!114 &1866508377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866508372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce1ba3dccfc97e4d824d4fb8b6c9e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAction: {fileID: -3658510120406034354, guid: 5d0c0bda3bedab54ea37bc2f52d90edd, type: 3}
+  bindingDisplayNameText: {fileID: 2102393448}
+  Button: {fileID: 1866508374}
+  displayStringOptions: 0
 --- !u!1 &1881744356
 GameObject:
   m_ObjectHideFlags: 0
