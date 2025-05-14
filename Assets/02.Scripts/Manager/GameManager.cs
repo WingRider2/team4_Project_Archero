@@ -28,4 +28,11 @@ public class GameManager : Singleton<GameManager>
     {
         MapManager.Instance.GenerateMap(SelectedChapter);
     }
+
+
+    public void SaveGame()
+    {
+        List<SaveQuestData> questData = QuestManager.Instance.QusetList;
+        int                 Gold      = AccountManager.Instance.Gold;
+    }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 
 /// <summary>
@@ -12,6 +13,7 @@ public class StatusEffectManager : MonoBehaviour
     private Dictionary<DebuffType, Coroutine> activeDebuffs = new Dictionary<DebuffType, Coroutine>();
     private MonsterBase monster;
 
+    private Dictionary<DebuffType, IDebuffSkill> debuffSkills = new Dictionary<DebuffType, IDebuffSkill>();
 
     void Start()
     {
@@ -31,43 +33,109 @@ public class StatusEffectManager : MonoBehaviour
         activeDebuffs[type] = newDebuff;
     }
 
+    public void ApplyDebuff(IDebuffSkill debuffSkill)
+    {
+        if (debuffSkill.DebuffType == DebuffType.None) return;
+        if (debuffSkills.TryGetValue(debuffSkill.DebuffType, out var debuff))
+        {
+            Debug.Log("Duration 갱신");
+            debuff.Duration = debuffSkill.Duration;
+        }
+        else
+        {
+            debuffSkills[debuffSkill.DebuffType] = debuffSkill;
+            StartCoroutine(HandleDebuff(debuffSkills[debuffSkill.DebuffType]));
+        }
+    }
+
     private IEnumerator HandleDebuff(DebuffType type, float value, float duration)
     {
         float elapsed = 0f;
 
-        if (type == DebuffType.Burn || type == DebuffType.Posion)
+        switch (type)
         {
-            while (elapsed < duration)
-            {
-                monster.MonsterStatManager.AllDecreaseStatValue(StatType.CurrentHp, value);
-
-                // 몬스터의 체력이 0 이하인 경우 사망 처리
-                float currentHp = monster.MonsterStatManager.GetFinalValue(StatType.CurrentHp);
-                if (currentHp < 0f)
+            case DebuffType.Burn:
+            case DebuffType.Posion:
                 {
-                    monster.SendMessage("Dead", SendMessageOptions.DontRequireReceiver);
-                    yield break;
+                    while (elapsed < duration)
+                    {
+                        monster.Damaged(value);
+
+                        if (monster.IsDead)
+                        {
+                            yield break;
+                        }
+
+                        yield return new WaitForSeconds(1f);
+                        elapsed += 1f;
+                    }
+
+                    break;
                 }
+            case DebuffType.Slow:
+                {
+                    float originalMoveSpeed = monster.MonsterStatManager.GetFinalValue(StatType.MoveSpeed);
+                    float reducedSpeed      = originalMoveSpeed * (1 - value); // ex) value가 0.3이면 30% 감소
 
-                yield return new WaitForSeconds(1f);
-                elapsed += 1f;
-            }
-        }
-        else if (type == DebuffType.Slow)
-        {
-            float originalMoveSpeed = monster.MonsterStatManager.GetFinalValue(StatType.MoveSpeed);
-            float reducedSpeed = originalMoveSpeed * (1 - value);   // ex) value가 0.3이면 30% 감소
+                    Debug.Log(originalMoveSpeed);
+                    monster.MonsterStatManager.DecreaseStatValue(StatType.MoveSpeed, StatValueType.Buff, originalMoveSpeed - reducedSpeed);
 
-            monster.MonsterStatManager.DecreaseStatValue(StatType.MoveSpeed, StatValueType.Buff, reducedSpeed);
+                    yield return new WaitForSeconds(duration);
 
-            yield return new WaitForSeconds(duration);
-
-            // yield return 다음 디버프값 복구
-            monster.MonsterStatManager.IncreaseStatValue(StatType.MoveSpeed, StatValueType.Buff, reducedSpeed);
+                    // yield return 다음 디버프값 복구
+                    monster.MonsterStatManager.IncreaseStatValue(StatType.MoveSpeed, StatValueType.Buff, originalMoveSpeed - reducedSpeed);
+                    break;
+                }
         }
 
         // 디버프 종료 시, 딕셔너리에서 제거
         activeDebuffs.Remove(type);
+    }
+
+    private IEnumerator HandleDebuff(IDebuffSkill debuffSkill)
+    {
+        switch (debuffSkill.DebuffType)
+        {
+            case DebuffType.Burn:
+            case DebuffType.Posion:
+                {
+                    while (debuffSkill.Duration > 0)
+                    {
+                        monster.Damaged(debuffSkill.DPS);
+
+                        if (monster.IsDead)
+                        {
+                            yield break;
+                        }
+
+                        yield return new WaitForSeconds(1f);
+                        debuffSkill.Duration -= 1f;
+                    }
+
+                    break;
+                }
+            case DebuffType.Slow:
+                {
+                    float originalMoveSpeed = monster.MonsterStatManager.GetFinalValue(StatType.MoveSpeed);
+                    float reducedSpeed      = originalMoveSpeed * (1 - debuffSkill.Duration); // ex) value가 0.3이면 30% 감소
+
+                    Debug.Log($"MoveSpd : {originalMoveSpeed}");
+                    monster.MonsterStatManager.DecreaseStatValue(StatType.MoveSpeed, StatValueType.Buff, originalMoveSpeed - reducedSpeed);
+
+                    while (debuffSkill.Duration > 0)
+                    {
+                        Debug.Log($"{debuffSkill.Duration}초");
+
+                        yield return new WaitForSeconds(1f);
+                        debuffSkill.Duration -= 1f;
+                    }
+
+                    monster.MonsterStatManager.IncreaseStatValue(StatType.MoveSpeed, StatValueType.Buff, originalMoveSpeed - reducedSpeed);
+                    break;
+                }
+        }
+
+        debuffSkills.Remove(debuffSkill.DebuffType);
     }
 
     // 몬스터가 죽을때 호출되는 클리어 디버프 함수
@@ -79,6 +147,7 @@ public class StatusEffectManager : MonoBehaviour
             StopCoroutine(pair.Value);
         }
 
+        debuffSkills.Clear();
         activeDebuffs.Clear();
     }
 }

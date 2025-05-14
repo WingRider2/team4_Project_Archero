@@ -49,7 +49,9 @@ public class ProjectileController : MonoBehaviour, IPoolObject
             {
                 if (skill is IDebuffSkill debuffSkill)
                 {
-                    monster.ApplyDebuff(debuffSkill.DebuffType, debuffSkill.DPS, debuffSkill.Duration);
+                    var debuffClone = debuffSkill.Clone();
+                    // monster.ApplyDebuff(debuffSkill.DebuffType, debuffSkill.DPS, debuffSkill.Duration);
+                    monster.ApplyDebuff(debuffClone);
                 }
             }
 
