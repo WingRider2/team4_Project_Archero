@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     public void StageClear()
     {
         MapManager.Instance.CurrentDoor.DoorControl(true);
+        QuestManager.Instance.UpdateCurrentCount(QuestConditionType.Challenge, 1);
         if (MapManager.Instance.CurrentChapterData.StageDatas.Count - 1 == MapManager.Instance.currentStage)
         {
             ChapterClear(MapManager.Instance.CurrentChapterData);

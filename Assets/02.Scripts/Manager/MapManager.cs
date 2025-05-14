@@ -70,7 +70,6 @@ public class MapManager : SceneOnlyManager<MapManager>
         SpawnDoors();
         GenerateObstacle(stageData);
         CameraController.Instance.MapUpdate();
-        QuestManager.Instance.UpdateCurrentCount(QuestConditionType.Challenge, 1);
     }
 
     private void GenerateTile(Tilemap tilemap, Tilemap dataTilemap)
