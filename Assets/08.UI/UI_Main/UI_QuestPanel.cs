@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class UI_QuestPanel : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI
-    name_text,
-    reward_text,
-    progress_text;
+        name_text,
+        reward_text,
+        progress_text;
 
     // public Sprite reward_sprite; // 골드 외 다른 아이템이 없기에 스프라이트는 바꾸지 않는 것으로..
     [SerializeField] RectTransform progress_bar;
@@ -25,7 +25,7 @@ public class UI_QuestPanel : MonoBehaviour
     {
         // 해당 퀘스트 번호에 해당하는 퀘스트 정보를 써주기!
         // transform.GetSiblingIndex() : 1번부터 시작. 마침 퀘스트도 1번부터 시작하기에 바로 사용 가능
-        PrintQuest_Init(QuestManager.Instance.QusetList[transform.GetSiblingIndex()]);
+        PrintQuest_Init(QuestManager.Instance.QuestList[transform.GetSiblingIndex()]);
     }
 
     // 시작할 때 모든 퀘스트 항목에 대해 한번씩 호출하여 퀘스트 데이터를 써주게끔
@@ -74,7 +74,7 @@ public class UI_QuestPanel : MonoBehaviour
         else
         {
             // 퀘스트 목표, 진행 값(표시가 목표값을 넘지 않도록 클램프)
-            int goal = saveQuestData.Condition.RequiredCount,
+            int goal             = saveQuestData.Condition.RequiredCount,
                 progress_Clamped = Mathf.Clamp(saveQuestData.Condition.CurrentCount, 0, goal);
 
             // 텍스트로 표시
@@ -90,10 +90,10 @@ public class UI_QuestPanel : MonoBehaviour
     public void GetQuestReward()
     {
         // 보상 지급
-        QuestManager.Instance.QusetList[transform.GetSiblingIndex()].ClearQuest();
+        QuestManager.Instance.QuestList[transform.GetSiblingIndex()].ClearQuest();
 
         // 업적 형태로 점점 늘어나게끔 디자인 되어 있어 이를 새로고침하여 다시 써주기
-        PrintQuest_Init(QuestManager.Instance.QusetList[transform.GetSiblingIndex()]);
+        PrintQuest_Init(QuestManager.Instance.QuestList[transform.GetSiblingIndex()]);
 
         // 바뀐 골드에 맞게 텍스트 변경
         ui_GoldText.RenewalGoldText();
