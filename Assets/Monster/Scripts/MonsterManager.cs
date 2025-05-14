@@ -47,9 +47,16 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
     private void HandleMonsterDeath(MonsterBase mon)
     {
         mon.OnDeath -= HandleMonsterDeath;
-        Debug.Log($"{mon.name} 몬스터 사망");
-        //TODO : 보스몬스터일때 보스 퀘스트로 증가
-        QuestManager.Instance.UpdateCurrentCount(QuestConditionType.MonsterKill, 1);
+        switch (mon.MonsterData.Type)
+        {
+            case MonType.Boss:
+                QuestManager.Instance.UpdateCurrentCount(QuestConditionType.BossMonsterKill, 1);
+                break;
+            default:
+                QuestManager.Instance.UpdateCurrentCount(QuestConditionType.MonsterKill, 1);
+                break;
+        }
+
         monsters.Remove(mon);
         if (monsters.Count == 0)
         {

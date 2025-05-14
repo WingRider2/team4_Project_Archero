@@ -22,6 +22,8 @@ public class MprohectileController : MonoBehaviour, IPoolObject
 
     protected ObjectPoolManager mPoolManager;
 
+    private MonsterBase m_MonsterBase;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,6 +32,7 @@ public class MprohectileController : MonoBehaviour, IPoolObject
     protected virtual void Start()
     {
         mPoolManager = ObjectPoolManager.Instance;
+        m_MonsterBase = mWeaponHandler.GetComponent<MonsterBase>();
     }
 
     protected virtual void Update()
@@ -48,15 +51,15 @@ public class MprohectileController : MonoBehaviour, IPoolObject
     {
         if (collision.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<HitPart>()?.Damaged(3);
+            collision.gameObject.GetComponentInChildren<HitPart>()?.Damaged(m_MonsterBase.MonsterStatManager.GetFinalValue(StatType.AttackPow));
 
             mPoolManager.ReturnObject(this);
         }
+
         if (collision.CompareTag("Obstacle"))
         {
             mPoolManager.ReturnObject(this);
         }
-        
     }
 
     public virtual void Init(Vector2 dir, MWeaponHandler weaponHandler)

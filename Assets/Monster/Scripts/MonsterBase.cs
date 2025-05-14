@@ -44,6 +44,7 @@ public class MonsterBase : MonoBehaviour
 
 
     private HPBarUI hpBarUI;
+    public MonsterData MonsterData { get; private set; }
 
     protected virtual void Awake()
     {
@@ -85,6 +86,7 @@ public class MonsterBase : MonoBehaviour
         attackRange = monsterData.AttackRange;
         findRange = monsterData.FindRange;
         MonsterStatManager.Initialize(monsterData);
+        MonsterData = monsterData;
     }
 
     public virtual float Attack()
