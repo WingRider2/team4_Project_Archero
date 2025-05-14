@@ -18,20 +18,51 @@ public class KeyRemapper : MonoBehaviour
 
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
 
-    //내일 추가 수정
-    public void StartRebinding()
+    private int bindingIndexToRebind = -1;
+
+
+    public int FindBindingIndexByPart(int compositeIndex, string partName)
     {
+        var bindings = currentAction.action.bindings;
+        int compositeCount = -1;
+
+        for (int i = 0; i < bindings.Count; i++)
+        {
+            if (bindings[i].isComposite)
+            {
+                compositeCount++;
+            }
+
+            if (bindings[i].isPartOfComposite &&
+                compositeCount == compositeIndex &&
+                bindings[i].name.CompareTo(partName)==0)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+    //내일 추가 수정
+    public void StartRebinding(string partName)
+    {
+        bindingIndexToRebind = FindBindingIndexByPart(0, partName);
+        if (bindingIndexToRebind == -1)
+        {
+            Debug.LogError($"'{partName}'에 해당하는 바인딩을 찾을 수 없습니다.");
+            return;
+        }
         // 리바인딩 시작하는 함수. 각 버튼에 OnClick함수로 넣어줄 함수.
         currentAction.action.Disable();
 
         Button.gameObject.SetActive(true);
 
-        rebindingOperation = currentAction.action.PerformInteractiveRebinding()
+        rebindingOperation = currentAction.action.PerformInteractiveRebinding(bindingIndexToRebind)
             .WithControlsExcluding("<Mouse>/rightButton")
-            .WithCancelingThrough("<Mouse>/leftButton")
+            //.WithCancelingThrough("<Mouse>/leftButton")
             .OnCancel(operation => RebindCancel())
             .OnComplete(operation => RebindComplete())
-            .Start();
+            .Start();        
     }
 
     private void RebindCancel()
@@ -46,13 +77,12 @@ public class KeyRemapper : MonoBehaviour
     private void RebindComplete()
     {
         // 리바인딩이 완료됐을 때 실행될 함수
-        var displayString = string.Empty;
-        var deviceLayoutName = default(string);
-        var controlPath = default(string);
-
-        displayString = currentAction.action.GetBindingDisplayString(0, out deviceLayoutName, out controlPath, displayStringOptions);
-
+        string displayString = currentAction.action.GetBindingDisplayString(bindingIndexToRebind, displayStringOptions);
         bindingDisplayNameText.text = displayString;
+
+        rebindingOperation.Dispose();
+        currentAction.action.actionMap?.Enable();
+        currentAction.action.Enable();
     }
 
     public void ShowBindText()

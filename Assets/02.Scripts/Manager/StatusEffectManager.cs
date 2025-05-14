@@ -31,22 +31,39 @@ public class StatusEffectManager : MonoBehaviour
         activeDebuffs[type] = newDebuff;
     }
 
-    private IEnumerator HandleDebuff(DebuffType type, float damage, float duration)
+    private IEnumerator HandleDebuff(DebuffType type, float value, float duration)
     {
         float elapsed = 0f;
 
-        while (elapsed < duration)
+        if (type == DebuffType.Burn || type == DebuffType.Posion)
         {
-            monster.Damaged(damage);
-            if (monster.IsDead)
+            while (elapsed < duration)
             {
-                // monster.SendMessage("Dead", SendMessageOptions.DontRequireReceiver);
-                activeDebuffs.Clear();
-                yield break;
-            }
+                monster.MonsterStatManager.AllDecreaseStatValue(StatType.CurrentHp, value);
 
-            yield return new WaitForSeconds(1f);
-            elapsed += 1f;
+                // 몬스터의 체력이 0 이하인 경우 사망 처리
+                float currentHp = monster.MonsterStatManager.GetFinalValue(StatType.CurrentHp);
+                if (currentHp < 0f)
+                {
+                    monster.SendMessage("Dead", SendMessageOptions.DontRequireReceiver);
+                    yield break;
+                }
+
+                yield return new WaitForSeconds(1f);
+                elapsed += 1f;
+            }
+        }
+        else if (type == DebuffType.Slow)
+        {
+            float originalMoveSpeed = monster.MonsterStatManager.GetFinalValue(StatType.MoveSpeed);
+            float reducedSpeed = originalMoveSpeed * (1 - value);   // ex) value가 0.3이면 30% 감소
+
+            monster.MonsterStatManager.DecreaseStatValue(StatType.MoveSpeed, StatValueType.Buff, reducedSpeed);
+
+            yield return new WaitForSeconds(duration);
+
+            // yield return 다음 디버프값 복구
+            monster.MonsterStatManager.IncreaseStatValue(StatType.MoveSpeed, StatValueType.Buff, reducedSpeed);
         }
 
         // 디버프 종료 시, 딕셔너리에서 제거
