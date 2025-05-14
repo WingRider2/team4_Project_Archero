@@ -37,6 +37,7 @@ public class MonsterCloseSim : MonsterBase
         Vector2 nowPos = transform.position;
         yield return new WaitForSeconds(0.2f);
         float nowTime = 0;
+        soundPlayer.Play(UnitSoundType.Attack);
         while (nowTime<attackTime)
         {
             nowTime += Time.deltaTime;

@@ -21,6 +21,7 @@ public class MonsterRangeSim : MonsterBase
             base.Attack();
             Vector2 dir = Target.position - transform.position;
             m_Controller.Attack(dir);
+            soundPlayer.Play(UnitSoundType.Attack);
             return MonsterStatManager.GetFinalValue(StatType.AttackPow);
      
 

@@ -46,10 +46,20 @@ public class MprohectileController : MonoBehaviour, IPoolObject
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        mPoolManager.ReturnObject(this);
+        if (collision.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<HitPart>()?.Damaged(3);
+
+            mPoolManager.ReturnObject(this);
+        }
+        if (collision.CompareTag("Obstacle"))
+        {
+            mPoolManager.ReturnObject(this);
+        }
+        
     }
 
-    public void Init(Vector2 dir, MWeaponHandler weaponHandler)
+    public virtual void Init(Vector2 dir, MWeaponHandler weaponHandler)
     {
         mWeaponHandler = weaponHandler;
         direction = dir;

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf34934239597564aa7121b6a95859c0, type: 3}
+  m_Name: CloseMonSound
+  m_EditorClassIdentifier: 
+  attack: {fileID: 8300000, guid: 5f521371edb143d438493784d98ec37e, type: 3}
+  hit: {fileID: 8300000, guid: baf64325399654648a9db5319d3be41b, type: 3}
+  die: {fileID: 8300000, guid: 1469695f2ce03604daa7fa1b7b0ea679, type: 3}
+  skill: {fileID: 8300000, guid: 52e44914fe9b4e846a103835f3df489e, type: 3}
+  move: {fileID: 8300000, guid: ae0b85b792783ac418a84e2d2059687b, type: 3}
