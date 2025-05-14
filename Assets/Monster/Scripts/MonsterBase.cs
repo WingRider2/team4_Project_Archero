@@ -59,8 +59,6 @@ public class MonsterBase : MonoBehaviour
         statusEffectManager = GetComponent<StatusEffectManager>();
         soundPlayer = GetComponent<UnitSoundPlayer>();
         hpBarUI = HealthBarManager.Instance.SpawnHealthBar(transform);
-      
-  
     }
 
     public void setPath(List<Vector2> _path)
@@ -87,7 +85,6 @@ public class MonsterBase : MonoBehaviour
 
     public virtual float Attack()
     {
-      
         movementDir = Vector2.zero;
         lookDir = (target.position - transform.position).normalized;
         Move();
@@ -117,7 +114,6 @@ public class MonsterBase : MonoBehaviour
         // StartCoroutine(Timer(0.2f, () => isInvincible = false));
         if (curHp <= 0)
             Dead();
-        
     }
 
     private void Dead()
@@ -132,25 +128,27 @@ public class MonsterBase : MonoBehaviour
         isDead = true;
         OnDeath?.Invoke(this);
         hpBarUI.UnLink();
-       
+
         Destroy(gameObject);
     }
-   
+
 
     public void Move()
     {
         Rotate(lookDir);
         Movement(movementDir);
     }
-    SoundSource move=null;
+
+    SoundSource move = null;
+
     private void Movement(Vector2 direction)
     {
         float moveSpeed = MonsterStatManager.GetFinalValue(StatType.MoveSpeed);
         direction = direction * moveSpeed;
         _rigidbody.velocity = direction;
         if (move == null)
-            move=soundPlayer.MakeLoop(UnitSoundType.Move);
-        if(direction == Vector2.zero)
+            move = soundPlayer.MakeLoop(UnitSoundType.Move);
+        if (direction == Vector2.zero)
             move.LoopStop();
         else
             move.LoopStart();
@@ -207,12 +205,6 @@ public class MonsterBase : MonoBehaviour
         {
             collision.gameObject.GetComponent<HitPart>()?.Damaged(MonsterStatManager.GetFinalValue(StatType.AttackPow));
         }
-    }
-
-    // 몬스터에게 디버프를 적용시켜줄 함수
-    public void ApplyDebuff(DebuffType type, float debuffDPS, float duration)
-    {
-        statusEffectManager?.ApplyDebuff(type, debuffDPS, duration);
     }
 
     public void ApplyDebuff(IDebuffSkill debuffSkill)
