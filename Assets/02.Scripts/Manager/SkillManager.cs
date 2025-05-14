@@ -54,7 +54,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
             //int skillById = Random.Range(0, skillTable.DataDic.Count + 1);
 
             int skillById = skillIDs[Random.Range(0, skills.Count)];
-            var skill     = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
+            var skill = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
             selectSkillList.Add(skill);
         }
 
@@ -69,6 +69,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
             SkillType.Attack when skill.Id == 2 => new BackArrowSkill(skill),
             SkillType.Attack when skill.Id == 3 => new SideArrowSkill(skill),
             SkillType.Attack when skill.Id == 4 => new PoisonArrowSkill(skill),
+            SkillType.Attack when skill.Id == 5 => new FireArrowSkill(skill),
 
             SkillType.Stat => new StatSkill(skill),
 
@@ -97,9 +98,5 @@ public class SkillManager : SceneOnlyManager<SkillManager>
         {
             skills.Remove(skill);
         }
-    }
-
-    protected override void OnDestroy()
-    {
     }
 }
