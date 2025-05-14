@@ -59,6 +59,10 @@ public class MonsterStatManager : MonoBehaviour
         {
             monsterStatDic[StatType.CurrentHp].MaxValue = monsterStatDic[StatType.MaxHp].FinalValue;
         }
+        else if (statType == StatType.MoveSpeed)
+        {
+            monsterStatDic[StatType.MoveSpeed].MaxValue = monsterStatDic[StatType.MoveSpeed].FinalValue;
+        }
     }
 
     public float GetFinalValue(StatType statType)
