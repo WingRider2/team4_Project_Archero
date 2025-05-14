@@ -61,7 +61,6 @@ public class ProjectileController : MonoBehaviour, IPoolObject
 
     public void Launch(Vector2 direction, float speed)
     {
-        Debug.Log("발사");
         rigid.velocity = direction.normalized * speed;
     }
 }

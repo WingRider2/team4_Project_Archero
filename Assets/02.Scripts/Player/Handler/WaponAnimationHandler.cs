@@ -16,7 +16,6 @@ public class WaponAnimationHandler : MonoBehaviour
 
     public void Shot()
     {
-        Debug.Log("น฿ป็");
         animator.SetTrigger("ShotTrigger");
     }
 }

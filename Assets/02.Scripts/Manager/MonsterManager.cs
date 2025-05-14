@@ -73,7 +73,6 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
         mon.OnDeath += HandleMonsterDeath;
         if (mon == null)
         {
-            Debug.Log("���� ���� ����");
             return null;
         }
 

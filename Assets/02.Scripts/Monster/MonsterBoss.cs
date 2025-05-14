@@ -46,7 +46,6 @@ public class MonsterBoss : MonsterBase
     }
     public bool Teleport(Vector2 pos)
     {
-        Debug.Log("이동");
         transform.position = pos+new Vector2(0,1);
         return true;
     }

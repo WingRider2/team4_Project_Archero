@@ -179,14 +179,12 @@ public class PlayerController : SceneOnlyManager<PlayerController>
             if (moveSound == null)
                 moveSound = soundPlayer.MakeLoop(UnitSoundType.Move);
             moveSound.LoopStart();
-            Debug.Log("이동시작");
             isMove = true;
             isAttack = false;
         }
         else
         {
             moveSound?.LoopStop();
-            Debug.Log("이동 종료");
             isMove = false;
             isAttack = true;
             timeSinceLastAttack = 0; // 공격 지연 시간 초기화
