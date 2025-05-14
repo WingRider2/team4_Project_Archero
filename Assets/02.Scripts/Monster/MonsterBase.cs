@@ -108,7 +108,7 @@ public class MonsterBase : MonoBehaviour
     {
         // if (isInvincible)
         //     return;
-        Debug.Log($"공격 받음 {damage}");
+       
         soundPlayer.Play(UnitSoundType.Hit);
         MonsterStatManager.AllDecreaseStatValue(StatType.CurrentHp, damage);
         float curHp = MonsterStatManager.GetFinalValue(StatType.CurrentHp);
@@ -193,7 +193,7 @@ public class MonsterBase : MonoBehaviour
 
     public void SetTarget(Transform _target)
     {
-        Debug.Log("플레이어 확인");
+        
         target = _target;
     }
 
