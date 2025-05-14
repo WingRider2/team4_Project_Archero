@@ -32,6 +32,7 @@ public abstract class BaseStat
 
     public float DecreaseBaseValue(float value)
     {
+        value = Mathf.Abs(value);
         float decreaseAmount = Mathf.Min(BaseValue, value);
         BaseValue -= decreaseAmount;
         return value - decreaseAmount;
@@ -44,8 +45,10 @@ public abstract class BaseStat
 
     public float DecreaseBuffValue(float value)
     {
-        BuffValue -= value;
-        return BuffValue;
+        value = Mathf.Abs(value);
+        float decreaseAmount = Mathf.Min(BuffValue, value);
+        BuffValue -= decreaseAmount;
+        return value - decreaseAmount;
     }
 
     protected void TriggerEvent(float updateValue)

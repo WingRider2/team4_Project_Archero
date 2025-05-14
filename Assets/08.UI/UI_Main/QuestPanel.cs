@@ -82,9 +82,6 @@ public class QuestPanel : MonoBehaviour
     // 퀘스트 버튼을 눌렀을 때, 보상 받기
     public void GetQuestReward()
     {
-        QuestData tmpData = TableManager.Instance.GetTable<QuestTable>().GetDataByID(transform.GetSiblingIndex());
-
-        // 아래의 보상 골드를 보유 골드에 더해주기
-        // tmpData.RewardData.RewardGold;
+        QuestManager.Instance.QusetList[transform.GetSiblingIndex()].ClearQuest();
     }
 }

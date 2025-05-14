@@ -13,7 +13,8 @@ public enum PoolType
     PoisonArrow,
     BloodArrow,
     MonsterBullet,
-    MonsterCircleBullet
+    MonsterCircleBullet,
+    HealthBar
 }
 
 public class ObjectPoolManager : SceneOnlyManager<ObjectPoolManager>

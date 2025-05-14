@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     public void ChapterClear(ChapterData chapter)
     {
         RewardManager.Instance.GiveReward(chapter.RewardData);
+        QuestManager.Instance.UpdateCurrentCount(QuestConditionType.ChapterClear, 1);
     }
 
     public void StartGame()
