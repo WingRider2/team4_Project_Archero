@@ -43,7 +43,7 @@ public class KeyRemapper : MonoBehaviour
 
         return -1;
     }
-    //내일 추가 수정
+    // 리바인딩 시작하는 함수. 각 버튼에 OnClick함수로 넣어줄 함수.
     public void StartRebinding(string partName)
     {
         bindingIndexToRebind = FindBindingIndexByPart(0, partName);
@@ -52,14 +52,14 @@ public class KeyRemapper : MonoBehaviour
             Debug.LogError($"'{partName}'에 해당하는 바인딩을 찾을 수 없습니다.");
             return;
         }
-        // 리바인딩 시작하는 함수. 각 버튼에 OnClick함수로 넣어줄 함수.
+        
         currentAction.action.Disable();
 
         Button.gameObject.SetActive(true);
 
         rebindingOperation = currentAction.action.PerformInteractiveRebinding(bindingIndexToRebind)
             .WithControlsExcluding("<Mouse>/rightButton")
-            //.WithCancelingThrough("<Mouse>/leftButton")
+            .WithCancelingThrough("<Mouse>/leftButton")
             .OnCancel(operation => RebindCancel())
             .OnComplete(operation => RebindComplete())
             .Start();        
