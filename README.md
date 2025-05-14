@@ -75,7 +75,7 @@ UIManager_Main, UIManager_Battle 구조 분리
 패턴	          사용 위치
 
 |패턴|사용 위치|
-|------|---|---|
+|------|---|
 |Singleton|GameManager, SaveManager, SoundManager, TableManager, 등
 |Factory|StatFactory(), CreateSkill() 내부|
 |Strategy|ISkill, IDebuffSkill, IAngleArrowSkill|
