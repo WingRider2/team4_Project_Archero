@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 public class MonsterStat : BaseStat
 {
     public override float FinalValue => Mathf.Clamp(BaseValue + BuffValue, MinValue, MaxValue);

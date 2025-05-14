@@ -19,9 +19,9 @@ MonoBehaviour:
     Type: 0
     Stats:
     - StatType: 0
-      Value: 10
+      Value: 150
     - StatType: 1
-      Value: 10
+      Value: 150
     - StatType: 2
       Value: 5
     - StatType: 4
@@ -39,9 +39,9 @@ MonoBehaviour:
     Type: 2
     Stats:
     - StatType: 0
-      Value: 10
+      Value: 150
     - StatType: 1
-      Value: 10
+      Value: 150
     - StatType: 2
       Value: 5
     - StatType: 3
@@ -59,9 +59,9 @@ MonoBehaviour:
     Type: 1
     Stats:
     - StatType: 0
-      Value: 10
+      Value: 150
     - StatType: 1
-      Value: 10
+      Value: 150
     - StatType: 2
       Value: 5
     - StatType: 3

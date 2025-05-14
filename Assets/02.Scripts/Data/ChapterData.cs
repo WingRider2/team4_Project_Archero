@@ -24,6 +24,7 @@ public class StageData
 {
     public int MonsterSpawnCount;
     public int ObstacleSpawnCount;
+    public bool IsBossStage;
 }
 
 [Serializable]
@@ -34,4 +35,5 @@ public class TilemapData
     public Tilemap ColliderTilemap;
     public Tilemap DoorTilemap;
     public Tilemap PlayerSpawnTilemap;
+    public Tilemap BossSpawnTilemap;
 }

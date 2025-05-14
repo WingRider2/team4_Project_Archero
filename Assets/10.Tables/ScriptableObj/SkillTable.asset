@@ -77,7 +77,7 @@ MonoBehaviour:
     Name: "\uB3D9\uC0C1 \uD654\uC0B4"
     Info: "\uC77C\uC815\uC2DC\uAC04 \uB3D9\uC548 \uC801\uC758 \uC774\uB3D9\uC18D\uB3C4\uB97C
       \uC800\uD558\uC2DC\uD0B5\uB2C8\uB2E4."
-    dps: 5
+    dps: 0.3
     duration: 5
     SkillIcon: {fileID: 21300000, guid: 5851bf9e5a0fd7b4cb5abfea192d8280, type: 3}
   - Id: 101

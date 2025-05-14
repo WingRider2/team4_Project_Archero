@@ -38,7 +38,7 @@ public abstract class BaseStat
         return value - decreaseAmount;
     }
 
-    public void IncreaseBuffStat(float value)
+    public void ApplyBuffStat(float value)
     {
         BuffValue += value;
     }

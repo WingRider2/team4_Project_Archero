@@ -37,7 +37,7 @@ public class PlayerStatManager : MonoBehaviour
                 playerStatDic[statType].IncreaseBaseStat(value);
                 break;
             case StatValueType.Buff:
-                playerStatDic[statType].IncreaseBuffStat(value);
+                playerStatDic[statType].ApplyBuffStat(value);
                 break;
             case StatValueType.Equipment:
                 playerStatDic[statType].IncreaseEquipmentValue(value);

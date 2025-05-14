@@ -16,6 +16,19 @@ public class MonsterStatManager : MonoBehaviour
         }
     }
 
+    public void ApplyStatEffect(StatType statType, StatValueType valueType, float value)
+    {
+        switch (valueType)
+        {
+            case StatValueType.Base:
+                monsterStatDic[statType].IncreaseBaseStat(value); // value 음수도 허용 가능
+                break;
+            case StatValueType.Buff:
+                monsterStatDic[statType].ApplyBuffStat(value); // 디버프는 음수
+                break;
+        }
+    }
+
     public void IncreaseStatValue(StatType statType, StatValueType valueType, float value)
     {
         switch (valueType)
@@ -24,7 +37,7 @@ public class MonsterStatManager : MonoBehaviour
                 monsterStatDic[statType].IncreaseBaseStat(value);
                 break;
             case StatValueType.Buff:
-                monsterStatDic[statType].IncreaseBuffStat(value);
+                monsterStatDic[statType].ApplyBuffStat(value);
                 break;
         }
 
@@ -46,22 +59,20 @@ public class MonsterStatManager : MonoBehaviour
                 break;
         }
 
-        if (statType == StatType.MaxHp)
-        {
-            monsterStatDic[StatType.CurrentHp].MaxValue = monsterStatDic[StatType.MaxHp].FinalValue;
-        }
+        RefreshLinkedMaxHpStat(statType);
     }
 
     public void AllDecreaseStatValue(StatType statType, float value)
     {
         monsterStatDic[statType].DecreaseAllValue(value);
+        RefreshLinkedMaxHpStat(statType);
+    }
+
+    private void RefreshLinkedMaxHpStat(StatType statType)
+    {
         if (statType == StatType.MaxHp)
         {
             monsterStatDic[StatType.CurrentHp].MaxValue = monsterStatDic[StatType.MaxHp].FinalValue;
-        }
-        else if (statType == StatType.MoveSpeed)
-        {
-            monsterStatDic[StatType.MoveSpeed].MaxValue = monsterStatDic[StatType.MoveSpeed].FinalValue;
         }
     }
 
