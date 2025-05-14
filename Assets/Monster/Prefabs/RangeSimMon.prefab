@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2212523706906131536}
   - component: {fileID: 3866600819892150138}
   - component: {fileID: 7067998763468208122}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RangeSimMon
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2175535112789789609}
   - component: {fileID: 2166021148684667817}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MonsterSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

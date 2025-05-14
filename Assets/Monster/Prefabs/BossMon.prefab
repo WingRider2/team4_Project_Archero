@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8599310049663417213}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 1397342083386743377}
   - component: {fileID: 2212523706906131536}
   - component: {fileID: -2714337271959929287}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BossMon
   m_TagString: Enemy
   m_Icon: {fileID: 0}
