@@ -180,7 +180,8 @@ public class PlayerController : SceneOnlyManager<PlayerController>
         }
         else
         {
-            moveSound.LoopStop();
+            
+                moveSound?.LoopStop();
             Debug.Log("이동 종료");
             isMove = false;
             isAttack = true;
