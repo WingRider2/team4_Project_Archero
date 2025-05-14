@@ -5,9 +5,10 @@ using UnityEngine;
 public class HealthBarManager : SceneOnlyManager<HealthBarManager>
 {
     public Canvas hpBarCanvas;
-    [SerializeField] GameObject healthBarPrefab;
 
-    List<HPBarUI> activeBars = new();
+    [SerializeField] private GameObject healthBarPrefab;
+
+    private List<HPBarUI> activeBars = new();
 
 
     private void LateUpdate()
@@ -23,13 +24,11 @@ public class HealthBarManager : SceneOnlyManager<HealthBarManager>
         HPBarUI bar = ObjectPoolManager.Instance.GetObject(PoolType.HealthBar).GetComponent<HPBarUI>();
         bar.Initialize(targetTransform);
         activeBars.Add(bar);
-        Debug.Log("Active HP Bar");
         return bar;
     }
 
     public void DespawnHealthBar(IPoolObject bar)
     {
-        Debug.Log("DeActive HP Bar");
         activeBars.Remove(bar.GameObject.GetComponent<HPBarUI>());
         ObjectPoolManager.Instance.ReturnObject(bar);
     }

@@ -9,25 +9,24 @@ using Random = UnityEngine.Random;
 public class MonsterManager : SceneOnlyManager<MonsterManager>
 {
     List<MonsterBase> monsters;
+    public List<MonsterBase> Monsters { get { return monsters; } }
 
     protected override void Awake()
     {
     }
-
-    public List<MonsterBase> Monsters { get { return monsters; } }
 
     public void makeMonList(List<Vector3> monpoint, int level)
     {
         monsters = new List<MonsterBase>();
         foreach (var monPos in monpoint)
         {
-            monsters.Add(MakeMon(monPos, Random.Range(1, 3)));
+            monsters.Add(MakeMonster(monPos, Random.Range(1, 3)));
         }
     }
 
     public void MakeBossMonster(Vector3 spawnPos)
     {
-        monsters.Add(MakeMon(spawnPos, 3));
+        monsters.Add(MakeMonster(spawnPos, 3));
     }
 
     private void Update()
@@ -65,7 +64,7 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
         }
     }
 
-    public MonsterBase MakeMon(Vector3 pos, int num)
+    public MonsterBase MakeMonster(Vector3 pos, int num)
     {
         MonsterData monData = TableManager.Instance.GetTable<MonsterTable>().GetDataByID(num);
         MonsterBase mon     = Instantiate(monData.Monster, pos, Quaternion.identity);

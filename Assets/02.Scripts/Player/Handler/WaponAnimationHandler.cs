@@ -16,6 +16,6 @@ public class WaponAnimationHandler : MonoBehaviour
 
     public void Shot()
     {
-        animator.SetTrigger("ShotTrigger");
+        animator.SetTrigger(ShotTrigger);
     }
 }

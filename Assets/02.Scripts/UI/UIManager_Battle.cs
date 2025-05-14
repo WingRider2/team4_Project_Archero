@@ -55,7 +55,7 @@ public class UIManager_Battle : SceneOnlyManager<UIManager_Battle>
     void MaintainAspectRatio()
     {
         // 현재 프로그램창 너비, 높이
-        int newWidth  = Screen.width,
+        int newWidth  = Screen.width, 
             newHeight = Screen.height;
 
         // 초기 화면비에 맞춰주기

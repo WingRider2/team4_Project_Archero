@@ -6,15 +6,16 @@ public class EchObstacleNode : INode
 {
     private MonsterBase _enemy;
 
-    public EchObstacleNode(MonsterBase enemy)
-    {
-        
-        _enemy = enemy;
-    }
     bool isFind = false;
     bool isOb = false;
     float findTimer = 0;
     private const float FindCooldown = 0.5f;
+
+    public EchObstacleNode(MonsterBase enemy)
+    {
+        _enemy = enemy;
+    }
+
     INode.ENodeState INode.Evaluate()
     {
         if (isFind)
@@ -26,20 +27,19 @@ public class EchObstacleNode : INode
                 findTimer = 0f;
             }
         }
-     
+
         if (!isFind)
         {
             isOb = _enemy.ShootObstacle();
         }
+
         if (isOb)
         {
-      
             isFind = true;
             return INode.ENodeState.Success;
         }
         else
         {
-     
             return INode.ENodeState.Failure;
         }
     }
