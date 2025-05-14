@@ -113,17 +113,17 @@ public class PlayerController : SceneOnlyManager<PlayerController>
             SkillManager.Instance.SelectSkill(103);
         }
 
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            Debug.Log("F7 : 독화살");
+            SkillManager.Instance.SelectSkill(4);
+        }
+
         GameObject findTarget = TargetingSystem.FindTarget();
         if (findTarget == null)
             return;
         LookDirection = (findTarget.transform.position - transform.position).normalized;
         HandleAttackDelay();
-        float curHp = PlayerStats.GetFinalValue(StatType.CurrentHp);
-        if (curHp <= 0)
-        {
-            isDead = true;
-            animationHandler.Dead();
-        }
 
         if (isAttack)
         {
@@ -196,6 +196,11 @@ public class PlayerController : SceneOnlyManager<PlayerController>
         weaponHandler?.Rotate(isLeft);
     }
 
+    public void Dead()
+    {
+        isDead = true;
+        animationHandler.Dead();
+    }
 
     public void AddExp(int exp)
     {

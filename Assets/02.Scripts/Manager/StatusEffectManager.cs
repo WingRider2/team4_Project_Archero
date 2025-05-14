@@ -37,13 +37,11 @@ public class StatusEffectManager : MonoBehaviour
 
         while (elapsed < duration)
         {
-            monster.MonsterStatManager.AllDecreaseStatValue(StatType.CurrentHp, damage);
-
-            // 몬스터의 체력이 0 이하인 경우 사망 처리
-            float currentHp = monster.MonsterStatManager.GetFinalValue(StatType.CurrentHp);
-            if (currentHp < 0f)
+            monster.Damaged(damage);
+            if (monster.IsDead)
             {
-                monster.SendMessage("Dead", SendMessageOptions.DontRequireReceiver);
+                // monster.SendMessage("Dead", SendMessageOptions.DontRequireReceiver);
+                activeDebuffs.Clear();
                 yield break;
             }
 
