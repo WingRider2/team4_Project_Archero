@@ -39,6 +39,10 @@ public class MonsterBase : MonoBehaviour
     public bool IsInvincible { get { return isInvincible; } }
 
     public MonsterStatManager MonsterStatManager { get; private set; }
+    private StatusEffectManager statusEffectManager;
+
+
+    private HPBarUI hpBarUI;
 
     protected virtual void Awake()
     {
@@ -51,6 +55,9 @@ public class MonsterBase : MonoBehaviour
 
         MonsterStatManager = GetComponent<MonsterStatManager>();
 
+        statusEffectManager = GetComponent<StatusEffectManager>();
+
+        hpBarUI = HealthBarManager.Instance.SpawnHealthBar(transform);
     }
 
     public void setPath(List<Vector2> _path)
@@ -77,12 +84,12 @@ public class MonsterBase : MonoBehaviour
 
     public virtual float Attack()
     {
-      
         movementDir = Vector2.zero;
         lookDir = (target.position - transform.position).normalized;
         Move();
+
         // StartCoroutine(Timer(MonsterStatManager.monsterStatDic[StatType.AttackSpd].FinalValue, () => isAttack = false));
-        
+
         return MonsterStatManager.monsterStatDic[StatType.AttackPow].FinalValue;
     }
 
@@ -94,24 +101,30 @@ public class MonsterBase : MonoBehaviour
 
     public void Damaged(float damage)
     {
-        Debug.Log("공격 받음");
-        if(isInvincible) 
-            return;
-        MonsterStatManager.ModifyStatValue(StatType.CurrentHp, StatValueType.Base, -damage);
+        // if (isInvincible)
+        //     return;
+        Debug.Log($"공격 받음 {damage}");
+        MonsterStatManager.AllDecreaseStatValue(StatType.CurrentHp, damage);
         float curHp = MonsterStatManager.GetFinalValue(StatType.CurrentHp);
-        curHp -= damage;
-        isInvincible = true;
+        // isInvincible = true;
         manationHandler.Damaged();
-        StartCoroutine(Timer(0.2f, () => isInvincible = false));
+        hpBarUI.UpdateFill(curHp, MonsterStatManager.GetFinalValue(StatType.MaxHp));
+        // StartCoroutine(Timer(0.2f, () => isInvincible = false));
         if (curHp <= 0)
             Dead();
     }
 
     private void Dead()
     {
+        if (statusEffectManager != null)
+        {
+            statusEffectManager.ClearAllDebuffs();
+        }
+
         manationHandler.Dead();
         isDead = true;
         OnDeath?.Invoke(this);
+        hpBarUI.UnLink();
         Destroy(gameObject);
     }
 
@@ -181,7 +194,14 @@ public class MonsterBase : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    // 몬스터에게 디버프를 적용시켜줄 함수
+    public void ApplyDebuff(DebuffType type, float debuffDPS, float duration)
     {
+        statusEffectManager?.ApplyDebuff(type, debuffDPS, duration);
+    }
+
+    public void ApplyDebuff(IDebuffSkill debuffSkill)
+    {
+        statusEffectManager?.ApplyDebuff(debuffSkill);
     }
 }

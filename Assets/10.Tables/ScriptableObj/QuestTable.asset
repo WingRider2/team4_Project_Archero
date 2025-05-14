@@ -13,26 +13,6 @@ MonoBehaviour:
   m_Name: QuestTable
   m_EditorClassIdentifier: 
   dataList:
-  - QuestName: "\uBA54\uC778 \uC2A4\uD14C\uC774\uC9C0 \uB3C4\uC804"
-    ID: 1
-    QuestType: 0
-    Condition:
-      ConditionType: 0
-      NextValue: 0
-      RequiredCount: 10
-    RewardData:
-      RewardItemsList: 
-      RewardGold: 0
-  - QuestName: "\uC7A1\uBAB9 {0}\uCC98\uB9AC"
-    ID: 2
-    QuestType: 0
-    Condition:
-      ConditionType: 1
-      NextValue: 0
-      RequiredCount: 100
-    RewardData:
-      RewardItemsList: 
-      RewardGold: 1000
   - QuestName: "\uC720\uC800 Lv.{0} \uB2EC\uC131"
     ID: 3
     QuestType: 2

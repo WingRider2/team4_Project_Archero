@@ -15,18 +15,11 @@ public class MonsterStat : BaseStat
         BaseValue = value;
     }
 
-    public override void ModifyBaseValue(float value)
+    public void DecreaseAllValue(float value)
     {
-        base.ModifyBaseValue(value);
-    }
+        float remain = value;
 
-    public override void ModifyBuffValue(float value)
-    {
-        base.ModifyBuffValue(value);
-    }
-
-    public override void ClampValues()
-    {
-        throw new System.NotImplementedException();
+        remain = DecreaseBuffValue(remain);
+        remain = DecreaseBaseValue(remain);
     }
 }

@@ -27,7 +27,10 @@ public class StatSkill : ISkill
     {
         foreach (var effect in Effects)
         {
-            player.PlayerStats.ModifyStatValue(effect.StatType, StatValueType.Buff, effect.Value);
+            if (effect.Value > 0)
+                player.PlayerStats.IncreaseStatValue(effect.StatType, StatValueType.Buff, effect.Value);
+            else
+                player.PlayerStats.DecreaseStatValue(effect.StatType, StatValueType.Buff, effect.Value);
         }
     }
 }

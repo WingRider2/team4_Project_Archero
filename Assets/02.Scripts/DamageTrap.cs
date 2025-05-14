@@ -16,7 +16,7 @@ public class DamageTrap : MonoBehaviour
         damageColiider = GetComponent<BoxCollider2D>();
         damageColiider.enabled = false;
     }
-    
+
     public void EnableDamageCollider()
     {
         damageColiider.enabled = true;
@@ -26,6 +26,12 @@ public class DamageTrap : MonoBehaviour
     {
         damageColiider.enabled = false;
     }
-    
-    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<HitPart>()?.Damaged(damage);
+        }
+    }
 }

@@ -4,22 +4,35 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-    }
+    public int SelectedChapter = 1;
 
 
     public void StageClear()
     {
         MapManager.Instance.CurrentDoor.DoorControl(true);
+        MapManager.Instance.currentStage++;
+        UIManager_Battle.Instance.Enable_LevelUp();
     }
 
     public void ChapterClear(ChapterData chapter)
     {
         RewardManager.Instance.GiveReward(chapter.RewardData);
+        QuestManager.Instance.UpdateCurrentCount(QuestConditionType.ChapterClear, 1);
+    }
+
+    public void StartGame()
+    {
+    }
+
+    public void ReStart()
+    {
+        MapManager.Instance.GenerateMap(SelectedChapter);
+    }
+
+
+    public void SaveGame()
+    {
+        List<SaveQuestData> questData = QuestManager.Instance.QusetList;
+        int                 Gold      = AccountManager.Instance.Gold;
     }
 }

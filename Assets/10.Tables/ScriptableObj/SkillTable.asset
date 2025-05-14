@@ -15,67 +15,128 @@ MonoBehaviour:
   dataList:
   - Id: 1
     Type: 0
+    DebuffType: 0
     StatSkillEffects: []
     Value: 0
     Name: "\uD2B8\uB9AC\uD50C\uC0F7"
     Info: "\uD654\uC0B4\uC744 3\uAC08\uB798\uB85C \uBC1C\uC0AC\uD569\uB2C8\uB2E4."
+    dps: 0
+    duration: 0
     SkillIcon: {fileID: 21300000, guid: 7bc4728c727e44f46b370ca9af71ad7f, type: 3}
   - Id: 2
     Type: 0
+    DebuffType: 0
     StatSkillEffects: []
     Value: 0
     Name: "\uBC31\uC0F7"
     Info: "\uB4A4 \uBC29\uD5A5\uC73C\uB85C\uB3C4 \uD654\uC0B4\uC744 \uBC1C\uC0AC\uD569\uB2C8\uB2E4."
+    dps: 0
+    duration: 0
     SkillIcon: {fileID: 21300000, guid: fcd694262c8c53b41ae27e896f8d7da1, type: 3}
   - Id: 3
     Type: 0
+    DebuffType: 0
     StatSkillEffects: []
     Value: 0
     Name: "\uC0AC\uC774\uB4DC \uC0F7"
     Info: "\uC591 \uC606 \uBC29\uD5A5\uC73C\uB85C\uB3C4 \uD654\uC0B4\uC744 \uBC1C\uC0AC\uD569\uB2C8\uB2E4."
+    dps: 0
+    duration: 0
     SkillIcon: {fileID: 21300000, guid: 696487fa3cfba3c47ab273d59ee9a85a, type: 3}
+  - Id: 4
+    Type: 0
+    DebuffType: 1
+    StatSkillEffects: []
+    Value: 0
+    Name: "\uB3C5\uD654\uC0B4"
+    Info: "\uC801\uC744 \uC911\uB3C5\uC2DC\uCF1C \uC77C\uC815\uC2DC\uAC04 \uB3D9\uC548
+      \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4."
+    dps: 20
+    duration: 5
+    SkillIcon: {fileID: 21300000, guid: 442467745d389054fa582a50aba13f1a, type: 3}
+  - Id: 5
+    Type: 0
+    DebuffType: 2
+    StatSkillEffects:
+    - StatType: 1
+      Value: 200
+    Value: 0
+    Name: "\uBD88\uD654\uC0B4"
+    Info: "\uC801\uC5D0\uAC8C \uD654\uC0C1\uC744 \uC785\uD600 \uC77C\uC815\uC2DC\uAC04
+      \uB3D9\uC548 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4."
+    dps: 15
+    duration: 5
+    SkillIcon: {fileID: 21300000, guid: ab5da3740ca636a4ca3ad549766e6615, type: 3}
+  - Id: 6
+    Type: 0
+    DebuffType: 4
+    StatSkillEffects:
+    - StatType: 1
+      Value: 200
+    Value: 0
+    Name: "\uB3D9\uC0C1 \uD654\uC0B4"
+    Info: "\uC77C\uC815\uC2DC\uAC04 \uB3D9\uC548 \uC801\uC758 \uC774\uB3D9\uC18D\uB3C4\uB97C
+      \uC800\uD558\uC2DC\uD0B5\uB2C8\uB2E4."
+    dps: 5
+    duration: 5
+    SkillIcon: {fileID: 21300000, guid: 5851bf9e5a0fd7b4cb5abfea192d8280, type: 3}
   - Id: 101
     Type: 1
+    DebuffType: 0
     StatSkillEffects:
     - StatType: 2
       Value: 10
     Value: 10
     Name: "\uACF5\uACA9\uB825 \uC5C5"
     Info: "\uACF5\uACA9\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    dps: 0
+    duration: 0
     SkillIcon: {fileID: 21300000, guid: 43f2eeb5ab467bd488d3c853a7d498b5, type: 3}
   - Id: 102
     Type: 1
+    DebuffType: 0
     StatSkillEffects:
     - StatType: 4
       Value: -0.2
     Value: 0.2
     Name: "\uACF5\uACA9 \uC18D\uB3C4 \uC5C5"
     Info: "\uACF5\uACA9 \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    dps: 0
+    duration: 0
     SkillIcon: {fileID: 21300000, guid: 9b91dbdcdd38d22428f6d4e389146ae5, type: 3}
   - Id: 103
     Type: 1
+    DebuffType: 0
     StatSkillEffects:
     - StatType: 5
       Value: 1
     Value: 1
     Name: "\uC774\uB3D9\uC18D\uB3C4 "
     Info: "\uC774\uB3D9\uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    dps: 0
+    duration: 0
     SkillIcon: {fileID: 21300000, guid: 0f83dd8b2569c3b47a0c7907acd91d5b, type: 3}
   - Id: 104
     Type: 1
+    DebuffType: 0
     StatSkillEffects:
     - StatType: 0
       Value: 100
     Value: 100
     Name: "\uCD5C\uB300 \uCCB4\uB825 \uC5C5"
     Info: "\uCD5C\uB300 \uCCB4\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    dps: 0
+    duration: 0
     SkillIcon: {fileID: 21300000, guid: bff4b709635de3041a612cecb87c44af, type: 3}
   - Id: 105
     Type: 1
+    DebuffType: 0
     StatSkillEffects:
     - StatType: 1
       Value: 200
     Value: 200
     Name: "\uD604\uC7AC \uCCB4\uB825 \uD68C\uBCF5"
     Info: "\uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+    dps: 0
+    duration: 0
     SkillIcon: {fileID: 21300000, guid: 2d5a244b4c2297240a32699fcb427d27, type: 3}

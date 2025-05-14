@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,7 +18,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
 
 
     List<ISkill> skills = new List<ISkill>();
-
+    List<int> skillIDs = new List<int>();
     public List<ISkill> SelectedSKills { get; set; } = new List<ISkill>();
 
     protected override void Awake()
@@ -32,6 +33,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
         foreach (var skill in skillTable.DataDic.Values)
         {
             skills.Add(CreateSkill(skill));
+            skillIDs.Add(skill.Id);
         }
     }
 
@@ -50,25 +52,25 @@ public class SkillManager : SceneOnlyManager<SkillManager>
         while (selectSkillList.Count < 3)
         {
             //int skillById = Random.Range(0, skillTable.DataDic.Count + 1);
-            List<int> tmp_DataDic_Id = new List<int>();
-            for (int i = 0; i < skills.Count; i++)
-            {
-                tmp_DataDic_Id.Add(skills[i].Id);
-            }
-            int skillById = tmp_DataDic_Id[Random.Range(0, skills.Count)];
+
+            int skillById = skillIDs[Random.Range(0, skills.Count)];
             var skill = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
             selectSkillList.Add(skill);
         }
+
         return selectSkillList;
     }
 
-    public ISkill CreateSkill(SkillData skill)
+    private ISkill CreateSkill(SkillData skill)
     {
         return skill.Type switch
         {
             SkillType.Attack when skill.Id == 1 => new TripleArrowSkill(skill),
             SkillType.Attack when skill.Id == 2 => new BackArrowSkill(skill),
             SkillType.Attack when skill.Id == 3 => new SideArrowSkill(skill),
+            SkillType.Attack when skill.Id == 4 => new PoisonArrowSkill(skill),
+            SkillType.Attack when skill.Id == 5 => new FireArrowSkill(skill),
+            SkillType.Attack when skill.Id == 6 => new SlowArrowSkill(skill),
 
             SkillType.Stat => new StatSkill(skill),
 
@@ -76,14 +78,14 @@ public class SkillManager : SceneOnlyManager<SkillManager>
         };
     }
 
-    public ISkill GetSkill(int id)
+    private ISkill GetSkill(int id)
     {
         return skills.Find(x => x.Id == id);
     }
 
     public void SelectSkill(int id)
     {
-        var skill = GetSkill(id);
+        ISkill skill = GetSkill(id);
         if (skill == null)
             return;
 
@@ -97,9 +99,5 @@ public class SkillManager : SceneOnlyManager<SkillManager>
         {
             skills.Remove(skill);
         }
-    }
-
-    protected override void OnDestroy()
-    {
     }
 }
