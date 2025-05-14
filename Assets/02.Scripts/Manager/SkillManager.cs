@@ -49,8 +49,8 @@ public class SkillManager : SceneOnlyManager<SkillManager>
         // 스킬 선택이 필요한 상황에서 UIManager_Battle.Instance.Enable_LevelUp(); 사용
         while (selectSkillList.Count < 3)
         {
-            int skillById = skillIDs[Random.Range(0, skills.Count)];
-            var skill = TableManager.Instance.GetTable<SkillTable>().GetDataByID(skillById);
+            ISkill randomSkill = skills[Random.Range(0, skills.Count)];
+            var skill = TableManager.Instance.GetTable<SkillTable>().GetDataByID(randomSkill.Id);
             selectSkillList.Add(skill);
         }
 
