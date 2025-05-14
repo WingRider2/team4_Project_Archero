@@ -95,7 +95,7 @@ MonoBehaviour:
   name_text: {fileID: 9044198068472950352}
   reward_text: {fileID: 7032719209716634176}
   progress_text: {fileID: 2230875667112315202}
-  progress_bar: {fileID: 6414589011935227308}
+  progress_bar: {fileID: 8926739823331363157}
   GetReward_Button: {fileID: 5664267428006489174}
 --- !u!1 &1142577144495261487
 GameObject:
