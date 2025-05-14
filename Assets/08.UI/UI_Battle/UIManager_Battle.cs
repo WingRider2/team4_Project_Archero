@@ -1,23 +1,24 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager_Battle : SceneOnlyManager<UIManager_Battle>
 {
-    [SerializeField] Transform Panel_Pause, Panel_LevelUp, Panel_GameOver;
-    
+    [Header("UI 패널"), SerializeField] Transform Panel_Pause;
+    [SerializeField] Transform Panel_Confirm, Panel_LevelUp, Panel_GameOver;
+
     // 레벨, 골드 : 게임 플레이 중 써주기 위함
     // 계속하기, 나가기 버튼의 텍스트는 글자 크기를 맞춰주기 위해 가져옴
-    [SerializeField] 
-    TextMeshProUGUI 
-        gold_text,
-        level_text,
-        continue_button_text, 
-        exit_button_text;
+    [Header("텍스트"), SerializeField]
+    TextMeshProUGUI gold_text;
+    [SerializeField] TextMeshProUGUI level_text, continue_button_text, exit_button_text;
 
     // 체력바
-    [SerializeField] RectTransform hpBar;
+    [Space(10), SerializeField] RectTransform hpBar;
 
     float targetAspectRatio; // 너비/높이로 게임 화면 비율 계산한 값
+
+    const string MainSceneName = "UI_Main";
 
     protected override void Awake()
     {
@@ -70,6 +71,7 @@ public class UIManager_Battle : SceneOnlyManager<UIManager_Battle>
     public void Enable_LevelUp() => Panel_LevelUp.gameObject.SetActive(true);
 
     // 게임오버/스테이지 클리어 UI 활성화
+    // 플레이어 사망/보스 몬스터 처치 후 호출하기!
     public void Enable_GameOver() => Panel_GameOver.gameObject.SetActive(true);
 
     // 골드 획득량 표시 변화
@@ -78,14 +80,11 @@ public class UIManager_Battle : SceneOnlyManager<UIManager_Battle>
     // exp 바 채워진 양 표시 변화
     public void SetExpRatio(float ratio) => hpBar.localScale = new Vector3(ratio, 1, 1);
 
-    // 전투에서 나가기 버튼
-    // 전투 UI의 모든 메인 화면으로 나가기 버튼에서 해당 메서드 참조(똑같은 기능)
-    public void Button_Exit()
-    {
-        // !!!!! 공용으로 쓰는 씬 전환 매니저를 만들 것이라면 그걸 가져다 쓰기. 따로 없다고 하면 여기서 씬 전환해보자
-        // 현재 버튼에 연결은 해둔 상태
-        Debug.Log("나가기!");
-    }
+    // 일시 정지 중 나가기 버튼을 눌렀을 때 확인 창 팝업 + 확인 창 끄기
+    public void ChangeActive_Confirm() => Panel_Confirm.gameObject.SetActive(!Panel_Confirm.gameObject.activeSelf);
+
+    // 메인 씬으로 나가기
+    public void SceneChange_Main() => SceneManager.LoadScene(MainSceneName);
 
     // 레벨 표시 변경
     public void SetLevelText(int nextLevel) => level_text.text = $"Lv. {nextLevel}";
