@@ -16,7 +16,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
     public PlayerStatManager PlayerStats { get; private set; }
     private TargetingSystem TargetingSystem;
     protected AnimationHandler animationHandler;
-
+    private UnitSoundPlayer soundPlayer;
     [SerializeField] private Transform weaponPivot;
     [SerializeField] private WeaponHandler weaponPrefab;
     private WeaponHandler weaponHandler;
@@ -42,7 +42,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
         PlayerStats = GetComponent<PlayerStatManager>();
         TargetingSystem = GetComponent<TargetingSystem>();
         animationHandler = GetComponent<AnimationHandler>();
-
+        soundPlayer=GetComponent<UnitSoundPlayer>();
         if (weaponPrefab != null)
             weaponHandler = Instantiate(weaponPrefab, weaponPivot); //???????
         else
@@ -163,19 +163,24 @@ public class PlayerController : SceneOnlyManager<PlayerController>
 
     private void Attack(float angle = 0)
     {
+        soundPlayer.Play(UnitSoundType.Attack);
         weaponHandler.Attack(angle);
     }
-
+    SoundSource moveSound = null;
     private void StateChanged(bool _isMove)
     {
         if (_isMove)
         {
+            if (moveSound == null)
+                moveSound = soundPlayer.MakeLoop(UnitSoundType.Move);
+            moveSound.LoopStart();
             Debug.Log("이동시작");
             isMove = true;
             isAttack = false;
         }
         else
         {
+            moveSound.LoopStop();
             Debug.Log("이동 종료");
             isMove = false;
             isAttack = true;
@@ -198,6 +203,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
 
     public void Dead()
     {
+        soundPlayer.Play(UnitSoundType.Die);
         isDead = true;
         animationHandler.Dead();
     }
