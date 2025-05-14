@@ -41,6 +41,9 @@ public class MonsterBase : MonoBehaviour
     public MonsterStatManager MonsterStatManager { get; private set; }
     private StatusEffectManager statusEffectManager;
 
+
+    private HPBarUI hpBarUI;
+
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -53,6 +56,8 @@ public class MonsterBase : MonoBehaviour
         MonsterStatManager = GetComponent<MonsterStatManager>();
 
         statusEffectManager = GetComponent<StatusEffectManager>();
+
+        hpBarUI = HealthBarManager.Instance.SpawnHealthBar(transform);
     }
 
     public void setPath(List<Vector2> _path)
@@ -97,14 +102,14 @@ public class MonsterBase : MonoBehaviour
 
     public void Damaged(float damage)
     {
-        Debug.Log("공격 받음");
+        Debug.Log($"공격 받음 {damage}");
         if (isInvincible)
             return;
         MonsterStatManager.AllDecreaseStatValue(StatType.CurrentHp, damage);
         float curHp = MonsterStatManager.GetFinalValue(StatType.CurrentHp);
-        curHp -= damage;
         isInvincible = true;
         manationHandler.Damaged();
+        hpBarUI.UpdateFill(curHp, MonsterStatManager.GetFinalValue(StatType.MaxHp));
         StartCoroutine(Timer(0.2f, () => isInvincible = false));
         if (curHp <= 0)
             Dead();
@@ -120,6 +125,7 @@ public class MonsterBase : MonoBehaviour
         manationHandler.Dead();
         isDead = true;
         OnDeath?.Invoke(this);
+        hpBarUI.UnLink();
         Destroy(gameObject);
     }
 
@@ -187,10 +193,6 @@ public class MonsterBase : MonoBehaviour
         {
             collision.gameObject.GetComponent<HitPart>()?.Damaged(MonsterStatManager.GetFinalValue(StatType.AttackPow));
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
     }
 
     // 몬스터에게 디버프를 적용시켜줄 함수
