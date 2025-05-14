@@ -18,15 +18,9 @@ public class HitPart : MonoBehaviour
     {
         statManager.AllDecreaseStatValue(StatType.CurrentHp, dmg);
         Debug.Log(dmg + "공격");
-        PlayerController.Instance.HpBarUI.UpdateFill(statManager.GetFinalValue(StatType.CurrentHp), statManager.GetFinalValue(StatType.MaxHp));
         if (statManager.GetFinalValue(StatType.CurrentHp) < 0)
         {
             PlayerController.Instance.Dead();
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //OnHit?.Invoke(damagetMultiplier, collision);
     }
 }
