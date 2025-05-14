@@ -70,6 +70,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
             SkillType.Attack when skill.Id == 3 => new SideArrowSkill(skill),
             SkillType.Attack when skill.Id == 4 => new PoisonArrowSkill(skill),
             SkillType.Attack when skill.Id == 5 => new FireArrowSkill(skill),
+            SkillType.Attack when skill.Id == 6 => new SlowArrowSkill(skill),
 
             SkillType.Stat => new StatSkill(skill),
 
