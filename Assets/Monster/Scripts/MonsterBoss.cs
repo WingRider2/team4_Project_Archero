@@ -15,13 +15,16 @@ public class MonsterBoss : MonsterBase
     }
     public  void Attack(int a)
     {
-        
-        
+
+
+       
             Vector2 dir = Target.position - transform.position;
             if(a==1)
                 m_Controller.CircleAttack();
             if(a==2)
                 m_Controller.Attack(dir);
+            if(a==3)
+              m_Controller.ZoneAttack(Target.position);
        
         
     }

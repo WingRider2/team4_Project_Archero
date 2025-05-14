@@ -13,7 +13,10 @@ public class BossAttackNode : INode
     }
     public INode.ENodeState Evaluate()
     {
-     
+
+        _enemy.movementDir = Vector2.zero;
+   
+        _enemy.Move();
         MonsterBoss boss = _enemy as MonsterBoss;
         boss.Attack(num);
         return INode.ENodeState.Success;

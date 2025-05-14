@@ -8,7 +8,7 @@ public class MWeaponHandler : MonoBehaviour
     public float speed;
     public float duration;
     public GameObject Circle;
-
+    
     public void Attack(Vector2 dir)
     {
         GameObject go = ObjectPoolManager.Instance.GetObject(PoolType.MonsterBullet);
@@ -18,6 +18,17 @@ public class MWeaponHandler : MonoBehaviour
         {
             go.transform.position = this.transform.position;
             bullet.Init(dir, this);
+        }
+    }
+    public void ZoneAttack(Vector2 pos)
+    {
+        GameObject go = ObjectPoolManager.Instance.GetObject(PoolType.MonsterZoneBullet);
+        if (go == null)
+            Debug.Log("총알 없음");
+        if (go.TryGetComponent<SkillZone>(out var bullet))
+        {
+            go.transform.position = this.transform.position;
+            bullet.Init(pos, this);
         }
     }
     private int circleCount;

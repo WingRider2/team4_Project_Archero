@@ -30,8 +30,10 @@ public class MCircleProhectile : MprohectileController
     {
         if (collision.tag=="Player")
         {
-            mPoolManager.ReturnObject(this);
+            collision.gameObject.GetComponent<HitPart>()?.Damaged(3);
             onFinished?.Invoke();
+            mPoolManager.ReturnObject(this);
+           
         }
     }
     // Update is called once per frame
