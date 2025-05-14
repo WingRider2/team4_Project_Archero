@@ -17,15 +17,7 @@ public class ProjectileController : MonoBehaviour, IPoolObject
 
     public bool fxOnDestory = true;
 
-    // // 디버프 관련 정보
-    // public DebuffType debuffType = DebuffType.None;
-    // public float debuffDPS = 1f;
-    // public float debuffDuration = 5f;
-    // public SkillType skillType;
 
-
-    //임시
-    public AttackType attackType;
     ObjectPoolManager mPoolManager;
 
     private void Awake()
@@ -50,16 +42,9 @@ public class ProjectileController : MonoBehaviour, IPoolObject
                 if (skill is IDebuffSkill debuffSkill)
                 {
                     var debuffClone = debuffSkill.Clone();
-                    // monster.ApplyDebuff(debuffSkill.DebuffType, debuffSkill.DPS, debuffSkill.Duration);
                     monster.ApplyDebuff(debuffClone);
                 }
             }
-
-            // 스킬타입이 Attack이고, 디버프가 있을 경우에만 적용
-            // if (skillType == SkillType.Attack && debuffType != DebuffType.None)
-            // {
-            //     monster.ApplyDebuff(debuffType, debuffDPS, debuffDuration);
-            // }
 
             rigid.velocity = Vector3.zero; // 속도 정보 제거
             mPoolManager.ReturnObject(this);
