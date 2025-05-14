@@ -31,12 +31,14 @@ public class MCircleProhectile : MprohectileController
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (!collision.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<HitPart>()?.Damaged(3);
-            onFinished?.Invoke();
-            mPoolManager.ReturnObject(this);
+            return;
         }
+
+        collision.gameObject.GetComponent<HitPart>()?.Damaged(3);
+        onFinished?.Invoke();
+        mPoolManager.ReturnObject(this);
     }
 
     // Update is called once per frame

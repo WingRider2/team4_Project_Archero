@@ -8,30 +8,26 @@ using Random = UnityEngine.Random;
 public class SkillManager : SceneOnlyManager<SkillManager>
 {
     // 플레이어 레벨업 판단 임시 변수
-    private PlayerController player;
 
     // 스테이지 클리어 임시 변수
-    bool isStageClear;
-    SkillTable skillTable;
 
 
-    List<ISkill> skills = new List<ISkill>();
-    List<int> skillIDs = new List<int>();
+    private List<ISkill> skills = new List<ISkill>();
+    private List<int> skillIds = new List<int>();
     public List<ISkill> SelectedSKills { get; set; } = new List<ISkill>();
 
     protected override void Awake()
     {
-        player = PlayerController.Instance;
     }
 
     private void Start()
     {
-        skillTable = TableManager.Instance.GetTable<SkillTable>();
+        var skillTable = TableManager.Instance.GetTable<SkillTable>();
 
         foreach (var skill in skillTable.DataDic.Values)
         {
             skills.Add(CreateSkill(skill));
-            skillIDs.Add(skill.Id);
+            skillIds.Add(skill.Id);
         }
     }
 
@@ -49,8 +45,8 @@ public class SkillManager : SceneOnlyManager<SkillManager>
         // 스킬 선택이 필요한 상황에서 UIManager_Battle.Instance.Enable_LevelUp(); 사용
         while (selectSkillList.Count < 3)
         {
-            ISkill randomSkill = skills[Random.Range(0, skills.Count)];
-            var    skill       = TableManager.Instance.GetTable<SkillTable>().GetDataByID(randomSkill.Id);
+            ISkill    randomSkill = skills[Random.Range(0, skills.Count)];
+            SkillData skill       = TableManager.Instance.GetTable<SkillTable>().GetDataByID(randomSkill.Id);
             selectSkillList.Add(skill);
         }
 
@@ -94,7 +90,7 @@ public class SkillManager : SceneOnlyManager<SkillManager>
         }
         else
         {
-            skills.Remove(skill);
+            skills.RemoveAll(x => x.Id == skill.Id);
         }
     }
 }

@@ -1,11 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Pool;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(AnimationHandler))]
 public class PlayerController : SceneOnlyManager<PlayerController>
@@ -26,8 +22,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
 
     private bool isMove = false;
     private bool isAttack = true;
-    private bool isDead = false;
-    public bool IsDead { get; }
+    public bool IsDead { get; private set; }
 
     private float timeSinceLastAttack = float.MaxValue;
     private float rotateSpeed = 10.0f;
@@ -60,12 +55,13 @@ public class PlayerController : SceneOnlyManager<PlayerController>
 
     private void FixedUpdate()
     {
-        if (isDead) return;
+        if (IsDead) return;
 
         Vector2 moveDir = PlayerInputHandler.moveInput;
         float   moveSpd = PlayerStats.GetFinalValue(StatType.MoveSpeed);
         Rigidbody2D.velocity = moveDir * moveSpd;
         animationHandler.Move(moveDir * moveSpd);
+        
         bool wasMoving = isMove;
         isMove = moveDir.magnitude > 0.01f;
 
@@ -77,7 +73,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
 
     private void Update()
     {
-        if (isDead) return;
+        if (IsDead) return;
 
         // 테스트용 코드
         if (Input.GetKeyDown(KeyCode.F1))
@@ -172,20 +168,20 @@ public class PlayerController : SceneOnlyManager<PlayerController>
 
     SoundSource moveSound = null;
 
-    private void StateChanged(bool _isMove)
+    private void StateChanged(bool isMove)
     {
-        if (_isMove)
+        if (isMove)
         {
             if (moveSound == null)
                 moveSound = soundPlayer.MakeLoop(UnitSoundType.Move);
             moveSound.LoopStart();
-            isMove = true;
+            this.isMove = true;
             isAttack = false;
         }
         else
         {
             moveSound?.LoopStop();
-            isMove = false;
+            this.isMove = false;
             isAttack = true;
             timeSinceLastAttack = 0; // 공격 지연 시간 초기화
         }
@@ -207,7 +203,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
     public void Dead()
     {
         soundPlayer.Play(UnitSoundType.Die);
-        isDead = true;
+        IsDead = true;
         animationHandler.Dead();
         UIManager_Battle.Instance.Enable_GameOver();
     }
