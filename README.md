@@ -74,14 +74,12 @@ UIManager_Main, UIManager_Battle 구조 분리
 # 🧠 사용한 디자인 패턴
 패턴	          사용 위치
 
-Singleton	   || GameManager, SaveManager, SoundManager, TableManager, 등
+|패턴|사용 위치|
+|------|---|---|
+|Singleton|GameManager, SaveManager, SoundManager, TableManager, 등
+|Factory|StatFactory(), CreateSkill() 내부|
+|Strategy|ISkill, IDebuffSkill, IAngleArrowSkill|
+|Composite|SequenceNode, SelectorNode 등 BT 구조|
+|Decorator|CoolDownNode, InverterNode 등 BT 트리|
+|ObjectPool|ObjectPoolManager, IPoolObject|
 
-Factory	     || StatFactory(), CreateSkill() 내부
-
-Strategy	   || ISkill, IDebuffSkill, IAngleArrowSkill
-
-Composite	   || SequenceNode, SelectorNode 등 BT 구조
-
-Decorator	   || CoolDownNode, InverterNode 등 BT 트리
-
-Object Pool  ||	ObjectPoolManager, IPoolObject
