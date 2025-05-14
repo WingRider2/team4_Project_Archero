@@ -26,7 +26,7 @@ public class Astar
    
     public List<Vector2> MakePath(Node lastNode)
     {
-       
+        Debug.Log("경로 출력");
         List<Vector2> path=new List<Vector2>();
         while (lastNode != null) {
            
@@ -46,7 +46,7 @@ public class Astar
     public List<Vector2> FindPath(Vector2 start, Vector2 target)
     {
 
-        
+        Debug.Log("탐색 시작");
         List<Node> openNodes = new List<Node>();
         HashSet<Vector2> closedNodes = new HashSet<Vector2>();
 
