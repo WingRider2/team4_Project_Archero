@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 [Serializable]
@@ -35,13 +36,17 @@ public class RewardData
     public int RewardGold;
 }
 
-
+[Serializable]
 public class SaveQuestData
 {
     public int ID;
     public int ClearCount;
     public SaveQuestCondition Condition;
     public bool IsComplete => Condition.IsComplete;
+
+    public SaveQuestData()
+    {
+    }
 
     public SaveQuestData(QuestData questData)
     {
@@ -56,7 +61,6 @@ public class SaveQuestData
             var questData = TableManager.Instance.GetTable<QuestTable>().GetDataByID(ID);
             if (questData == null)
                 return;
-            //TODO: 리워드 추가
             var rewordData = questData.RewardData;
             if (rewordData == null)
                 return;
@@ -66,21 +70,24 @@ public class SaveQuestData
     }
 }
 
+[Serializable]
 public class SaveQuestCondition
 {
     public int CurrentCount;
     public int RequiredCount;
+    public QuestType QuestType;
+    public int nextValue;
 
-
-    private readonly int nextValue;
-    private readonly QuestType questType;
+    public SaveQuestCondition()
+    {
+    }
 
     public SaveQuestCondition(QuestCondition condition, QuestType questType)
     {
         CurrentCount = 0;
         RequiredCount = condition.RequiredCount;
         nextValue = condition.NextValue;
-        this.questType = questType;
+        this.QuestType = questType;
     }
 
     public bool IsComplete => CurrentCount >= RequiredCount;
@@ -101,7 +108,7 @@ public class SaveQuestCondition
         if (CurrentCount < RequiredCount)
             return false;
 
-        if (questType != QuestType.Achievement)
+        if (QuestType != QuestType.Achievement)
             CurrentCount -= RequiredCount;
 
         if (nextValue > 0)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
@@ -33,27 +34,29 @@ public class MapManager : SceneOnlyManager<MapManager>
     public int currentStage = 0;
     List<GameObject> instanceObstacleObjects = new List<GameObject>();
 
+    public ChapterData CurrentChapterData { get; private set; }
+
     protected override void Awake()
     {
     }
 
     void Start()
     {
-        GenerateMap(GameManager.Instance.SelectedChapter);
+        CurrentChapterData = TableManager.Instance.GetTable<StageTable>().GetDataByID(GameManager.Instance.SelectedChapter);
+        GenerateMap();
     }
 
 
-    public void GenerateMap(int chapterID)
+    public void GenerateMap()
     {
-        var chapterData = TableManager.Instance.GetTable<StageTable>().GetDataByID(chapterID);
-        if (chapterData == null)
+        if (CurrentChapterData == null)
         {
-            print($"Chapter ID {chapterID} not found");
+            print($"Chapter not found");
             return;
         }
 
         instanceObstacleObjects.ForEach(Destroy);
-        StageData   stageData   = chapterData.StageDatas[currentStage % chapterData.StageDatas.Count];
+        StageData   stageData   = CurrentChapterData.StageDatas[currentStage];
         TilemapData tilemapData = tilemapDatas[Random.Range(0, tilemapDatas.Length)];
         GenerateTile(floorMap, tilemapData.FloorTilemap);
         GenerateTile(wallMap, tilemapData.WallTilemap);
@@ -67,7 +70,6 @@ public class MapManager : SceneOnlyManager<MapManager>
         SpawnDoors();
         GenerateObstacle(stageData);
         CameraController.Instance.MapUpdate();
-        QuestManager.Instance.UpdateCurrentCount(QuestConditionType.Challenge, 1);
     }
 
     private void GenerateTile(Tilemap tilemap, Tilemap dataTilemap)
@@ -104,7 +106,9 @@ public class MapManager : SceneOnlyManager<MapManager>
             tileIndex.Add(Random.Range(0, vaildPositions.Count));
         }
 
-        foreach (var index in tileIndex)
+        List<int> sortedIndices = tileIndex.ToList();
+        sortedIndices.Sort((a, b) => b.CompareTo(a)); // 내림차순
+        foreach (var index in sortedIndices)
         {
             GameObject go = Instantiate(obstacleObjects[Random.Range(0, obstacleObjects.Length)]);
             go.transform.position = floorMap.CellToWorld(vaildPositions[index]) + new Vector3(0.5f, 0.5f);

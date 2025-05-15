@@ -9,6 +9,10 @@ public class AccountManager : Singleton<AccountManager>
 
     public event Action<int> OnGoldChanged;
 
+    private void Start()
+    {
+        Gold = SaveManager.Instance.SaveData.Gold;
+    }
 
     public void AddGold(int gold)
     {

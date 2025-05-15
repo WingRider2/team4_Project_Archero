@@ -65,10 +65,7 @@ public class ObjectPoolManager : SceneOnlyManager<ObjectPoolManager>
                 Debug.LogError($"오브젝트에 IPoolObject이 상속 되어 있지 않습니다. {obj.name}");
             }
         }
-    }
 
-    private void Start()
-    {
         foreach (var pool in pools)
         {
             CreatePool(pool, pool.PoolSize);

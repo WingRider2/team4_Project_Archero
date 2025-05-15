@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,24 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public int SelectedChapter = 1;
-    public int BestChapter = 1;
+    public int BestChapter { get; private set; } = 0;
+
+
+    public void Start()
+    {
+        BestChapter = SaveManager.Instance.SaveData.BestChapter;
+    }
 
     public void StageClear()
     {
         MapManager.Instance.CurrentDoor.DoorControl(true);
+        QuestManager.Instance.UpdateCurrentCount(QuestConditionType.Challenge, 1);
+        if (MapManager.Instance.CurrentChapterData.StageDatas.Count - 1 == MapManager.Instance.currentStage)
+        {
+            ChapterClear(MapManager.Instance.CurrentChapterData);
+            return;
+        }
+
         MapManager.Instance.currentStage++;
         UIManager_Battle.Instance.Enable_LevelUp();
     }
@@ -24,22 +38,10 @@ public class GameManager : Singleton<GameManager>
         }
 
         UIManager_Battle.Instance.Enable_GameOver();
-        //게임 챕터 클리어 
-    }
-
-    public void StartGame()
-    {
     }
 
     public void ReStart()
     {
-        MapManager.Instance.GenerateMap(SelectedChapter);
-    }
-
-
-    public void SaveGame()
-    {
-        List<SaveQuestData> questData = QuestManager.Instance.QusetList;
-        int                 Gold      = AccountManager.Instance.Gold;
+        MapManager.Instance.GenerateMap();
     }
 }

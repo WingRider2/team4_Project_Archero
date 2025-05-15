@@ -25,7 +25,6 @@ public class StatusEffectManager : MonoBehaviour
         if (debuffSkill.DebuffType == DebuffType.None) return;
         if (debuffSkills.TryGetValue(debuffSkill.DebuffType, out var debuff))
         {
-            Debug.Log("Duration 갱신");
             debuff.Duration = debuffSkill.Duration;
         }
         else
@@ -81,7 +80,6 @@ public class StatusEffectManager : MonoBehaviour
     // 몬스터가 죽을때 호출되는 클리어 디버프 함수
     public void ClearAllDebuffs()
     {
-        Debug.Log("디버프 삭제");
         foreach (var pair in activeDebuffs)
         {
             StopCoroutine(pair.Value);
