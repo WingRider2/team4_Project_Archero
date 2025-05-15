@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public class MonsterManager : SceneOnlyManager<MonsterManager>
 {
     List<MonsterBase> monsters;
+    public int GetMonstersCount { get => monsters.Count; }
 
     protected override void Awake()
     {
