@@ -61,7 +61,7 @@ public class PlayerController : SceneOnlyManager<PlayerController>
         float   moveSpd = PlayerStats.GetFinalValue(StatType.MoveSpeed);
         Rigidbody2D.velocity = moveDir * moveSpd;
         animationHandler.Move(moveDir * moveSpd);
-        
+
         bool wasMoving = isMove;
         isMove = moveDir.magnitude > 0.01f;
 

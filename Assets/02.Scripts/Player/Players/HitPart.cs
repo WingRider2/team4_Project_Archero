@@ -17,7 +17,7 @@ public class HitPart : MonoBehaviour
     public void Damaged(float dmg)
     {
         statManager.AllDecreaseStatValue(StatType.CurrentHp, dmg);
-        if (statManager.GetFinalValue(StatType.CurrentHp) < 0)
+        if (statManager.GetFinalValue(StatType.CurrentHp) <= 0)
         {
             PlayerController.Instance.Dead();
         }
