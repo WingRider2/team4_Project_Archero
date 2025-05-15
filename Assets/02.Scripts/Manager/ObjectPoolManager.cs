@@ -1,10 +1,12 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor.Compilation;
+using UnityEngine.InputSystem.Android;
+#endif
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem.Android;
 using UnityEngine.Serialization;
 
 public enum PoolType
