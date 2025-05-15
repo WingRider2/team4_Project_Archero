@@ -70,6 +70,8 @@ public class MapManager : SceneOnlyManager<MapManager>
         SpawnDoors();
         GenerateObstacle(stageData);
         CameraController.Instance.MapUpdate();
+
+        UIManager_Battle.Instance.stageInfo.ChangeStageText(currentStage+1); // 바뀐 스테이지에 맞게 텍스트 표시 변경
     }
 
     private void GenerateTile(Tilemap tilemap, Tilemap dataTilemap)
@@ -160,6 +162,8 @@ public class MapManager : SceneOnlyManager<MapManager>
         MonsterManager.Instance.makeMonList(MonsterSpawnPositions, 1);
         if (stageData.IsBossStage)
             MonsterManager.Instance.MakeBossMonster(SpawnBoss());
+
+        UIManager_Battle.Instance.stageInfo.ChangeRemainMonsterText(MonsterManager.Instance.GetMonstersCount); // 스테이지 초기에 생성한 몬스터 수 써주기
     }
 
     private void SpawnDoors()

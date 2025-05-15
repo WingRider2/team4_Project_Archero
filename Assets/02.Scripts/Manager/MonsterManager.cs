@@ -10,6 +10,7 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
 {
     List<MonsterBase> monsters;
     public List<MonsterBase> Monsters { get { return monsters; } }
+    public int GetMonstersCount { get => monsters.Count; }
 
     protected override void Awake()
     {
@@ -57,6 +58,7 @@ public class MonsterManager : SceneOnlyManager<MonsterManager>
         }
 
         monsters.Remove(mon);
+        UIManager_Battle.Instance.stageInfo.ChangeRemainMonsterText(monsters.Count); // 남은 몬스터 수를 써주기
         if (monsters.Count == 0)
         {
             Clear();
