@@ -17,6 +17,9 @@ public class UIManager_Battle : SceneOnlyManager<UIManager_Battle>
     // 체력바
     [Space(10), SerializeField] RectTransform hpBar;
 
+    // 스테이지 정보 표시를 위해 만든 스크립트
+    [Space(10)] public UI_StageInfo stageInfo;
+
     float targetAspectRatio; // 너비/높이로 게임 화면 비율 계산한 값
 
     const string MainSceneName = "MainScene";
